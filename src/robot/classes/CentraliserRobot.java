@@ -1,4 +1,4 @@
-package src.robot;
+package robot.classes;
 
 public class CentraliserRobot extends Robot
 {
