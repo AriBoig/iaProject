@@ -1,4 +1,4 @@
-package src.map;
+package map;
 
 public class Gameboard {
 
