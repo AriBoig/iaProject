@@ -1,13 +1,14 @@
-package main;
+package src.display.main;
 
 import container.PrincipalContainerController;
-import controller.PrincipalViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import src.display.controller.PrincipalViewController;
+import src.map.Gameboard;
 
 import java.io.IOException;
 
@@ -15,6 +16,15 @@ public class MainClass extends Application {
 
     private BorderPane principalContainer;
     private Stage principalStage;
+    private Gameboard gameboard;
+
+    public Gameboard getGameboard() {
+        return gameboard;
+    }
+
+    public void setGameboard(Gameboard gameboard) {
+        this.gameboard = gameboard;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -25,6 +35,10 @@ public class MainClass extends Application {
         initializePrincipalView();
     }
 
+
+    public void initializeGameboardMap(){
+        gameboard.initializeWaterGameBoard();
+    }
 
     public void initialiazePrincipalContainer(){
         FXMLLoader loader = new FXMLLoader();
@@ -49,7 +63,9 @@ public class MainClass extends Application {
             principalContainer.setCenter(view);
             PrincipalViewController controller = loader.getController();
             controller.setMainClass(this);
-            controller.launchGameBoard();
+            controller.initializeImages();
+            controller.initializeGameboardFromMain();
+            controller.refreshGameboard();
         } catch (IOException e) {
             e.printStackTrace();
         }

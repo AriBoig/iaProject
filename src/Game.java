@@ -1,4 +1,6 @@
-import classes.robot.*;
+package src;
+
+import src.robot.*;
 
 import java.util.ArrayList;
 import java.util.List;
