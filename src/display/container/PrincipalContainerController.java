@@ -1,7 +1,6 @@
 package container;
 
-
-import main.MainClass;
+import src.display.main.MainClass;
 
 public class PrincipalContainerController {
     private MainClass main;
