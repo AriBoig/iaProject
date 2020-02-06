@@ -1,7 +1,6 @@
-package src;
+package robot;
 
-import src.robot.*;
-
+import robot.classes.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -15,10 +14,17 @@ public class Game
     private static final int NB_EXTRACTOR_ROBOT     = 3;
     private static final int NB_CONSTRUCTOR_ROBOT   = 3;
     private static final int NB_COLLECTOR_ROBOT     = 3;
+    private static final int NB_DAY                 = 2922;
 
-    private static Logger logger = Logger.getLogger("logger");
+
+    private int day;
+    private List<Robot> robots;
 
 
+    public Game() {
+        day    = 0;
+        robots = new ArrayList<Robot>();
+    }
 
     /**
      * Fonction qui permet d'initialiser les robots.
@@ -53,11 +59,40 @@ public class Game
             System.exit(1);
         }
 
+        this.robots = robots;
     }
+
+
+    /**
+     * La fonction qui permet de mettre a jour la sante des robots en fonction de la metamorphose du terrain.
+     * @author Enzo DECHAENE.
+     */
+    public void metamorphose()
+    {
+        for (Robot robot:robots) {
+
+            if ("métamorphose limitée" && "terrain=Zoneinfranchissable") robots.remove(robot);
+            if ("métamorphose limitée" && "terrain!=Zoneinfranchissable");
+            if ("métamorphose petite" && "terrain=Zoneinfranchissable") robots.remove(robot);
+            if ("métamorphose petite" && "terrain!=Zoneinfranchissable");
+            if ("métamorphose moyenne" && "terrain=Zoneinfranchissable") robots.remove(robot);
+            if ("métamorphose moyenne" && "terrain!=Zoneinfranchissable") robot.health -= 10;
+            if ("métamorphose grande" && "terrain=Zoneinfranchissable") robots.remove(robot);
+            if ("métamorphose grande" && "terrain!=Zoneinfranchissable") robot.health -= 10;
+            if ("métamorphose importante" && "terrain=Zoneinfranchissable") robots.remove(robot);
+            if ("métamorphose importante" && "terrain!=Zoneinfranchissable") robots.remove(robot);
+        }
+    }
+
+    private static Logger logger = Logger.getLogger("logger");
 
     public static void main(String[] args) {
-
+        Game game = new Game();
+        game.initializeRobots();
     }
 }
+
+
+
 
 
