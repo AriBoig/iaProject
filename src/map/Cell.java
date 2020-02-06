@@ -1,13 +1,16 @@
 package src.map;
 
-public class Case {
+public class Cell {
     private TypeCase type;
     private int capacite;
     private boolean metamorphose;
-    int x;
-    int y;
+    private int x;
+    private int y;
 
-    public Case(TypeCase type, int capacite, boolean metamorphose, int x, int y) {
+    public Cell() {
+    }
+
+    public Cell(TypeCase type, int capacite, boolean metamorphose, int x, int y) {
         this.type = type;
         this.capacite = capacite;
         this.metamorphose = metamorphose;

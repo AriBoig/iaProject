@@ -26,18 +26,28 @@ public class MainClass extends Application {
         this.gameboard = gameboard;
     }
 
+    public void iniGameboard(){
+        gameboard = new Gameboard();
+        gameboard.initializeWaterGameBoard();
+        gameboard.initializeBaseGameBoard();
+        gameboard.initializeOreGameBoard();
+        gameboard.initializeFoodGameBoard();
+        gameboard.initializeTreeGameBoard();
+        gameboard.initializeDryMedow();
+        gameboard.initializeNormalMedow();
+        gameboard.initializeOilyMedow();
+        gameboard.initializeDesertGameBoard();
+        gameboard.initializeScreeGameBoard();
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         principalStage = primaryStage;
         principalStage.setTitle("IA");
         principalStage.setResizable(false);
+        iniGameboard();
         initialiazePrincipalContainer();
         initializePrincipalView();
-    }
-
-
-    public void initializeGameboardMap(){
-        gameboard.initializeWaterGameBoard();
     }
 
     public void initialiazePrincipalContainer(){

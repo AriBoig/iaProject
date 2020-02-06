@@ -86,7 +86,7 @@ public class PrincipalViewController {
                     gridpaneGameBoard.add(imv, i, j);
                 }else if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.FOOD)){
                     ImageView imv = new ImageView();
-                    imv.setImage(imageBase);
+                    imv.setImage(imageFood);
                     gridpaneGameBoard.add(imv, i, j);
                 }else if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.ORE)){
                     ImageView imv = new ImageView();
