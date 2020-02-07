@@ -2,7 +2,7 @@ package robot.classes;
 
 import map.TypeCase;
 
-public class ConstructorRobot extends WorkerRobot
+public class ConstructorRobot extends Robot
 {
     private static final int NB_DAY_CONSTRUCTOR_PIPELINE = 2;
 

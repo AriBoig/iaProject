@@ -1,6 +1,7 @@
 package robot.classes;
 
 import map.Cell;
+import map.Coordonnee;
 
 
 public class Robot
@@ -10,6 +11,7 @@ public class Robot
     public Mode action;
     protected Cell cell;
     protected Neighbour neighbour;
+
 
     public Robot() {
         this.health = 100;
@@ -24,17 +26,21 @@ public class Robot
      */
     protected void move()
     {
-
+        
     }
 
     /**
      * Need to be @override for all robot
      */
-    protected void checkCell()
+    protected void checkCell() { }
+
+    /**
+     * @author Enzo DECHAENE
+     */
+    public void goReparing()
     {
-
+        this.action = Mode.REPAIR;
     }
-
 
     /**
      * @return the Cell where is the robot.
