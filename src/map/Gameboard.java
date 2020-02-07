@@ -1,4 +1,4 @@
-package src.map;
+package map;
 
 public class Gameboard {
 
@@ -6,16 +6,23 @@ public class Gameboard {
     private int tailleY;
     private Cell[][] gameboard;
 
+
+    public void initializeGameBoard(){
+        for (int i = 0; i < 21; i++) {
+            for (int j = 0; j < 21; j++) {
+
+            }
+        }
+    }
+
     public Gameboard() {
         this.tailleX = 21;
         this.tailleY = 21;
         gameboard = new Cell[tailleX][tailleY];
         for (int i = 0; i < tailleX; i++) {
             for (int j = 0; j < tailleY; j++) {
-                gameboard[i][j] = new Cell();
-                gameboard[i][j].setType(TypeCase.IMPASSABLE_AREA);
-                gameboard[i][j].setX(i);
-                gameboard[i][j].setY(j);
+                Coordonnee coordonnee = new Coordonnee(j, i);
+                gameboard[i][j] = new Cell(map.TypeCase.IMPASSABLE_AREA,0,false,coordonnee);
             }
         }
     }
@@ -520,11 +527,3 @@ public class Gameboard {
     }
 }
 
-    public void initializeGameBoard(){
-        for (int i = 0; i < 21; i++) {
-            for (int j = 0; j < 21; j++) {
-                Coordonnee coordonnee = new Coordonnee(j, i);
-                gameboard[i][j].setCoordonnee(coordonnee);
-            }
-        }
-    }

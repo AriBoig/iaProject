@@ -7,8 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import map.Gameboard;
 import src.display.controller.PrincipalViewController;
-import src.map.Gameboard;
 
 import java.io.IOException;
 

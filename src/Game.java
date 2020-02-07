@@ -1,5 +1,3 @@
-package robot;
-
 import robot.classes.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +68,7 @@ public class Game
     public void metamorphose()
     {
         for (Robot robot:robots) {
-
+            /*
             if ("métamorphose limitée" && "terrain=Zoneinfranchissable") robots.remove(robot);
             if ("métamorphose limitée" && "terrain!=Zoneinfranchissable");
             if ("métamorphose petite" && "terrain=Zoneinfranchissable") robots.remove(robot);
@@ -81,6 +79,8 @@ public class Game
             if ("métamorphose grande" && "terrain!=Zoneinfranchissable") robot.health -= 10;
             if ("métamorphose importante" && "terrain=Zoneinfranchissable") robots.remove(robot);
             if ("métamorphose importante" && "terrain!=Zoneinfranchissable") robots.remove(robot);
+
+             */
         }
     }
 

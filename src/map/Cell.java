@@ -1,37 +1,25 @@
-package src.map;
+package map;
 
 public class Cell {
     private TypeCase type;
     private int capacite;
     private boolean metamorphose;
-    private int x;
-    private int y;
+    private Coordonnee coordonnee;
 
-    public Cell() {
-    }
 
-    public Cell(TypeCase type, int capacite, boolean metamorphose, int x, int y) {
+    public Cell(TypeCase type, int capacite, boolean metamorphose, Coordonnee coordonnee) {
         this.type = type;
         this.capacite = capacite;
         this.metamorphose = metamorphose;
-        this.x = x;
-        this.y = y;
+        this.coordonnee = coordonnee;
     }
 
-    public int getX() {
-        return x;
+    public Coordonnee getCoordonnee() {
+        return coordonnee;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
+    public void setCoordonnee(Coordonnee coordonnee) {
+        this.coordonnee = coordonnee;
     }
 
     public TypeCase getType() {

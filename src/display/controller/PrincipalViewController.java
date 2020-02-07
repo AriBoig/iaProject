@@ -4,9 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import map.Gameboard;
 import src.display.main.MainClass;
-import src.map.Gameboard;
-import src.map.TypeCase;
+import map.TypeCase;
 
 
 public class PrincipalViewController {
