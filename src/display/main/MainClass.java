@@ -1,6 +1,8 @@
-package src.display.main;
+package display.main;
 
-import container.PrincipalContainerController;
+
+import display.container.PrincipalContainerController;
+import display.controller.PrincipalViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,7 +10,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import map.Gameboard;
-import src.display.controller.PrincipalViewController;
 
 import java.io.IOException;
 
