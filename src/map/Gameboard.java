@@ -519,3 +519,12 @@ public class Gameboard {
         gameboard[1][20].setType(TypeCase.SCREE);
     }
 }
+
+    public void initializeGameBoard(){
+        for (int i = 0; i < 21; i++) {
+            for (int j = 0; j < 21; j++) {
+                Coordonnee coordonnee = new Coordonnee(j, i);
+                gameboard[i][j].setCoordonnee(coordonnee);
+            }
+        }
+    }
