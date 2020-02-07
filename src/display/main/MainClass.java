@@ -1,13 +1,14 @@
-package main;
+package src.display.main;
 
 import container.PrincipalContainerController;
-import controller.PrincipalViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import src.display.controller.PrincipalViewController;
+import src.map.Gameboard;
 
 import java.io.IOException;
 
@@ -15,16 +16,39 @@ public class MainClass extends Application {
 
     private BorderPane principalContainer;
     private Stage principalStage;
+    private Gameboard gameboard;
+
+    public Gameboard getGameboard() {
+        return gameboard;
+    }
+
+    public void setGameboard(Gameboard gameboard) {
+        this.gameboard = gameboard;
+    }
+
+    public void iniGameboard(){
+        gameboard = new Gameboard();
+        gameboard.initializeWaterGameBoard();
+        gameboard.initializeBaseGameBoard();
+        gameboard.initializeOreGameBoard();
+        gameboard.initializeFoodGameBoard();
+        gameboard.initializeTreeGameBoard();
+        gameboard.initializeDryMedow();
+        gameboard.initializeNormalMedow();
+        gameboard.initializeOilyMedow();
+        gameboard.initializeDesertGameBoard();
+        gameboard.initializeScreeGameBoard();
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         principalStage = primaryStage;
         principalStage.setTitle("IA");
         principalStage.setResizable(false);
+        iniGameboard();
         initialiazePrincipalContainer();
         initializePrincipalView();
     }
-
 
     public void initialiazePrincipalContainer(){
         FXMLLoader loader = new FXMLLoader();
@@ -49,7 +73,9 @@ public class MainClass extends Application {
             principalContainer.setCenter(view);
             PrincipalViewController controller = loader.getController();
             controller.setMainClass(this);
-            controller.launchGameBoard();
+            controller.initializeImages();
+            controller.initializeGameboardFromMain();
+            controller.refreshGameboardMap();
         } catch (IOException e) {
             e.printStackTrace();
         }

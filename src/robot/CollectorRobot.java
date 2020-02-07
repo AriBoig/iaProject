@@ -1,4 +1,4 @@
-package classes.robot;
+package src.robot;
 
 public class CollectorRobot extends WorkerRobot
 {
