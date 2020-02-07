@@ -5,7 +5,7 @@ public class Robot
 {
     private double energy;
     public int health;
-    public Mode action;
+    public Mode action;<
 
     public Robot() {
         this.health = 100;
