@@ -2,7 +2,7 @@ package robot.classes;
 
 import map.TypeCase;
 
-public class CollectorRobot extends WorkerRobot
+public class CollectorRobot extends Robot
 {
 
     private static final int PERCENT_OF_COLLECTING = 10;

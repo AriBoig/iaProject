@@ -70,18 +70,31 @@ public class Game
     {
         for (Robot robot:robots) {
 
-            if ("métamorphose limitée" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) robots.remove(robot);
+            if ("métamorphose limitée" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA)
+                robots.remove(robot);
             if ("métamorphose limitée" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA);
-            if ("métamorphose petite" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) robots.remove(robot);
+            if ("métamorphose petite" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA)
+                robots.remove(robot);
             if ("métamorphose petite" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA);
-            if ("métamorphose moyenne" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) robots.remove(robot);
-            if ("métamorphose moyenne" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA) robot.health -= 10;
-            if ("métamorphose grande" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) robots.remove(robot);
-            if ("métamorphose grande" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA) robot.health -= 10;
-            if ("métamorphose importante" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) robots.remove(robot);
-            if ("métamorphose importante" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA) robots.remove(robot);
+            if ("métamorphose moyenne" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA)
+                robots.remove(robot);
+            if ("métamorphose moyenne" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA) {
+                robot.health -= 10;
+                robot.goReparing();
+            }
+            if ("métamorphose grande" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA)
+                robots.remove(robot);
+            if ("métamorphose grande" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA) {
+                robot.health -= 10;
+                robot.goReparing();
+            }
+            if ("métamorphose importante" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA)
+                robots.remove(robot);
+            if ("métamorphose importante" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA)
+                robots.remove(robot);
         }
     }
+
 
     private static Logger logger = Logger.getLogger("logger");
 
