@@ -1,6 +1,6 @@
 package robot.classes;
 
-import map.Case;
+import map.Cell;
 
 
 public class Robot
@@ -8,7 +8,7 @@ public class Robot
     protected double energy; /* Ajoute mais pas necessaire dans le sujet */
     public int health;
     public Mode action;
-    protected Case cell;
+    protected Cell cell;
     protected Neighbour neighbour;
 
     public Robot() {
@@ -19,7 +19,7 @@ public class Robot
 
 
     /**
-     * Fonction qui permet de deplacer le robot sur une case adjacente.
+     * Fonction qui permet de deplacer le robot sur une Cell adjacente.
      * @author Enzo DECHAENE.
      */
     protected void move()
@@ -40,6 +40,6 @@ public class Robot
      * @return the Cell where is the robot.
      * @author Enzo DECHAENE.
      */
-    public Case getCell() { return cell; }
+    public Cell getCell() { return cell; }
 
 }

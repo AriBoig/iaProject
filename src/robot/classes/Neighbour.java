@@ -1,18 +1,18 @@
 package robot.classes;
 
-import map.Case;
+import map.Cell;
 import map.TypeCase;
 
 public class Neighbour
 {
-    public Case north;
-    public Case south;
-    public Case east;
-    public Case west;
-    public Case northeast;
-    public Case northwest;
-    public Case southeast;
-    public Case southwest;
+    public Cell north;
+    public Cell south;
+    public Cell east;
+    public Cell west;
+    public Cell northeast;
+    public Cell northwest;
+    public Cell southeast;
+    public Cell southwest;
 
     
     public boolean findWater()
