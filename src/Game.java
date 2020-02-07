@@ -1,5 +1,5 @@
-package robot;
 
+import map.TypeCase;
 import robot.classes.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class Game
     private static final int NB_EXTRACTOR_ROBOT     = 3;
     private static final int NB_CONSTRUCTOR_ROBOT   = 3;
     private static final int NB_COLLECTOR_ROBOT     = 3;
-    private static final int NB_DAY                 = 2922;
+    private static final int NB_TOTAL_DAY           = 2922;
 
 
     private int day;
@@ -71,16 +71,16 @@ public class Game
     {
         for (Robot robot:robots) {
 
-            if ("métamorphose limitée" && "terrain=Zoneinfranchissable") robots.remove(robot);
-            if ("métamorphose limitée" && "terrain!=Zoneinfranchissable");
-            if ("métamorphose petite" && "terrain=Zoneinfranchissable") robots.remove(robot);
-            if ("métamorphose petite" && "terrain!=Zoneinfranchissable");
-            if ("métamorphose moyenne" && "terrain=Zoneinfranchissable") robots.remove(robot);
-            if ("métamorphose moyenne" && "terrain!=Zoneinfranchissable") robot.health -= 10;
-            if ("métamorphose grande" && "terrain=Zoneinfranchissable") robots.remove(robot);
-            if ("métamorphose grande" && "terrain!=Zoneinfranchissable") robot.health -= 10;
-            if ("métamorphose importante" && "terrain=Zoneinfranchissable") robots.remove(robot);
-            if ("métamorphose importante" && "terrain!=Zoneinfranchissable") robots.remove(robot);
+            if ("métamorphose limitée" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) robots.remove(robot);
+            if ("métamorphose limitée" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA);
+            if ("métamorphose petite" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) robots.remove(robot);
+            if ("métamorphose petite" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA);
+            if ("métamorphose moyenne" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) robots.remove(robot);
+            if ("métamorphose moyenne" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA) robot.health -= 10;
+            if ("métamorphose grande" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) robots.remove(robot);
+            if ("métamorphose grande" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA) robot.health -= 10;
+            if ("métamorphose importante" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) robots.remove(robot);
+            if ("métamorphose importante" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA) robots.remove(robot);
         }
     }
 
