@@ -1,11 +1,11 @@
-package src.display.controller;
+package display.controller;
 
+import display.main.MainClass;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import map.Gameboard;
-import src.display.main.MainClass;
 import map.TypeCase;
 
 
