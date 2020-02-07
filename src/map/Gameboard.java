@@ -1,3 +1,6 @@
+/**
+ * @author AB
+ */
 package map;
 
 public class Gameboard {
@@ -21,8 +24,8 @@ public class Gameboard {
         gameboard = new Cell[tailleX][tailleY];
         for (int i = 0; i < tailleX; i++) {
             for (int j = 0; j < tailleY; j++) {
-                Coordonnee coordonnee = new Coordonnee(j, i);
-                gameboard[i][j] = new Cell(map.TypeCase.IMPASSABLE_AREA,0,false,coordonnee);
+                Coordinate coordinate = new Coordinate(j, i);
+                gameboard[i][j] = new Cell(map.TypeCase.IMPASSABLE_AREA,0,false, coordinate);
             }
         }
     }

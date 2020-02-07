@@ -6,14 +6,14 @@ package map;
  * @date 06/02/2020
  */
 
-public class Coordonnee {
+public class Coordinate {
 
     private int x;
     private int y;
 
-    public Coordonnee(){};
+    public Coordinate(){};
 
-    public Coordonnee(int x, int y) {
+    public Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -34,7 +34,7 @@ public class Coordonnee {
         this.y = y;
     }
 
-    public Boolean equals(Coordonnee coordonnee) {
-        return coordonnee.getX() == this.x && coordonnee.getY() == this.y;
+    public Boolean equals(Coordinate coordinate) {
+        return coordinate.getX() == this.x && coordinate.getY() == this.y;
     }
 }
