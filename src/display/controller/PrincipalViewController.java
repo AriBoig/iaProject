@@ -57,9 +57,9 @@ public class PrincipalViewController {
         imageWater = new Image("src/display/ressources/field/water.png");
     }
 
-    public void refreshGameboard(){
-        for (int i = 0; i < 21; i++) {
-            for (int j = 0; j < 21; j++) {
+    public void refreshGameboardMap(){
+        for (int i = 0; i < gameboard.getTailleX(); i++) {
+            for (int j = 0; j < gameboard.getTailleY(); j++) {
                 if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.WATER)){
                     ImageView imv = new ImageView();
                     imv.setImage(imageWater);
@@ -104,6 +104,16 @@ public class PrincipalViewController {
                     ImageView imv = new ImageView();
                     imv.setImage(imageImpassableArea);
                     gridpaneGameBoard.add(imv, i, j);
+                }
+            }
+        }
+    }
+
+    public void refreshGameBoardRobot(){
+        for (int i = 0; i < gameboard.getTailleX(); i++) {
+            for (int j = 0; j < gameboard.getTailleY(); j++) {
+                if (gameboard.getGameboard()[i][j].getCapacite() != 0){
+
                 }
             }
         }

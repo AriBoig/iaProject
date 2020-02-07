@@ -75,7 +75,7 @@ public class MainClass extends Application {
             controller.setMainClass(this);
             controller.initializeImages();
             controller.initializeGameboardFromMain();
-            controller.refreshGameboard();
+            controller.refreshGameboardMap();
         } catch (IOException e) {
             e.printStackTrace();
         }
