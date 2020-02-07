@@ -19,8 +19,8 @@ public class Gameboard {
     public void initializeGameBoard(){
         for (int i = 0; i < 21; i++) {
             for (int j = 0; j < 21; j++) {
-                gameboard[i][j].setX(j);
-                gameboard[i][j].setY(i);
+                Coordonnee coordonnee = new Coordonnee(j, i);
+                gameboard[i][j].setCoordonnee(coordonnee);
             }
         }
     }
