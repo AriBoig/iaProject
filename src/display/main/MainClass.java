@@ -1,5 +1,10 @@
 package display.main;
 
+/**
+ * Classe principale de lancement de la simulation. Les ressources et images ont été éditées à la main
+ * @author Aristide Boisgontier
+ * @date 06/02/2020
+ */
 
 import display.container.PrincipalContainerController;
 import display.controller.PrincipalViewController;

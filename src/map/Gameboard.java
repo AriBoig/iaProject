@@ -1,5 +1,11 @@
 package map;
 
+/**
+ * Classe qui fait office de carte de la simulation
+ * @author Aristide Boisgontier
+ * @date 06/02/2020
+ */
+
 public class Gameboard {
 
     private int tailleX;

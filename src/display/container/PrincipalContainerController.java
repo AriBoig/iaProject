@@ -1,4 +1,9 @@
 package display.container;
+/**
+ * Classe conteneur de la vue principale
+ * @author Aristide Boisgontier
+ * @date 06/02/2020
+ */
 
 import display.main.MainClass;
 
