@@ -22,14 +22,10 @@ public class MainClass extends Application {
 
     private BorderPane principalContainer;
     private Stage principalStage;
-    private Gameboard gameboard;
+    private static Gameboard gameboard;
 
-    public Gameboard getGameboard() {
+    public static Gameboard getGameboard() {
         return gameboard;
-    }
-
-    public void setGameboard(Gameboard gameboard) {
-        this.gameboard = gameboard;
     }
 
     public void iniGameboard(){
