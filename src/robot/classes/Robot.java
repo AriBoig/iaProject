@@ -42,4 +42,11 @@ public class Robot
      */
     public Cell getCell() { return cell; }
 
+    /**
+     * @author AC
+     * @return
+     */
+    public Neighbour getNeighbour() {
+        return neighbour;
+    }
 }

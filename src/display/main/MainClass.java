@@ -1,5 +1,10 @@
 package display.main;
 
+/**
+ * Classe principale de lancement de la simulation. Les ressources et images ont été éditées à la main
+ * @author Aristide Boisgontier
+ * @date 06/02/2020
+ */
 
 import display.container.PrincipalContainerController;
 import display.controller.PrincipalViewController;
@@ -17,14 +22,10 @@ public class MainClass extends Application {
 
     private BorderPane principalContainer;
     private Stage principalStage;
-    private Gameboard gameboard;
+    private static Gameboard gameboard;
 
-    public Gameboard getGameboard() {
+    public static Gameboard getGameboard() {
         return gameboard;
-    }
-
-    public void setGameboard(Gameboard gameboard) {
-        this.gameboard = gameboard;
     }
 
     public void iniGameboard(){

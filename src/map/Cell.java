@@ -1,25 +1,35 @@
+/**
+ * @author AB
+ * @author AC
+ */
 package map;
+
+/**
+ * Classe des cellules du gameboard
+ * @author Aristide Boisgontier
+ * @date 06/02/2020
+ */
 
 public class Cell {
     private TypeCase type;
     private int capacite;
     private boolean metamorphose;
-    private Coordonnee coordonnee;
+    private Coordinate coordinate;
 
 
-    public Cell(TypeCase type, int capacite, boolean metamorphose, Coordonnee coordonnee) {
+    public Cell(TypeCase type, int capacite, boolean metamorphose, Coordinate coordinate) {
         this.type = type;
         this.capacite = capacite;
         this.metamorphose = metamorphose;
-        this.coordonnee = coordonnee;
+        this.coordinate = coordinate;
     }
 
-    public Coordonnee getCoordonnee() {
-        return coordonnee;
+    public Coordinate getCoordinate() {
+        return coordinate;
     }
 
-    public void setCoordonnee(Coordonnee coordonnee) {
-        this.coordonnee = coordonnee;
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
     }
 
     public TypeCase getType() {
