@@ -15,15 +15,6 @@ public class Gameboard {
     private int tailleY;
     private Cell[][] gameboard;
 
-
-    public void initializeGameBoard(){
-        for (int i = 0; i < 21; i++) {
-            for (int j = 0; j < 21; j++) {
-
-            }
-        }
-    }
-
     public Gameboard() {
         this.tailleX = 21;
         this.tailleY = 21;
@@ -31,15 +22,25 @@ public class Gameboard {
         for (int i = 0; i < tailleX; i++) {
             for (int j = 0; j < tailleY; j++) {
                 Coordinate coordinate = new Coordinate(j, i);
-                gameboard[i][j] = new Cell(map.TypeCase.IMPASSABLE_AREA,0,false, coordinate);
+                gameboard[i][j] = new Cell(map.TypeCase.IMPASSABLE_AREA,0,false, coordinate,0,0,0);
             }
         }
     }
 
-    public Gameboard(int tailleX, int tailleY, Cell[][] gameboard) {
-        this.tailleX = tailleX;
-        this.tailleY = tailleY;
-        this.gameboard = gameboard;
+    public void setValueOfCells(){
+        for (int i = 0; i < tailleX; i++) {
+            for (int j = 0; j < tailleY; j++) {
+                if (gameboard[i][j].getType().equals(TypeCase.WATER)){
+                    gameboard[i][j].setWaterNb(200000);
+                }
+                if (gameboard[i][j].getType().equals(TypeCase.FOOD)){
+                    gameboard[i][j].setFoodNb(100);
+                }
+                if (gameboard[i][j].getType().equals(TypeCase.ORE)){
+                    gameboard[i][j].setFoodNb(100);
+                }
+            }
+        }
     }
 
     public int getTailleX() {

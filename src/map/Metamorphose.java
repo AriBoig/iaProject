@@ -1,71 +1,237 @@
 package map;
 
+/**
+ * Classe Metamorphose
+ * @author Aristide Boisgontier
+ * @date 11/02/2020
+ */
 
 import com.fuzzylite.Engine;
-import com.fuzzylite.FuzzyLite;
-import com.fuzzylite.Op;
-import com.fuzzylite.activation.General;
-import com.fuzzylite.defuzzifier.Centroid;
 import com.fuzzylite.imex.FllImporter;
-import com.fuzzylite.norm.s.Maximum;
-import com.fuzzylite.norm.t.AlgebraicProduct;
-import com.fuzzylite.rule.Rule;
-import com.fuzzylite.rule.RuleBlock;
-import com.fuzzylite.term.Ramp;
 import com.fuzzylite.variable.InputVariable;
 import com.fuzzylite.variable.OutputVariable;
+import display.main.MainClass;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Random;
 
 public class Metamorphose {
     public static void main(String[] args) {
-        Engine engine = new Engine();
-        engine.setName("ObstacleAvoidance");
-        engine.setDescription("");
-        InputVariable obstacle = new InputVariable();
-        obstacle.setName("obstacle");
-        obstacle.setDescription("");
-        obstacle.setEnabled(true);
-        obstacle.setRange(0.000, 1.000);
-        obstacle.setLockValueInRange(false);
-        obstacle.addTerm(new Ramp("left", 1.000, 0.000));
-        obstacle.addTerm(new Ramp("right", 0.000, 1.000));
-        engine.addInputVariable(obstacle);
-        OutputVariable mSteer = new OutputVariable();
-        mSteer.setName("mSteer");
-        mSteer.setDescription("");
-        mSteer.setEnabled(true);
-        mSteer.setRange(0.000, 1.000);
-        mSteer.setLockValueInRange(false);
-        mSteer.setAggregation(new Maximum());
-        mSteer.setDefuzzifier(new Centroid(100));
-        mSteer.setDefaultValue(Double.NaN);
-        mSteer.setLockPreviousValue(false);
-        mSteer.addTerm(new Ramp("left", 1.000, 0.000));
-        mSteer.addTerm(new Ramp("right", 0.000, 1.000));
-        engine.addOutputVariable(mSteer);
+        Engine engine = null;
+        try {
+            engine = new FllImporter().fromFile(new File("src/map/metamorphose.fll"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        StringBuilder status = new StringBuilder();
+        if (!engine.isReady(status))
+            throw new RuntimeException("[engine	error]	engine	is	not	ready:" + status);
+        InputVariable oreextraction = engine.getInputVariable("oreextraction");
+        InputVariable drawnedWater = engine.getInputVariable("drawnedWater");
+        OutputVariable mMetamorphosis = engine.getOutputVariable("mMetamorphosis");
+    }
 
-        RuleBlock	mamdani	=	new	RuleBlock();
-        mamdani.setName("mamdani");
-        mamdani.setDescription("");
-        mamdani.setEnabled(true);
-        mamdani.setConjunction(null);
-        mamdani.setDisjunction(null);
-        mamdani.setImplication(new	AlgebraicProduct());
-        mamdani.setActivation(new	General());
-        mamdani.addRule(Rule.parse("if	obstacle	is	left	then	mSteer	is	right",	engine));
-        mamdani.addRule(Rule.parse("if	obstacle	is	right	then	mSteer	is	left",	engine));
-        engine.addRuleBlock(mamdani);
-        StringBuilder	status	=	new	StringBuilder();
-        if	(!	engine.isReady(status))
-            throw	new	RuntimeException("[engine	error]	engine	is	not	ready:	"	+	status);
-        //InputVariable	obstacle	=	engine.getInputVariable("obstacle");
-        OutputVariable	steer	=	engine.getOutputVariable("mSteer");
-        for	(int	i	=	0;	i	<=	50;	++i){
-            double	location	=	obstacle.getMinimum()	+	i	*	(obstacle.range()	/	50);
-            obstacle.setValue(location);
-            engine.process();
-            FuzzyLite.logger().info(String.format(
-                    "obstacle.input	=	%s	->	steer.output	=	%s",
-                    Op.str(location),	Op.str(steer.getValue())));
+    public TypeCase MetamorphRandomFromCell(TypeCase typeCase){
+        TypeCase toReturn = null;
+        if (typeCase.equals(TypeCase.TREE)){
+            toReturn = fromTree();
+        }else if (typeCase.equals(TypeCase.DRY_MEDOW)){
+            toReturn = fromDryMedow();
+        }else if (typeCase.equals(TypeCase.NORMAL_MEDOW)){
+            toReturn = fromNormalMedow();
+        }else if (typeCase.equals(TypeCase.OILY_MEDOW)){
+            toReturn = fromOilyMedow();
+        }else if (typeCase.equals(TypeCase.DESERT)){
+            toReturn = fromDesert();
+        }else if (typeCase.equals(TypeCase.FOOD)){
+            toReturn = fromInfranchissable();
+        }else if (typeCase.equals(TypeCase.SCREE)){
+            toReturn = fromScree();
+        }else if (typeCase.equals(TypeCase.ORE)){
+            toReturn = fromOre();
+        }
+        if (toReturn == null){
+            return typeCase;
+        }else{
+            return toReturn;
         }
     }
+
+    //TODO faire la routine sur toutes les maps
+    public int routine(){
+        Gameboard gameboard = MainClass.getGameboard();
+        int routine = 0;
+        for (int i = 0; i < gameboard.getTailleX(); i++) {
+            for (int j = 0; j < gameboard.getTailleY(); j++) {
+                if (gameboard.getGameboard()[i][j].isExtraction()){
+                    routine += 1;
+                }
+                if (gameboard.getGameboard()[i][j].getFoodNb() == 0){
+                    gameboard.getGameboard()[i][j].setType(TypeCase.DRY_MEDOW);
+                }
+                if (gameboard.getGameboard()[i][j].getWaterNb() == 0){
+                    gameboard.getGameboard()[i][j].setType(TypeCase.SCREE);
+                }
+            }
+        }
+        return routine;
+    }
+
+    public int randomGen(int low, int high){
+        Random r = new Random();
+        return r.nextInt(high-low) + low;
+    }
+
+
+    public TypeCase fromTree(){
+        TypeCase toReturn = null;
+        int rand;
+        rand = randomGen(0,101);
+        if (rand <= 20){
+            toReturn = TypeCase.DRY_MEDOW;
+        }
+        rand = randomGen(0, 101);
+        if (rand <= 30){
+            toReturn = TypeCase.NORMAL_MEDOW;
+        }
+        rand = randomGen(0,101);
+        if (rand <= 40){
+            toReturn = TypeCase.OILY_MEDOW;
+        }
+        rand = randomGen(0,10);
+        if (rand <= 9){
+            toReturn = TypeCase.DESERT;
+        }
+        rand = randomGen(0,10001);
+        if (rand <= 1){
+            toReturn = TypeCase.IMPASSABLE_AREA;
+            }
+        return toReturn;
+    }
+
+    public TypeCase fromDryMedow(){
+        TypeCase toReturn = null;
+        int rand;
+        rand = randomGen(0, 101);
+        if (rand <= 80) {
+            toReturn = TypeCase.DESERT;
+        }
+        rand = randomGen(0, 101);
+        if (rand <= 19){
+            toReturn = TypeCase.FOOD;
+        }
+        rand = randomGen(0, 1001);
+        if (rand <= 1){
+            toReturn = TypeCase.IMPASSABLE_AREA;
+        }
+        return toReturn;
+    }
+
+    public TypeCase fromNormalMedow(){
+        TypeCase toReturn = null;
+        int rand;
+        rand = randomGen(0, 101);
+        if (rand <= 10) {
+            toReturn = TypeCase.DESERT;
+        }
+        rand = randomGen(0, 101);
+        if (rand <= 60) {
+            toReturn = TypeCase.DRY_MEDOW;
+        }
+        rand = randomGen(0, 101);
+        if (rand <= 30) {
+            toReturn = TypeCase.FOOD;
+        }
+        return toReturn;
+    }
+
+    public TypeCase fromOilyMedow(){
+        TypeCase toReturn = null;
+        int rand;
+        rand = randomGen(0, 101);
+        if (rand <= 5) {
+            toReturn = TypeCase.DESERT;
+        }
+        rand = randomGen(0, 101);
+        if (rand <= 40) {
+            toReturn = TypeCase.NORMAL_MEDOW;
+        }
+        rand = randomGen(0, 101);
+        if (rand <= 30) {
+            toReturn = TypeCase.DRY_MEDOW;
+        }
+        rand = randomGen(0, 101);
+        if (rand <= 25) {
+            toReturn = TypeCase.FOOD;
+        }
+        return toReturn;
+    }
+
+    public TypeCase fromDesert(){
+        TypeCase toReturn = null;
+        int rand;
+        rand = randomGen(0, 101);
+        if (rand <= 65) {
+            toReturn = TypeCase.DRY_MEDOW;
+        }
+        rand = randomGen(0, 1001);
+        if (rand <= 1) {
+            toReturn = TypeCase.IMPASSABLE_AREA;
+        }
+        return toReturn;
+    }
+
+    public TypeCase fromFood(){
+        TypeCase toReturn = null;
+        int rand;
+        rand = randomGen(0, 101);
+        if (rand <= 50) {
+            toReturn = TypeCase.OILY_MEDOW;
+        }
+        rand = randomGen(0, 101);
+        if (rand <= 30) {
+            toReturn = TypeCase.NORMAL_MEDOW;
+        }
+        rand = randomGen(0, 101);
+        if (rand <= 10) {
+            toReturn = TypeCase.DRY_MEDOW;
+        }
+        rand = randomGen(0, 101);
+        if (rand <= 10) {
+            toReturn = TypeCase.TREE;
+        }
+        return toReturn;
+    }
+
+    public TypeCase fromInfranchissable(){
+        TypeCase toReturn = null;
+        int rand;
+        rand = randomGen(0, 101);
+        if (rand <= 1){
+            toReturn = TypeCase.DESERT;
+        }
+        return toReturn;
+    }
+
+    public TypeCase fromScree(){
+        TypeCase toReturn = null;
+        int rand;
+        rand = randomGen(0, 101);
+        if (rand <= 2){
+            toReturn = TypeCase.ORE;
+        }
+        return toReturn;
+    }
+
+    public TypeCase fromOre(){
+        TypeCase toReturn = null;
+        int rand;
+        rand = randomGen(0, 101);
+        if (rand <= 5){
+            toReturn = TypeCase.SCREE;
+        }
+        return toReturn;
+    }
 }
+

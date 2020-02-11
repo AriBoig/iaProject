@@ -40,6 +40,7 @@ public class MainClass extends Application {
         gameboard.initializeOilyMedow();
         gameboard.initializeDesertGameBoard();
         gameboard.initializeScreeGameBoard();
+        gameboard.setValueOfCells();
     }
 
     @Override

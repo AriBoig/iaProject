@@ -13,15 +13,47 @@ package map;
 public class Cell {
     private TypeCase type;
     private int capacite;
-    private boolean metamorphose;
+    private boolean extraction;
     private Coordinate coordinate;
+    private int waterNb;
+    private int oreNb;
+    private int foodNb;
 
-
-    public Cell(TypeCase type, int capacite, boolean metamorphose, Coordinate coordinate) {
+    public Cell(TypeCase type, int capacite, boolean metamorphose, Coordinate coordinate, int waterNb, int oreNb, int foodNb) {
         this.type = type;
         this.capacite = capacite;
-        this.metamorphose = metamorphose;
+        this.extraction = metamorphose;
         this.coordinate = coordinate;
+        this.waterNb = waterNb;
+        this.oreNb = oreNb;
+        this.foodNb = foodNb;
+    }
+
+    public int getWaterNb() {
+        return waterNb;
+    }
+
+    public void setWaterNb(int waterNb) {
+        this.extraction = true;
+        this.waterNb = waterNb;
+    }
+
+    public int getOreNb() {
+        return oreNb;
+    }
+
+    public void setOreNb(int oreNb) {
+        this.extraction = true;
+        this.oreNb = oreNb;
+    }
+
+    public int getFoodNb() {
+        return foodNb;
+    }
+
+    public void setFoodNb(int foodNb) {
+        this.extraction = true;
+        this.foodNb = foodNb;
     }
 
     public Coordinate getCoordinate() {
@@ -48,11 +80,12 @@ public class Cell {
         this.capacite = capacite;
     }
 
-    public boolean isMetamorphose() {
-        return metamorphose;
+    public boolean isExtraction() {
+        return extraction;
     }
 
-    public void setMetamorphose(boolean metamorphose) {
-        this.metamorphose = metamorphose;
+    public void setExtraction(boolean extraction) {
+        this.extraction = extraction;
     }
+
 }
