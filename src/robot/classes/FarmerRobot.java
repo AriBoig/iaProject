@@ -1,6 +1,7 @@
 package robot.classes;
 
 import map.TypeCase;
+import robot.enums.Mode;
 
 public class FarmerRobot extends Robot
 {
@@ -24,11 +25,11 @@ public class FarmerRobot extends Robot
     @Override
     public void checkCell()
     {
-        if (this.action == Mode.EXPLORATION) {
+        if (this.action == Mode.EXPLORATION || this.action == Mode.OPERATION) {
             if (getCell().getType() == TypeCase.DRY_MEDOW || getCell().getType() == TypeCase.NORMAL_MEDOW ||
                     getCell().getType() == TypeCase.OILY_MEDOW)
             {
-                this.action = Mode.OPERATION; /* Le robot se met en exploitation */
+                this.action = Mode.WORK; /* Le robot se met au travail */
 
                 switch (getCell().getType()) {
                     case DRY_MEDOW: break;
@@ -40,5 +41,8 @@ public class FarmerRobot extends Robot
                 // TODO envoyer information au centraliser
             }
         }
+
+        // TODO move le robot si sa case ne lui plait pas
+        move();
     }
 }
