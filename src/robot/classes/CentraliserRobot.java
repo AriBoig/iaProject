@@ -4,12 +4,10 @@ import map.Cell;
 import map.Coordinate;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * @author Enzo Dechaene
  * @author Adrien Costes
- * @date 06/02/2020
  */
 
 public class CentraliserRobot extends Robot
@@ -42,8 +40,6 @@ public class CentraliserRobot extends Robot
         getMapExplored().add(robot.getNeighbour().getSouthwest());
         getMapExplored().add(robot.getNeighbour().getWest());
     }
-
-    public void collect
 
     /**
      * @author AC

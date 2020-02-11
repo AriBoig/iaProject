@@ -1,5 +1,6 @@
 package robot.classes;
 
+import display.main.MainClass;
 import map.Cell;
 import map.Coordinate;
 import map.TypeCase;
@@ -36,41 +37,40 @@ public class Neighbour
      * @param current
      */
     private void cellInit(Cell current) {
-        Cell cur = current;
 
         //TODO récupérer le type des cases dans le gameboard
 
         Coordinate coordinate = new Coordinate(current.getCoordinate().getX(), current.getCoordinate().getY() + 1);
-        cur.setCoordinate(coordinate);
-        setNorth(cur);
+        getNorth().setCoordinate(coordinate);
+        getNorth().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
 
         coordinate = new Coordinate(current.getCoordinate().getX() + 1, current.getCoordinate().getY());
-        cur.setCoordinate(coordinate);
-        setEast(cur);
+        getEast().setCoordinate(coordinate);
+        getEast().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
 
         coordinate = new Coordinate(current.getCoordinate().getX() + 1, current.getCoordinate().getY() + 1);
-        cur.setCoordinate(coordinate);
-        setNortheast(cur);
+        getNortheast().setCoordinate(coordinate);
+        getNortheast().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
 
         coordinate = new Coordinate(current.getCoordinate().getX() - 1, current.getCoordinate().getY() + 1);
-        cur.setCoordinate(coordinate);
-        setNorthwest(cur);
+        getNorthwest().setCoordinate(coordinate);
+        getNorthwest().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
 
         coordinate = new Coordinate(current.getCoordinate().getX(), current.getCoordinate().getY() - 1);
-        cur.setCoordinate(coordinate);
-        setSouth(cur);
+        getWest().setCoordinate(coordinate);
+        getWest().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
 
         coordinate = new Coordinate(current.getCoordinate().getX() + 1, current.getCoordinate().getY() - 1);
-        cur.setCoordinate(coordinate);
-        setSoutheast(cur);
+        getNorthwest().setCoordinate(coordinate);
+        getNorthwest().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
 
         coordinate = new Coordinate(current.getCoordinate().getX() - 1, current.getCoordinate().getY() - 1);
-        cur.setCoordinate(coordinate);
-        setSouthwest(cur);
+        getNorthwest().setCoordinate(coordinate);
+        getNorthwest().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
 
         coordinate = new Coordinate(current.getCoordinate().getX() - 1, current.getCoordinate().getY());
-        cur.setCoordinate(coordinate);
-        setWest(cur);
+        getNorthwest().setCoordinate(coordinate);
+        getNorthwest().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
 
     }
 
