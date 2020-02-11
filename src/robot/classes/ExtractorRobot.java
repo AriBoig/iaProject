@@ -1,8 +1,9 @@
 package robot.classes;
 
 import map.TypeCase;
+import robot.enums.Mode;
 
-public class ExtractorRobot extends WorkerRobot
+public class ExtractorRobot extends Robot
 {
     private static final int PERCENT_OF_DRILLING = 2;
 
@@ -18,12 +19,15 @@ public class ExtractorRobot extends WorkerRobot
     @Override
     public void checkCell()
     {
-        if (this.action == Mode.EXPLORATION) {
+        if (this.action == Mode.EXPLORATION || this.action == Mode.OPERATION) {
             if (getCell().getType() == TypeCase.ORE) {
-                this.action = Mode.OPERATION; /* Le robot se met en exploitation */
+                this.action = Mode.WORK; /* Le robot se met au travail */
 
                 // TODO envoyer information au centraliser
             }
         }
+
+        // TODO move le robot si sa case ne lui plait pas
+        move();
     }
 }

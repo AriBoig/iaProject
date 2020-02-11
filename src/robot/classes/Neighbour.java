@@ -4,6 +4,7 @@ import display.main.MainClass;
 import map.Cell;
 import map.Coordinate;
 import map.TypeCase;
+import robot.enums.Direction;
 
 /**
  * @author ED
@@ -24,6 +25,12 @@ public class Neighbour
         cellInit(current);
     }
     
+
+    /**
+     *
+     * @return
+     * @author Enzo DECHAENE
+     */
     public boolean findWater()
     {
         return (north.getType() == TypeCase.WATER || south.getType() == TypeCase.WATER ||
@@ -200,5 +207,40 @@ public class Neighbour
      */
     public void setSouthwest(Cell southwest) {
         this.southwest = southwest;
+    }
+
+    /**
+     *
+     * @param direction
+     * @return
+     * @author Enzo DECHAENE
+     */
+    public Cell findCellByDirection(Direction direction)
+    {
+        Cell cell = null;
+
+        switch (direction) {
+            case NORTH:     cell = north;     break;
+            case SOUTH:     cell = south;     break;
+            case EAST:      cell = east;      break;
+            case WEST:      cell = west;      break;
+            case NORTHEAST: cell = northeast; break;
+            case NORTHWEST: cell = northwest; break;
+            case SOUTHEAST: cell = southeast; break;
+            case SOUTHWEST: cell = southwest; break;
+            default: cell = null;
+        }
+
+        return cell;
+    }
+
+    /**
+     *
+     * @param cell
+     * @author Enzo DECHAENE
+     */
+    public void updateNeighbour(Cell cell)
+    {
+        // TODO actualiser les cellules avec la cellule passe en parametre
     }
 }
