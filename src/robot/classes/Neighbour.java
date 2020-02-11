@@ -38,7 +38,7 @@ public class Neighbour
     private void cellInit(Cell current) {
         Cell cur = current;
 
-        //TODO ajouter le type des cases
+        //TODO récupérer le type des cases dans le gameboard
 
         Coordinate coordinate = new Coordinate(current.getCoordinate().getX(), current.getCoordinate().getY() + 1);
         cur.setCoordinate(coordinate);

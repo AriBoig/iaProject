@@ -43,6 +43,13 @@ public class CentraliserRobot extends Robot
         getMapExplored().add(robot.getNeighbour().getWest());
     }
 
+    public void collect
+
+    /**
+     * @author AC
+     * @param coordinate
+     * @return
+     */
     public Cell findByCoordinate(Coordinate coordinate) {
         int i = 0;
 
