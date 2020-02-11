@@ -4,6 +4,12 @@
  */
 package map;
 
+/**
+ * Classe des cellules du gameboard
+ * @author Aristide Boisgontier
+ * @date 06/02/2020
+ */
+
 public class Cell {
     private TypeCase type;
     private int capacite;

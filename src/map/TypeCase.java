@@ -1,5 +1,9 @@
 package map;
-
+/**
+ * Enum des types de cases
+ * @author Aristide Boisgontier
+ * @date 06/02/2020
+ */
 public enum TypeCase {
     BASE,               /* Base de la colonie   */
     DESERT,             /* Desert               */

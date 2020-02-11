@@ -1,5 +1,11 @@
 package display.controller;
 
+/**
+ * Classe qui affiche le gameboard et sa légende en javafx
+ * @author Aristide Boisgontier
+ * @date 06/02/2020
+ */
+
 import display.main.MainClass;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
