@@ -17,7 +17,7 @@ public class CentraliserRobot extends Robot
     private double water;
     private double consumeWater;
 
-    private ArrayList<Cell> mapExplored;
+    protected static ArrayList<Cell> mapExplored;
 
 
     public CentraliserRobot()
@@ -29,16 +29,16 @@ public class CentraliserRobot extends Robot
      * @author AC
      * @param robot
      */
-    public void collectInfo(Robot robot) {
-        getMapExplored().add(robot.getCell());
-        getMapExplored().add(robot.getNeighbour().getEast());
-        getMapExplored().add(robot.getNeighbour().getNorth());
-        getMapExplored().add(robot.getNeighbour().getNortheast());
-        getMapExplored().add(robot.getNeighbour().getNorthwest());
-        getMapExplored().add(robot.getNeighbour().getSouth());
-        getMapExplored().add(robot.getNeighbour().getSoutheast());
-        getMapExplored().add(robot.getNeighbour().getSouthwest());
-        getMapExplored().add(robot.getNeighbour().getWest());
+    protected static void collectInfo(Robot robot) {
+        mapExplored.add(robot.getCell());
+        mapExplored.add(robot.getNeighbour().getEast());
+        mapExplored.add(robot.getNeighbour().getNorth());
+        mapExplored.add(robot.getNeighbour().getNortheast());
+        mapExplored.add(robot.getNeighbour().getNorthwest());
+        mapExplored.add(robot.getNeighbour().getSouth());
+        mapExplored.add(robot.getNeighbour().getSoutheast());
+        mapExplored.add(robot.getNeighbour().getSouthwest());
+        mapExplored.add(robot.getNeighbour().getWest());
     }
 
     /**
@@ -46,7 +46,7 @@ public class CentraliserRobot extends Robot
      * @param coordinate
      * @return
      */
-    public Cell findByCoordinate(Coordinate coordinate) {
+    public static Cell findByCoordinate(Coordinate coordinate) {
         int i = 0;
 
         if (mapExplored.size() == 0)
@@ -92,14 +92,6 @@ public class CentraliserRobot extends Robot
      */
     public double getConsumeWater() {
         return consumeWater;
-    }
-
-    /**
-     * @author AC
-     * @return
-     */
-    public ArrayList<Cell> getMapExplored() {
-        return mapExplored;
     }
 
 }

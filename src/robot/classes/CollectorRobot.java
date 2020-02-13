@@ -15,6 +15,7 @@ public class CollectorRobot extends Robot
     }
 
     /**
+     * @author AC
      * @author Enzo DECHAENE
      */
     @Override

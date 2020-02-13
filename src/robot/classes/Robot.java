@@ -6,6 +6,7 @@ import robot.algo.LearningEnhancement;
 import robot.enums.Direction;
 import robot.enums.Mode;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -47,6 +48,66 @@ public class Robot
         else {
             // TODO faire en fonction du Q-LEARNING
         }
+    }
+
+    /**
+     * Tis method allow to know if one of the cells around the robot
+     * have been metamorphosed or not. If one or many of them are,
+     * the robot let know the changes.
+     * @author AC
+     * @param robot
+     * @return the cells which have been modified
+     */
+    protected ArrayList<Cell> metamorphosed (Robot robot){
+
+        ArrayList<Cell> changed = new ArrayList<>();
+
+        if (CentraliserRobot.findByCoordinate(robot.getCell().getCoordinate()) == null
+        || CentraliserRobot.findByCoordinate(robot.getCell().getCoordinate())
+                .getCoordinate().equals(robot.getCell().getCoordinate()))
+            changed.add(robot.getCell());
+
+        if (CentraliserRobot.findByCoordinate(robot.getNeighbour().getEast().getCoordinate()) == null
+        || CentraliserRobot.findByCoordinate(robot.getNeighbour().getEast().getCoordinate())
+                .getCoordinate().equals(robot.getNeighbour().getEast().getCoordinate()))
+            changed.add(robot.getNeighbour().getEast());
+
+        if (CentraliserRobot.findByCoordinate(robot.getNeighbour().getSouth().getCoordinate()) == null
+                || CentraliserRobot.findByCoordinate(robot.getNeighbour().getSouth().getCoordinate())
+                .getCoordinate().equals(robot.getNeighbour().getSouth().getCoordinate()))
+            changed.add(robot.getNeighbour().getSouth());
+
+        if (CentraliserRobot.findByCoordinate(robot.getNeighbour().getWest().getCoordinate()) == null
+                || CentraliserRobot.findByCoordinate(robot.getNeighbour().getWest().getCoordinate())
+                .getCoordinate().equals(robot.getNeighbour().getWest().getCoordinate()))
+            changed.add(robot.getNeighbour().getWest());
+
+        if (CentraliserRobot.findByCoordinate(robot.getNeighbour().getNorth().getCoordinate()) == null
+                || CentraliserRobot.findByCoordinate(robot.getNeighbour().getNorth().getCoordinate())
+                .getCoordinate().equals(robot.getNeighbour().getNorth().getCoordinate()))
+            changed.add(robot.getNeighbour().getNorth());
+
+        if (CentraliserRobot.findByCoordinate(robot.getNeighbour().getNortheast().getCoordinate()) == null
+                || CentraliserRobot.findByCoordinate(robot.getNeighbour().getNortheast().getCoordinate())
+                .getCoordinate().equals(robot.getNeighbour().getNortheast().getCoordinate()))
+            changed.add(robot.getNeighbour().getNortheast());
+
+        if (CentraliserRobot.findByCoordinate(robot.getNeighbour().getSoutheast().getCoordinate()) == null
+                || CentraliserRobot.findByCoordinate(robot.getNeighbour().getSoutheast().getCoordinate())
+                .getCoordinate().equals(robot.getNeighbour().getSoutheast().getCoordinate()))
+            changed.add(robot.getNeighbour().getSoutheast());
+
+        if (CentraliserRobot.findByCoordinate(robot.getNeighbour().getSouthwest().getCoordinate()) == null
+                || CentraliserRobot.findByCoordinate(robot.getNeighbour().getSouthwest().getCoordinate())
+                .getCoordinate().equals(robot.getNeighbour().getSouthwest().getCoordinate()))
+            changed.add(robot.getNeighbour().getSouthwest());
+
+        if (CentraliserRobot.findByCoordinate(robot.getNeighbour().getNorthwest().getCoordinate()) == null
+                || CentraliserRobot.findByCoordinate(robot.getNeighbour().getNorthwest().getCoordinate())
+                .getCoordinate().equals(robot.getNeighbour().getNorthwest().getCoordinate()))
+            changed.add(robot.getNeighbour().getNorthwest());
+
+        return changed;
     }
 
     /**
