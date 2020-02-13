@@ -52,7 +52,6 @@ public class Cell {
     }
 
     public void setFoodNb(int foodNb) {
-        this.extraction = true;
         this.foodNb = foodNb;
     }
 

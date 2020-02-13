@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.util.Random;
 
 public class Metamorphose {
+
+    float routinePercentWater;
+    float routinePercentOre;
     public static void main(String[] args) {
         Engine engine = null;
         try {
@@ -57,25 +60,35 @@ public class Metamorphose {
             return toReturn;
         }
     }
-
-    //TODO faire la routine sur toutes les maps
-    public int routine(){
+    
+    public void routinePercent(){
         Gameboard gameboard = MainClass.getGameboard();
-        int routine = 0;
+        routinePercentWater = 0;
+        routinePercentOre = 0;
+        int nbWater = 0;
+        int nbOre = 0;
         for (int i = 0; i < gameboard.getTailleX(); i++) {
             for (int j = 0; j < gameboard.getTailleY(); j++) {
-                if (gameboard.getGameboard()[i][j].isExtraction()){
-                    routine += 1;
-                }
                 if (gameboard.getGameboard()[i][j].getFoodNb() == 0){
                     gameboard.getGameboard()[i][j].setType(TypeCase.DRY_MEDOW);
                 }
                 if (gameboard.getGameboard()[i][j].getWaterNb() == 0){
                     gameboard.getGameboard()[i][j].setType(TypeCase.SCREE);
+                    nbWater++;
+                }
+                if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.WATER)
+                && gameboard.getGameboard()[i][j].isExtraction()){
+                    routinePercentWater++;
+                }
+                if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.ORE)
+                && gameboard.getGameboard()[i][j].isExtraction()){
+                    routinePercentOre++;
                 }
             }
         }
-        return routine;
+
+        routinePercentWater = routinePercentWater/nbWater;
+        routinePercentOre = routinePercentOre/nbOre;
     }
 
     public int randomGen(int low, int high){
