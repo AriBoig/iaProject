@@ -1,7 +1,7 @@
 package map;
 /**
  * Enum des types de cases
- * @author Aristide Boisgontier
+ * @author Aristide Boisgontier & Isaë Le Moigne
  * @date 06/02/2020
  */
 public enum TypeCase {
