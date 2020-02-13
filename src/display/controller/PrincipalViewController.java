@@ -2,7 +2,7 @@ package display.controller;
 
 /**
  * Classe qui affiche le gameboard et sa légende en javafx
- * @author Aristide Boisgontier
+ * @author Aristide Boisgontier & Isaë Le Moigne
  * @date 06/02/2020
  */
 
@@ -41,7 +41,7 @@ public class PrincipalViewController {
     }
 
     public void initialize(){
-        Image img = new Image("src/display/ressources/legende/legende.png");
+        Image img = new Image("file:src/display/ressources/legende/legende.png");
         imageViewLegend.setImage(img);
     }
 
@@ -50,17 +50,17 @@ public class PrincipalViewController {
     }
 
     public void initializeImages(){
-        imageBase = new Image("src/display/ressources/field/base.png");
-        imageDesert = new Image("src/display/ressources/field/desert.png");
-        imageDryMedow = new Image("src/display/ressources/field/dryMedow.png");
-        imageFood = new Image("src/display/ressources/field/food.png");
-        imageImpassableArea = new Image("src/display/ressources/field/impassableArea.png");
-        imageNormalMedow = new Image("src/display/ressources/field/normalMedow.png");
-        imageOilyMedow = new Image("src/display/ressources/field/oilyMedow.png");
-        imageOre = new Image("src/display/ressources/field/ore.png");
-        imageScree = new Image("src/display/ressources/field/scree.png");
-        imageTree = new Image("src/display/ressources/field/tree.png");
-        imageWater = new Image("src/display/ressources/field/water.png");
+        imageBase = new Image("file:src/display/ressources/field/base.png");
+        imageDesert = new Image("file:src/display/ressources/field/desert.png");
+        imageDryMedow = new Image("file:src/display/ressources/field/dryMedow.png");
+        imageFood = new Image("file:src/display/ressources/field/food.png");
+        imageImpassableArea = new Image("file:src/display/ressources/field/impassableArea.png");
+        imageNormalMedow = new Image("file:src/display/ressources/field/normalMedow.png");
+        imageOilyMedow = new Image("file:src/display/ressources/field/oilyMedow.png");
+        imageOre = new Image("file:src/display/ressources/field/ore.png");
+        imageScree = new Image("file:src/display/ressources/field/scree.png");
+        imageTree = new Image("file:src/display/ressources/field/tree.png");
+        imageWater = new Image("file:src/display/ressources/field/water.png");
     }
 
     public void refreshGameboardMap(){
