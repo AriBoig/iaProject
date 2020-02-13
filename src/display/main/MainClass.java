@@ -2,7 +2,7 @@ package display.main;
 
 /**
  * Classe principale de lancement de la simulation. Les ressources et images ont été éditées à la main
- * @author Aristide Boisgontier
+ * @author Aristide Boisgontier & Isaë Le Moigne
  * @date 06/02/2020
  */
 

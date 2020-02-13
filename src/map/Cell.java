@@ -6,7 +6,7 @@ package map;
 
 /**
  * Classe des cellules du gameboard
- * @author Aristide Boisgontier
+ * @author Aristide Boisgontier & Isaë Le Moigne
  * @date 06/02/2020
  */
 

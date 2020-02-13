@@ -5,7 +5,7 @@ package map;
 
 /**
  * Classe qui fait office de carte de la simulation
- * @author Aristide Boisgontier
+ * @author Aristide Boisgontier & Isaë Le Moigne
  * @date 06/02/2020
  */
 
@@ -19,12 +19,15 @@ public class Gameboard {
         this.tailleX = 21;
         this.tailleY = 21;
         gameboard = new Cell[tailleX][tailleY];
+
         for (int i = 0; i < tailleX; i++) {
+
             for (int j = 0; j < tailleY; j++) {
                 Coordinate coordinate = new Coordinate(j, i);
                 gameboard[i][j] = new Cell(map.TypeCase.IMPASSABLE_AREA,0,false, coordinate,0,0,0);
             }
         }
+
     }
 
     public void setValueOfCells(){

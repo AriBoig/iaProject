@@ -2,7 +2,7 @@ package map;
 
 /**
  * Classe Metamorphose
- * @author Aristide Boisgontier
+ * @author Aristide Boisgontier & Isaë Le Moigne
  * @date 11/02/2020
  */
 
