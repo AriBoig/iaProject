@@ -64,6 +64,27 @@ public class CentraliserRobot extends Robot
 
     /**
      * @author AC
+     * @param coordinate
+     * @return
+     */
+    public static Cell removeByCoordinate(Coordinate coordinate) {
+        int i = 0;
+
+        if (mapExplored.size() == 0)
+            return null;
+
+        while (i < mapExplored.size()) {
+            if (mapExplored.get(i).getCoordinate().equals(coordinate))
+                return mapExplored.remove(i);
+
+            i++;
+        }
+
+        return null;
+    }
+
+    /**
+     * @author AC
      * @return
      */
     public double getMineral() {

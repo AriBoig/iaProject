@@ -107,6 +107,11 @@ public class Robot
                 .getCoordinate().equals(robot.getNeighbour().getNorthwest().getCoordinate()))
             changed.add(robot.getNeighbour().getNorthwest());
 
+        changed.forEach(cell -> {
+            CentraliserRobot.removeByCoordinate(cell.getCoordinate());
+            CentraliserRobot.mapExplored.add(cell);
+        });
+
         return changed;
     }
 
