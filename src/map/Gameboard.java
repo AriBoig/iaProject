@@ -30,15 +30,29 @@ public class Gameboard {
 
     }
 
-    public void setValueOfCells(){
+    public void setValueOfWaterCells(){
         for (int i = 0; i < tailleX; i++) {
             for (int j = 0; j < tailleY; j++) {
                 if (gameboard[i][j].getType().equals(TypeCase.WATER)){
                     gameboard[i][j].setWaterNb(200000);
                 }
+            }
+        }
+    }
+
+    public void setValueOfFoodCells(){
+        for (int i = 0; i < tailleX; i++) {
+            for (int j = 0; j < tailleY; j++) {
                 if (gameboard[i][j].getType().equals(TypeCase.FOOD)){
                     gameboard[i][j].setFoodNb(100);
                 }
+            }
+        }
+    }
+
+    public void setValueOfOreCells(){
+        for (int i = 0; i < tailleX; i++) {
+            for (int j = 0; j < tailleY; j++) {
                 if (gameboard[i][j].getType().equals(TypeCase.ORE)){
                     gameboard[i][j].setFoodNb(100);
                 }

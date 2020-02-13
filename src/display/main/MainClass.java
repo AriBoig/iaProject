@@ -40,7 +40,9 @@ public class MainClass extends Application {
         gameboard.initializeOilyMedow();
         gameboard.initializeDesertGameBoard();
         gameboard.initializeScreeGameBoard();
-        gameboard.setValueOfCells();
+        gameboard.setValueOfWaterCells();
+        gameboard.setValueOfFoodCells();
+        gameboard.setValueOfOreCells();
     }
 
     @Override
