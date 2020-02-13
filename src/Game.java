@@ -24,9 +24,9 @@ public class Game
 
 
     public Game() {
-        day    = 0;
+        day       = 0;
         gameboard = new Gameboard();
-        robots = new ArrayList<Robot>();
+        robots    = new ArrayList<Robot>();
 
         initializeRobots(gameboard.getCenterCell());
     }
