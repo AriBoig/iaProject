@@ -1,3 +1,5 @@
+import map.Cell;
+import map.Gameboard;
 import map.TypeCase;
 import robot.classes.*;
 import java.util.ArrayList;
@@ -18,39 +20,43 @@ public class Game
 
     private int day;
     private List<Robot> robots;
+    private Gameboard gameboard;
 
 
     public Game() {
         day    = 0;
+        gameboard = new Gameboard();
         robots = new ArrayList<Robot>();
+
+        initializeRobots(gameboard.getCenterCell());
     }
 
     /**
      * Fonction qui permet d'initialiser les robots.
      * @author Enzo DECHAENE.
      */
-    public void initializeRobots()
+    public void initializeRobots(Cell cell)
     {
         List<Robot> robots = new ArrayList<Robot>();
 
         for (int i = 0; i < NB_CENTRALISER_ROBOT; i++) {
-            robots.add(new CentraliserRobot());
+            robots.add(new CentraliserRobot(cell));
         }
 
         for (int i = 0; i < NB_FARMER_ROBOT; i++) {
-            robots.add(new FarmerRobot());
+            robots.add(new FarmerRobot(cell));
         }
 
         for (int i = 0; i < NB_EXTRACTOR_ROBOT; i++) {
-            robots.add(new ExtractorRobot());
+            robots.add(new ExtractorRobot(cell));
         }
 
         for (int i = 0; i < NB_CONSTRUCTOR_ROBOT; i++) {
-            robots.add(new ConstructorRobot());
+            robots.add(new ConstructorRobot(cell));
         }
 
         for (int i = 0; i < NB_COLLECTOR_ROBOT; i++) {
-            robots.add(new CollectorRobot());
+            robots.add(new CollectorRobot(cell));
         }
 
         if (robots.size() != NB_ROBOT) {
@@ -86,11 +92,38 @@ public class Game
         }
     }
 
+    /**
+     * @author Enzo DECHAENE
+     */
+    public void moveRobots()
+    {
+        for (Robot robot:robots) {
+            robot.checkCell();
+            robot.move();
+        }
+    }
+
+    /**
+     * @author
+     */
+    public void play()
+    {
+        while (day < NB_TOTAL_DAY)
+        {
+            // TODO ACTION CHAQUE TOUR
+            moveRobots();
+            //actionMap() ?
+
+            try { wait(2); } catch (InterruptedException e) { e.printStackTrace(); }
+        }
+    }
+
     private static Logger logger = Logger.getLogger("logger");
 
     public static void main(String[] args) {
         Game game = new Game();
-        game.initializeRobots();
+
+        game.play();
     }
 }
 

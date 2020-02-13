@@ -1,14 +1,15 @@
 package robot.classes;
 
+import map.Cell;
 import robot.enums.Mode;
 
 public class ConstructorRobot extends Robot
 {
     private static final int NB_DAY_CONSTRUCTOR_PIPELINE = 2;
 
-    public ConstructorRobot()
+    public ConstructorRobot(Cell cell)
     {
-        super();
+        super(cell);
     }
 
     /**
