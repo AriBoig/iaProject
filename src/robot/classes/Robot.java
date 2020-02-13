@@ -49,6 +49,7 @@ public class Robot
         }
         else {
             // TODO faire en fonction du Q-LEARNING
+
         }
     }
 
