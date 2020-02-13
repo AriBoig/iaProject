@@ -1,5 +1,6 @@
 package robot.classes;
 
+import map.Cell;
 import map.TypeCase;
 import robot.enums.Mode;
 
@@ -13,9 +14,9 @@ public class FarmerRobot extends Robot
     private static final int NB_WATER_DRY_MEADOW    = 400;
 
 
-    public FarmerRobot()
+    public FarmerRobot(Cell cell)
     {
-        super();
+        super(cell);
         action = Mode.NOTHING; /* Il doit attendre qu'il y ai de l'eau afin de farmer */
     }
 

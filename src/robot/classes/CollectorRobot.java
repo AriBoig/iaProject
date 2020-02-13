@@ -1,5 +1,6 @@
 package robot.classes;
 
+import map.Cell;
 import map.TypeCase;
 import robot.enums.Mode;
 
@@ -9,9 +10,9 @@ public class CollectorRobot extends Robot
     private static final int PERCENT_OF_COLLECTING = 10;
 
 
-    public CollectorRobot()
+    public CollectorRobot(Cell cell)
     {
-        super();
+        super(cell);
     }
 
     /**

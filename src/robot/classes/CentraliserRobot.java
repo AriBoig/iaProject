@@ -20,9 +20,9 @@ public class CentraliserRobot extends Robot
     protected static ArrayList<Cell> mapExplored;
 
 
-    public CentraliserRobot()
+    public CentraliserRobot(Cell cell)
     {
-        super();
+        super(cell);
     }
 
     /**

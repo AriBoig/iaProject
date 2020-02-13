@@ -1,5 +1,6 @@
 package robot.classes;
 
+import map.Cell;
 import map.TypeCase;
 import robot.enums.Mode;
 
@@ -8,9 +9,9 @@ public class ExtractorRobot extends Robot
     private static final int PERCENT_OF_DRILLING = 2;
 
 
-    public ExtractorRobot()
+    public ExtractorRobot(Cell cell)
     {
-        super();
+        super(cell);
     }
 
     /**

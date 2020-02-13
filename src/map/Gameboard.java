@@ -534,5 +534,7 @@ public class Gameboard {
         gameboard[0][20].setType(TypeCase.SCREE);
         gameboard[1][20].setType(TypeCase.SCREE);
     }
+
+
 }
 

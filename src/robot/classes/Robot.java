@@ -19,18 +19,20 @@ public class Robot
     protected Neighbour neighbour;
     protected LearningEnhancement learningEnhancement;
 
-    public Robot()
+    public Robot(Cell cell)
     {
         health              = 100;
         action              = Mode.EXPLORATION;
         learningEnhancement = new LearningEnhancement();
+        this.cell           = cell;
+        neighbour           = new Neighbour(this.cell);
     }
 
     /**
      * Fonction qui permet de deplacer le robot sur une Cell adjacente.
      * @author Enzo DECHAENE.
      */
-    protected void move()
+    public void move()
     {
         if (learningEnhancement.getTypeMove() == Mode.EXPLORATION)
         {
@@ -42,7 +44,7 @@ public class Robot
             {
                 // TODO faire le mouvement du robot sur la case concerne
                 cell = nextCell;
-                neighbour.updateNeighbour(cell);
+                neighbour = new Neighbour(cell);
             }
         }
         else {
@@ -118,7 +120,7 @@ public class Robot
     /**
      * Need to be @override for all robot
      */
-    protected void checkCell()
+    public void checkCell()
     {
 
     }
