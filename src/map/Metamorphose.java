@@ -18,8 +18,8 @@ import java.util.Random;
 
 public class Metamorphose {
 
-    float routinePercentWater;
-    float routinePercentOre;
+    private float routinePercentWater;
+    private float routinePercentOre;
     public static void main(String[] args) {
         Engine engine = null;
         try {
@@ -35,30 +35,27 @@ public class Metamorphose {
         OutputVariable mMetamorphosis = engine.getOutputVariable("mMetamorphosis");
     }
 
-    public TypeCase MetamorphRandomFromCell(TypeCase typeCase){
-        TypeCase toReturn = null;
-        if (typeCase.equals(TypeCase.TREE)){
-            toReturn = fromTree();
-        }else if (typeCase.equals(TypeCase.DRY_MEDOW)){
-            toReturn = fromDryMedow();
-        }else if (typeCase.equals(TypeCase.NORMAL_MEDOW)){
-            toReturn = fromNormalMedow();
-        }else if (typeCase.equals(TypeCase.OILY_MEDOW)){
-            toReturn = fromOilyMedow();
-        }else if (typeCase.equals(TypeCase.DESERT)){
-            toReturn = fromDesert();
-        }else if (typeCase.equals(TypeCase.FOOD)){
-            toReturn = fromInfranchissable();
-        }else if (typeCase.equals(TypeCase.SCREE)){
-            toReturn = fromScree();
-        }else if (typeCase.equals(TypeCase.ORE)){
-            toReturn = fromOre();
+    public Cell MetamorphRandomFromCell(Cell cell){
+        if (cell.getType().equals(TypeCase.TREE)){
+            fromTree(cell);
+        }else if (cell.getType().equals(TypeCase.DRY_MEDOW)){
+            fromDryMedow(cell);
+        }else if (cell.getType().equals(TypeCase.NORMAL_MEDOW)){
+            fromNormalMedow(cell);
+        }else if (cell.getType().equals(TypeCase.OILY_MEDOW)){
+            fromOilyMedow(cell);
+        }else if (cell.getType().equals(TypeCase.DESERT)){
+            fromDesert(cell);
+        }else if (cell.getType().equals(TypeCase.FOOD)){
+            fromFood(cell);
+        }else if (cell.getType().equals(TypeCase.SCREE)){
+            fromScree(cell);
+        }else if (cell.getType().equals(TypeCase.ORE)){
+            fromOre(cell);
+        }else if (cell.getType().equals(TypeCase.IMPASSABLE_AREA)){
+            fromImpassable(cell);
         }
-        if (toReturn == null){
-            return typeCase;
-        }else{
-            return toReturn;
-        }
+        return cell;
     }
     
     public void routinePercent(){
@@ -76,17 +73,20 @@ public class Metamorphose {
                     gameboard.getGameboard()[i][j].setType(TypeCase.SCREE);
                     nbWater++;
                 }
-                if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.WATER)
-                && gameboard.getGameboard()[i][j].isExtraction()){
-                    routinePercentWater++;
+                if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.WATER)){
+                    nbWater++;
+                    if(gameboard.getGameboard()[i][j].isExtraction()) {
+                        routinePercentWater++;
+                    }
                 }
-                if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.ORE)
-                && gameboard.getGameboard()[i][j].isExtraction()){
-                    routinePercentOre++;
+                if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.ORE)){
+                    nbOre++;
+                    if(gameboard.getGameboard()[i][j].isExtraction()) {
+                        routinePercentOre++;
+                    }
                 }
             }
         }
-
         routinePercentWater = routinePercentWater/nbWater;
         routinePercentOre = routinePercentOre/nbOre;
     }
@@ -97,154 +97,145 @@ public class Metamorphose {
     }
 
 
-    public TypeCase fromTree(){
-        TypeCase toReturn = null;
+    public void fromTree(Cell cell){
         int rand;
         rand = randomGen(0,101);
         if (rand <= 20){
-            toReturn = TypeCase.DRY_MEDOW;
+            cell.setType(TypeCase.DRY_MEDOW);
         }
         rand = randomGen(0, 101);
         if (rand <= 30){
-            toReturn = TypeCase.NORMAL_MEDOW;
+            cell.setType(TypeCase.NORMAL_MEDOW);
         }
         rand = randomGen(0,101);
         if (rand <= 40){
-            toReturn = TypeCase.OILY_MEDOW;
+            cell.setType(TypeCase.OILY_MEDOW);
         }
         rand = randomGen(0,10);
         if (rand <= 9){
-            toReturn = TypeCase.DESERT;
+            cell.setType(TypeCase.DESERT);
         }
         rand = randomGen(0,10001);
         if (rand <= 1){
-            toReturn = TypeCase.IMPASSABLE_AREA;
-            }
-        return toReturn;
+            cell.setType(TypeCase.IMPASSABLE_AREA);
+        }
     }
 
-    public TypeCase fromDryMedow(){
-        TypeCase toReturn = null;
+    public void fromDryMedow(Cell cell){
         int rand;
         rand = randomGen(0, 101);
         if (rand <= 80) {
-            toReturn = TypeCase.DESERT;
+            cell.setType(TypeCase.DESERT);
         }
         rand = randomGen(0, 101);
         if (rand <= 19){
-            toReturn = TypeCase.FOOD;
+            cell.setType(TypeCase.FOOD);
+            cell.setFoodNb(100);
         }
         rand = randomGen(0, 1001);
         if (rand <= 1){
-            toReturn = TypeCase.IMPASSABLE_AREA;
+            cell.setType(TypeCase.IMPASSABLE_AREA);
         }
-        return toReturn;
     }
 
-    public TypeCase fromNormalMedow(){
-        TypeCase toReturn = null;
+    public void fromNormalMedow(Cell cell){
         int rand;
         rand = randomGen(0, 101);
         if (rand <= 10) {
-            toReturn = TypeCase.DESERT;
+            cell.setType(TypeCase.DESERT);
         }
         rand = randomGen(0, 101);
         if (rand <= 60) {
-            toReturn = TypeCase.DRY_MEDOW;
+            cell.setType(TypeCase.DRY_MEDOW);
         }
         rand = randomGen(0, 101);
         if (rand <= 30) {
-            toReturn = TypeCase.FOOD;
+            cell.setType(TypeCase.FOOD);
+            cell.setFoodNb(100);
         }
-        return toReturn;
     }
 
-    public TypeCase fromOilyMedow(){
-        TypeCase toReturn = null;
+    public void fromOilyMedow(Cell cell){
         int rand;
         rand = randomGen(0, 101);
         if (rand <= 5) {
-            toReturn = TypeCase.DESERT;
+            cell.setType(TypeCase.DESERT);
         }
         rand = randomGen(0, 101);
         if (rand <= 40) {
-            toReturn = TypeCase.NORMAL_MEDOW;
+            cell.setType(TypeCase.NORMAL_MEDOW);
         }
         rand = randomGen(0, 101);
         if (rand <= 30) {
-            toReturn = TypeCase.DRY_MEDOW;
+            cell.setType(TypeCase.DRY_MEDOW);
         }
         rand = randomGen(0, 101);
         if (rand <= 25) {
-            toReturn = TypeCase.FOOD;
+            cell.setType(TypeCase.FOOD);
+            cell.setFoodNb(100);
         }
-        return toReturn;
     }
 
-    public TypeCase fromDesert(){
-        TypeCase toReturn = null;
+    public void fromDesert(Cell cell){
         int rand;
         rand = randomGen(0, 101);
         if (rand <= 65) {
-            toReturn = TypeCase.DRY_MEDOW;
+            cell.setType(TypeCase.DRY_MEDOW);
         }
         rand = randomGen(0, 1001);
         if (rand <= 1) {
-            toReturn = TypeCase.IMPASSABLE_AREA;
+            cell.setType(TypeCase.IMPASSABLE_AREA);
         }
-        return toReturn;
     }
 
-    public TypeCase fromFood(){
-        TypeCase toReturn = null;
+    public void fromFood(Cell cell){
         int rand;
         rand = randomGen(0, 101);
         if (rand <= 50) {
-            toReturn = TypeCase.OILY_MEDOW;
+            cell.setType(TypeCase.OILY_MEDOW);
+            cell.setFoodNb(0);
         }
         rand = randomGen(0, 101);
         if (rand <= 30) {
-            toReturn = TypeCase.NORMAL_MEDOW;
+            cell.setType(TypeCase.NORMAL_MEDOW);
+            cell.setFoodNb(0);
         }
         rand = randomGen(0, 101);
         if (rand <= 10) {
-            toReturn = TypeCase.DRY_MEDOW;
+            cell.setType(TypeCase.DRY_MEDOW);
+            cell.setFoodNb(0);
         }
         rand = randomGen(0, 101);
         if (rand <= 10) {
-            toReturn = TypeCase.TREE;
+            cell.setType(TypeCase.TREE);
+            cell.setFoodNb(0);
         }
-        return toReturn;
     }
 
-    public TypeCase fromInfranchissable(){
-        TypeCase toReturn = null;
+    public void fromImpassable(Cell cell){
         int rand;
         rand = randomGen(0, 101);
         if (rand <= 1){
-            toReturn = TypeCase.DESERT;
+            cell.setType(TypeCase.DESERT);
         }
-        return toReturn;
     }
 
-    public TypeCase fromScree(){
-        TypeCase toReturn = null;
+    public void fromScree(Cell cell){
         int rand;
         rand = randomGen(0, 101);
         if (rand <= 2){
-            toReturn = TypeCase.ORE;
+            cell.setType(TypeCase.ORE);
+            cell.setOreNb(100);
         }
-        return toReturn;
     }
 
-    public TypeCase fromOre(){
-        TypeCase toReturn = null;
+    public void fromOre(Cell cell){
         int rand;
         rand = randomGen(0, 101);
         if (rand <= 5){
-            toReturn = TypeCase.SCREE;
+            cell.setType(TypeCase.SCREE);
+            cell.setOreNb(0);
         }
-        return toReturn;
     }
 }
 
