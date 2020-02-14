@@ -1,3 +1,7 @@
+package Game;
+
+import display.main.MainClass;
+import javafx.stage.Stage;
 import map.TypeCase;
 import robot.classes.*;
 import java.util.ArrayList;
@@ -88,10 +92,29 @@ public class Game
 
     private static Logger logger = Logger.getLogger("logger");
 
+    public List<Robot> getRobots() {
+        return robots;
+    }
+
+    public void setRobots(List<Robot> robots) {
+        this.robots = robots;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    /*
     public static void main(String[] args) {
-        Game game = new Game();
+        Game.Game game = new Game.Game();
         game.initializeRobots();
     }
+
+     */
 }
 
 

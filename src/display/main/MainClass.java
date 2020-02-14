@@ -6,6 +6,7 @@ package display.main;
  * @date 06/02/2020
  */
 
+import Game.Game;
 import display.container.PrincipalContainerController;
 import display.controller.PrincipalViewController;
 import javafx.application.Application;
@@ -15,19 +16,30 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import map.Gameboard;
-
+import robot.classes.Robot;
 import java.io.IOException;
+import java.util.List;
 
+//TODO Modifier TypeCase
 public class MainClass extends Application {
 
     private BorderPane principalContainer;
     private Stage principalStage;
     private static Gameboard gameboard;
+    private static List<Robot> listRobot;
+    private static Game game;
 
     public static Gameboard getGameboard() {
         return gameboard;
     }
 
+    public static List<Robot> getListRobot() {
+        return listRobot;
+    }
+
+    /**
+     * This function is launching and intializing the gameboard
+     */
     public void iniGameboard(){
         gameboard = new Gameboard();
         gameboard.initializeWaterGameBoard();
@@ -45,14 +57,27 @@ public class MainClass extends Application {
         gameboard.setValueOfOreCells();
     }
 
+
+    /**
+     * This function is intializing the base game
+     */
+    public void iniGame(){
+        game = new Game();
+        game.initializeRobots();
+        listRobot = game.getRobots();
+    }
+
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         principalStage = primaryStage;
         principalStage.setTitle("IA");
         principalStage.setResizable(false);
         iniGameboard();
+        iniGame();
         initialiazePrincipalContainer();
         initializePrincipalView();
+
     }
 
     public void initialiazePrincipalContainer(){
@@ -80,7 +105,9 @@ public class MainClass extends Application {
             controller.setMainClass(this);
             controller.initializeImages();
             controller.initializeGameboardFromMain();
+            controller.initializeRobotsFromMain();
             controller.refreshGameboardMap();
+            controller.refreshGameBoardRobot();
         } catch (IOException e) {
             e.printStackTrace();
         }
