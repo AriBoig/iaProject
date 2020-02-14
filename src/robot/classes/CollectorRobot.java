@@ -3,6 +3,7 @@ package robot.classes;
 import map.Cell;
 import map.TypeCase;
 import robot.enums.Mode;
+import robot.enums.Type;
 
 public class CollectorRobot extends Robot
 {
@@ -13,6 +14,7 @@ public class CollectorRobot extends Robot
     public CollectorRobot(Cell cell)
     {
         super(cell);
+        setType(Type.COLLECTER);
     }
 
     /**

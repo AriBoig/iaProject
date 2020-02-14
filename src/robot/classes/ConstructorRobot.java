@@ -2,6 +2,7 @@ package robot.classes;
 
 import map.Cell;
 import robot.enums.Mode;
+import robot.enums.Type;
 
 public class ConstructorRobot extends Robot
 {
@@ -10,6 +11,7 @@ public class ConstructorRobot extends Robot
     public ConstructorRobot(Cell cell)
     {
         super(cell);
+        setType(Type.CONSTRUCTER);
     }
 
     /**

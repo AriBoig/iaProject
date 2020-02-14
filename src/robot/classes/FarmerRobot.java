@@ -3,6 +3,7 @@ package robot.classes;
 import map.Cell;
 import map.TypeCase;
 import robot.enums.Mode;
+import robot.enums.Type;
 
 public class FarmerRobot extends Robot
 {
@@ -18,6 +19,7 @@ public class FarmerRobot extends Robot
     {
         super(cell);
         action = Mode.NOTHING; /* Il doit attendre qu'il y ai de l'eau afin de farmer */
+        setType(Type.FARMER);
     }
 
     /**

@@ -5,6 +5,7 @@ import map.TypeCase;
 import robot.algo.LearningEnhancement;
 import robot.enums.Direction;
 import robot.enums.Mode;
+import robot.enums.Type;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,6 +19,7 @@ public class Robot
     protected Cell cell; /* Cellule sur laquelle se trouve le robot */
     protected Neighbour neighbour;
     protected LearningEnhancement learningEnhancement;
+    protected Type type;
 
     public Robot(Cell cell)
     {
@@ -137,5 +139,13 @@ public class Robot
      */
     public Neighbour getNeighbour() {
         return neighbour;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 }

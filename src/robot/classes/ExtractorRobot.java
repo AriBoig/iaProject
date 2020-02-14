@@ -3,6 +3,7 @@ package robot.classes;
 import map.Cell;
 import map.TypeCase;
 import robot.enums.Mode;
+import robot.enums.Type;
 
 public class ExtractorRobot extends Robot
 {
@@ -12,6 +13,7 @@ public class ExtractorRobot extends Robot
     public ExtractorRobot(Cell cell)
     {
         super(cell);
+        setType(Type.EXTRACTER);
     }
 
     /**

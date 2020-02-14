@@ -2,6 +2,7 @@ package robot.classes;
 
 import map.Cell;
 import map.Coordinate;
+import robot.enums.Type;
 
 import java.util.ArrayList;
 
@@ -19,10 +20,10 @@ public class CentraliserRobot extends Robot
 
     protected static ArrayList<Cell> mapExplored;
 
-
     public CentraliserRobot(Cell cell)
     {
         super(cell);
+        setType(Type.CENTRALISER);
     }
 
     /**
@@ -80,6 +81,16 @@ public class CentraliserRobot extends Robot
             i++;
         }
 
+        return null;
+    }
+
+    /**
+     * This method will be use by the centraliser to give orders to the robots
+     * @author AC
+     * @return the better road to exploit resources
+     */
+    protected ArrayList<Cell> aStarDirection() {
+        //TODO
         return null;
     }
 
