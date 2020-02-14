@@ -1,7 +1,7 @@
 package map;
 
 /**
- * Classe Metamorphose
+ * Class for the metamorphosis of the cells
  * @author Aristide Boisgontier & Isaë Le Moigne
  * @date 11/02/2020
  */
@@ -20,6 +20,7 @@ public class Metamorphose {
 
     private float routinePercentWater;
     private float routinePercentOre;
+
     public static void main(String[] args) {
         Engine engine = null;
         try {
@@ -35,6 +36,12 @@ public class Metamorphose {
         OutputVariable mMetamorphosis = engine.getOutputVariable("mMetamorphosis");
     }
 
+    /**
+     * Get the type of a random cell and transform it
+     * @param cell
+     * @return cell
+     * @author Isaë LE MOIGNE.
+     */
     public Cell MetamorphRandomFromCell(Cell cell){
         if (cell.getType().equals(TypeCase.TREE)){
             fromTree(cell);
@@ -57,15 +64,19 @@ public class Metamorphose {
         }
         return cell;
     }
-    
+
+    /**
+     * Get the percentages of "water" and "ore" to use it with FuzzyLite
+     * @author Aristide BOISGONTIER.
+     */
     public void routinePercent(){
         Gameboard gameboard = MainClass.getGameboard();
         routinePercentWater = 0;
         routinePercentOre = 0;
         int nbWater = 0;
         int nbOre = 0;
-        for (int i = 0; i < gameboard.getTailleX(); i++) {
-            for (int j = 0; j < gameboard.getTailleY(); j++) {
+        for (int i = 0; i < gameboard.getSizeX(); i++) {
+            for (int j = 0; j < gameboard.getSizeY(); j++) {
                 if (gameboard.getGameboard()[i][j].getFoodNb() == 0){
                     gameboard.getGameboard()[i][j].setType(TypeCase.DRY_MEDOW);
                 }
@@ -91,127 +102,152 @@ public class Metamorphose {
         routinePercentOre = routinePercentOre/nbOre;
     }
 
+    /**
+     * Generate a random integer
+     * @param high, low
+     * @return the random number (>= low, < high)
+     * @author Isaë LE MOIGNE.
+     */
     public int randomGen(int low, int high){
         Random r = new Random();
         return r.nextInt(high-low) + low;
     }
 
-
+    /**
+     * Metamorphosis of a "TREE" cell
+     * @param cell
+     * @author Isaë LE MOIGNE.
+     */
     public void fromTree(Cell cell){
         int rand;
-        rand = randomGen(0,101);
-        if (rand <= 20){
+        rand = randomGen(0,10001);
+        if (rand >= 0 && rand <= 2000){
             cell.setType(TypeCase.DRY_MEDOW);
         }
-        rand = randomGen(0, 101);
-        if (rand <= 30){
+        if (rand > 2000 && rand <= 5000){
             cell.setType(TypeCase.NORMAL_MEDOW);
         }
-        rand = randomGen(0,101);
-        if (rand <= 40){
+        if (rand > 5000 && rand <= 9000){
             cell.setType(TypeCase.OILY_MEDOW);
         }
-        rand = randomGen(0,10);
-        if (rand <= 9){
+        if (rand > 9000 && rand <= 9900){
             cell.setType(TypeCase.DESERT);
         }
-        rand = randomGen(0,10001);
-        if (rand <= 1){
+        if (rand > 9900 && rand <= 9901){
             cell.setType(TypeCase.IMPASSABLE_AREA);
         }
     }
 
+    /**
+     * Metamorphosis of a "DRY_MEDOW" cell
+     * @param cell
+     * @author Isaë LE MOIGNE.
+     */
     public void fromDryMedow(Cell cell){
         int rand;
-        rand = randomGen(0, 101);
-        if (rand <= 80) {
+        rand = randomGen(0,10001);
+        if (rand >= 0 && rand <= 8000){
             cell.setType(TypeCase.DESERT);
         }
-        rand = randomGen(0, 101);
-        if (rand <= 19){
+        if (rand > 8000 && rand <= 9900){
             cell.setType(TypeCase.FOOD);
             cell.setFoodNb(100);
         }
-        rand = randomGen(0, 1001);
-        if (rand <= 1){
+        if (rand > 9900 && rand <= 9901){
             cell.setType(TypeCase.IMPASSABLE_AREA);
         }
     }
 
+    /**
+     * Metamorphosis of a "NORMAL_MEDOW" cell
+     * @param cell
+     * @author Isaë LE MOIGNE.
+     */
     public void fromNormalMedow(Cell cell){
         int rand;
-        rand = randomGen(0, 101);
-        if (rand <= 10) {
+        rand = randomGen(0,10001);
+        if (rand >= 0 && rand <= 1000){
             cell.setType(TypeCase.DESERT);
         }
-        rand = randomGen(0, 101);
-        if (rand <= 60) {
+        if (rand > 1000 && rand <= 7000){
             cell.setType(TypeCase.DRY_MEDOW);
         }
-        rand = randomGen(0, 101);
-        if (rand <= 30) {
+        if (rand > 7000 && rand <= 10000){
             cell.setType(TypeCase.FOOD);
             cell.setFoodNb(100);
         }
     }
 
+    /**
+     * Metamorphosis of a "OILY_MEDOW" cell
+     * @param cell
+     * @author Isaë LE MOIGNE.
+     */
     public void fromOilyMedow(Cell cell){
         int rand;
-        rand = randomGen(0, 101);
-        if (rand <= 5) {
+        rand = randomGen(0,10001);
+        if (rand >= 0 && rand <= 500){
             cell.setType(TypeCase.DESERT);
         }
-        rand = randomGen(0, 101);
-        if (rand <= 40) {
+        if (rand > 500 && rand <= 4500){
             cell.setType(TypeCase.NORMAL_MEDOW);
         }
-        rand = randomGen(0, 101);
-        if (rand <= 30) {
+        if (rand > 4500 && rand <= 7500){
             cell.setType(TypeCase.DRY_MEDOW);
         }
-        rand = randomGen(0, 101);
-        if (rand <= 25) {
+        if (rand > 7500 && rand <= 10000){
             cell.setType(TypeCase.FOOD);
             cell.setFoodNb(100);
         }
     }
 
+    /**
+     * Metamorphosis of a "DESERT" cell
+     * @param cell
+     * @author Isaë LE MOIGNE.
+     */
     public void fromDesert(Cell cell){
         int rand;
-        rand = randomGen(0, 101);
-        if (rand <= 65) {
+        rand = randomGen(0,10001);
+        if (rand >= 0 && rand <= 6500){
             cell.setType(TypeCase.DRY_MEDOW);
         }
-        rand = randomGen(0, 1001);
-        if (rand <= 1) {
+        if (rand > 6500 && rand <= 6510){
             cell.setType(TypeCase.IMPASSABLE_AREA);
         }
     }
 
+    /**
+     * Metamorphosis of a "FOOD" cell
+     * @param cell
+     * @author Isaë LE MOIGNE.
+     */
     public void fromFood(Cell cell){
         int rand;
-        rand = randomGen(0, 101);
-        if (rand <= 50) {
+        rand = randomGen(0,10001);
+        if (rand >= 0 && rand <= 5000){
             cell.setType(TypeCase.OILY_MEDOW);
             cell.setFoodNb(0);
         }
-        rand = randomGen(0, 101);
-        if (rand <= 30) {
+        if (rand > 5000 && rand <= 8000){
             cell.setType(TypeCase.NORMAL_MEDOW);
             cell.setFoodNb(0);
         }
-        rand = randomGen(0, 101);
-        if (rand <= 10) {
+        if (rand > 8000 && rand <= 9000){
             cell.setType(TypeCase.DRY_MEDOW);
             cell.setFoodNb(0);
         }
-        rand = randomGen(0, 101);
-        if (rand <= 10) {
+        if (rand > 9000 && rand <= 10000){
             cell.setType(TypeCase.TREE);
             cell.setFoodNb(0);
         }
     }
 
+    /**
+     * Metamorphosis of a "IMPASSABLE_AREA" cell
+     * @param cell
+     * @author Isaë LE MOIGNE.
+     */
     public void fromImpassable(Cell cell){
         int rand;
         rand = randomGen(0, 101);
@@ -220,6 +256,11 @@ public class Metamorphose {
         }
     }
 
+    /**
+     * Metamorphosis of a "SCREE" cell
+     * @param cell
+     * @author Isaë LE MOIGNE.
+     */
     public void fromScree(Cell cell){
         int rand;
         rand = randomGen(0, 101);
@@ -229,6 +270,11 @@ public class Metamorphose {
         }
     }
 
+    /**
+     * Metamorphosis of a "ORE" cell
+     * @param cell
+     * @author Isaë LE MOIGNE.
+     */
     public void fromOre(Cell cell){
         int rand;
         rand = randomGen(0, 101);
