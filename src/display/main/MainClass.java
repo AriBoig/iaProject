@@ -68,6 +68,11 @@ public class MainClass extends Application {
     }
 
 
+    /**
+     * This function launche the GUI
+     * @param primaryStage the initial primary stage of the application
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         principalStage = primaryStage;
@@ -80,6 +85,9 @@ public class MainClass extends Application {
 
     }
 
+    /**
+     * This function initialize the principal container in which we will see the objects
+     */
     public void initialiazePrincipalContainer(){
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainClass.class.getResource("../container/PrincipalContainer.fxml"));
@@ -95,6 +103,9 @@ public class MainClass extends Application {
         }
     }
 
+    /**
+     * This function intialize the principal View in which we will see the gameboard
+     */
     public void initializePrincipalView(){
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainClass.class.getResource("../view/PrincipalView.fxml"));
