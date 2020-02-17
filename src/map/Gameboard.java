@@ -536,5 +536,8 @@ public class Gameboard {
     }
 
 
+    public Cell getCenterCell() {
+        return gameboard[11][11];
+    }
 }
 
