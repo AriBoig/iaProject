@@ -1,6 +1,5 @@
 import map.Cell;
 import map.Gameboard;
-import map.TypeCase;
 import robot.classes.*;
 import java.util.ArrayList;
 import java.util.List;
