@@ -16,36 +16,82 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Metamorphose {
 
-    private float routinePercentWater;
-    private float routinePercentOre;
+    private double routinePercentWater;
+    private double routinePercentOre;
+    private Engine engine;
+    private InputVariable oreextraction;
+    private InputVariable drawnedWater;
+    private OutputVariable mMetamorphosis;
 
-    public static void main(String[] args) {
-        Engine engine = null;
+    /**
+     * Load the FLL file
+     * @author Arstide Boisgontier
+     */
+    public void loadFLL() {
         try {
             engine = new FllImporter().fromFile(new File("src/map/metamorphose.fll"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        StringBuilder status = new StringBuilder();
-        if (!engine.isReady(status))
-            throw new RuntimeException("[engine	error]	engine	is	not	ready:" + status);
-        InputVariable oreextraction = engine.getInputVariable("oreextraction");
-        InputVariable drawnedWater = engine.getInputVariable("drawnedWater");
-        OutputVariable mMetamorphosis = engine.getOutputVariable("mMetamorphosis");
+        oreextraction = engine.getInputVariable("oreextraction");
+        drawnedWater = engine.getInputVariable("drawnedwater");
+        mMetamorphosis = engine.getOutputVariable("mMetamorphosis");
+        Logger.getLogger("javafx").setLevel(Level.OFF);
     }
 
     /**
-     * Choose X random cases (X = [21*21]*[percent/100]) to transform them with the MetamorphRandomFromCell method
+     * Set the values of the variables from fll
+     * @author Arstide Boisgontier
+     */
+    //TODO enlever les vals fixes
+    public double loadResultFromFLL(){
+        routinePercentOre = 90;
+        routinePercentWater = 90;
+
+        oreextraction.setValue(routinePercentOre);
+        drawnedWater.setValue(routinePercentWater);
+        engine.process();
+
+        routinePercentWater = 0;
+        routinePercentOre = 0;
+
+        return mMetamorphosis.getValue();
+    }
+
+    /**
+     * Assesseurs
+     * @author Arstide Boisgontier
+     */
+    public double getRoutinePercentWater() {
+        return routinePercentWater;
+    }
+
+    public void setRoutinePercentWater(double routinePercentWater) {
+        this.routinePercentWater = routinePercentWater;
+    }
+
+    public double getRoutinePercentOre() {
+        return routinePercentOre;
+    }
+
+    public void setRoutinePercentOre(double routinePercentOre) {
+        this.routinePercentOre = routinePercentOre;
+    }
+
+    /**
+     * Choose X random cases (X = [21*21]*[percent/100]) to transform them with the metamorphRandomFromCell method
      * @param percent
      * @author Isaë LE MOIGNE
      */
-    public void ChooseMetamorphosisCell(double percent){
+    public void chooseMetamorphosisCell(double percent){
         Gameboard gameboard = MainClass.getGameboard();
         int roundedPercent = (int)percent;
-        int nbOfCases = (21*21)*(roundedPercent/100);
+        int nbOfCases = ((gameboard.getSizeX()*gameboard.getSizeY())*(roundedPercent))/100;
         ArrayList<Coordinate> cellList=new ArrayList<Coordinate>();
         for(int x = 0; x < nbOfCases; x++){
             int randX, randY;
@@ -58,7 +104,7 @@ public class Metamorphose {
                 randomCell = new Coordinate(randX, randY);
             }
             cellList.add(randomCell);
-            MetamorphRandomFromCell(gameboard.getGameboard()[randX][randY]);
+            metamorphRandomFromCell(gameboard.getGameboard()[randX][randY]);
         }
     }
 
@@ -67,8 +113,9 @@ public class Metamorphose {
      * @param cell
      * @return cell
      * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
      */
-    public Cell MetamorphRandomFromCell(Cell cell){
+    public Cell metamorphRandomFromCell(Cell cell){
         if (cell.getType().equals(TypeCase.TREE)){
             fromTree(cell);
         }else if (cell.getType().equals(TypeCase.DRY_MEDOW)){
@@ -143,6 +190,7 @@ public class Metamorphose {
      * Metamorphosis of a "TREE" cell
      * @param cell
      * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
      */
     public void fromTree(Cell cell){
         int rand;
@@ -159,7 +207,7 @@ public class Metamorphose {
         if (rand > 9000 && rand <= 9900){
             cell.setType(TypeCase.DESERT);
         }
-        if (rand > 9900 && rand <= 9901){
+        if (rand == 9901){
             cell.setType(TypeCase.IMPASSABLE_AREA);
         }
     }
@@ -168,6 +216,7 @@ public class Metamorphose {
      * Metamorphosis of a "DRY_MEDOW" cell
      * @param cell
      * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
      */
     public void fromDryMedow(Cell cell){
         int rand;
@@ -179,7 +228,7 @@ public class Metamorphose {
             cell.setType(TypeCase.FOOD);
             cell.setFoodNb(100);
         }
-        if (rand > 9900 && rand <= 9901){
+        if (rand == 9901){
             cell.setType(TypeCase.IMPASSABLE_AREA);
         }
     }
@@ -188,6 +237,7 @@ public class Metamorphose {
      * Metamorphosis of a "NORMAL_MEDOW" cell
      * @param cell
      * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
      */
     public void fromNormalMedow(Cell cell){
         int rand;
@@ -208,6 +258,7 @@ public class Metamorphose {
      * Metamorphosis of a "OILY_MEDOW" cell
      * @param cell
      * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
      */
     public void fromOilyMedow(Cell cell){
         int rand;
@@ -231,6 +282,7 @@ public class Metamorphose {
      * Metamorphosis of a "DESERT" cell
      * @param cell
      * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
      */
     public void fromDesert(Cell cell){
         int rand;
@@ -247,6 +299,7 @@ public class Metamorphose {
      * Metamorphosis of a "FOOD" cell
      * @param cell
      * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
      */
     public void fromFood(Cell cell){
         int rand;
@@ -273,6 +326,7 @@ public class Metamorphose {
      * Metamorphosis of a "IMPASSABLE_AREA" cell
      * @param cell
      * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
      */
     public void fromImpassable(Cell cell){
         int rand;
@@ -286,6 +340,7 @@ public class Metamorphose {
      * Metamorphosis of a "SCREE" cell
      * @param cell
      * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
      */
     public void fromScree(Cell cell){
         int rand;
@@ -300,6 +355,7 @@ public class Metamorphose {
      * Metamorphosis of a "ORE" cell
      * @param cell
      * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
      */
     public void fromOre(Cell cell){
         int rand;

@@ -29,6 +29,10 @@ public class MainClass extends Application {
     private static List<Robot> listRobot;
     private static Game game;
 
+    public static Game getGame() {
+        return game;
+    }
+
     public static Gameboard getGameboard() {
         return gameboard;
     }
@@ -114,6 +118,7 @@ public class MainClass extends Application {
             principalContainer.setCenter(view);
             PrincipalViewController controller = loader.getController();
             controller.setMainClass(this);
+            controller.initializeMetamorph();
             controller.initializeImages();
             controller.initializeGameboardFromMain();
             controller.initializeRobotsFromMain();

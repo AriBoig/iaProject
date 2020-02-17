@@ -18,6 +18,7 @@ public class Gameboard {
     /**
      * Class constructor
      * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
      */
     public Gameboard() {
         this.sizeX = 21;
@@ -36,6 +37,7 @@ public class Gameboard {
     /**
      * Set the "water" value of the gameboard's cells
      * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
      */
     public void setValueOfWaterCells(){
         for (int i = 0; i < sizeX; i++) {
@@ -50,6 +52,7 @@ public class Gameboard {
     /**
      * Set the "food" value of the gameboard's cells
      * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
      */
     public void setValueOfFoodCells(){
         for (int i = 0; i < sizeX; i++) {
@@ -63,6 +66,7 @@ public class Gameboard {
     /**
      * Set the "ore" value of the gameboard's cells
      * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
      */
     public void setValueOfOreCells(){
         for (int i = 0; i < sizeX; i++) {

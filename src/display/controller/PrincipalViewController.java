@@ -6,12 +6,14 @@ package display.controller;
  * @date 06/02/2020
  */
 
+import Game.Game;
 import display.main.MainClass;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import map.Gameboard;
+import map.Metamorphose;
 import map.TypeCase;
 import robot.classes.*;
 
@@ -23,6 +25,7 @@ public class PrincipalViewController {
     private MainClass main;
     private Gameboard gameboard;
     private List<Robot> robots;
+    private Metamorphose metamorphose;
 
     @FXML
     private GridPane gridpaneGameBoard;
@@ -69,6 +72,11 @@ public class PrincipalViewController {
     public void initialize(){
         Image img = new Image("file:src/display/ressources/legende/legende.png");
         imageViewLegend.setImage(img);
+    }
+
+    public void initializeMetamorph(){
+        metamorphose = new Metamorphose();
+        metamorphose.loadFLL();
     }
 
     /**
@@ -166,30 +174,51 @@ public class PrincipalViewController {
      * This function display the robots on the map
      */
     public void refreshGameBoardRobot(){
+        //TODO à retirer
         for (int i = 0; i < robots.size(); i++) {
-            ImageView imv = new ImageView();
-            if (robots.get(i) instanceof CentraliserRobot){
-                imv.setImage(imageRobotCentraliser);
-                gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
-                        robots.get(i).getCell().getCoordinate().getY());
-            }else if (robots.get(i) instanceof CollectorRobot){
-                imv.setImage(imageRobotCollector);
-                gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
-                        robots.get(i).getCell().getCoordinate().getY());
-            }else if (robots.get(i) instanceof ExtractorRobot){
-                imv.setImage(imageRobotExtrator);
-                gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
-                        robots.get(i).getCell().getCoordinate().getY());
-            }else if (robots.get(i) instanceof FarmerRobot){
-                imv.setImage(imageRobotFarmer);
-                gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
-                        robots.get(i).getCell().getCoordinate().getY());
-            }else if (robots.get(i) instanceof WorkerRobot){
-                imv.setImage(imageRobotConstructor);
-                gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
-                        robots.get(i).getCell().getCoordinate().getY());
+            robots.get(i).setCell(gameboard.getGameboard()[i][i]);
+        }
+        if (robots.size()!= 0){
+            for (int i = 0; i < robots.size(); i++) {
+                ImageView imv = new ImageView();
+                if (robots.get(i).getCell().getCoordinate() != gameboard.getGameboard()[gameboard.getSizeX()/2]
+                    [gameboard.getSizeY()/2].getCoordinate()){
+                    if (robots.get(i) instanceof CentraliserRobot){
+                        imv.setImage(imageRobotCentraliser);
+                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
+                                robots.get(i).getCell().getCoordinate().getY());
+                    }else if (robots.get(i) instanceof CollectorRobot){
+                        imv.setImage(imageRobotCollector);
+                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
+                                robots.get(i).getCell().getCoordinate().getY());
+                    }else if (robots.get(i) instanceof ExtractorRobot){
+                        imv.setImage(imageRobotExtrator);
+                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
+                                robots.get(i).getCell().getCoordinate().getY());
+                    }else if (robots.get(i) instanceof FarmerRobot){
+                        imv.setImage(imageRobotFarmer);
+                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
+                                robots.get(i).getCell().getCoordinate().getY());
+                    }else if (robots.get(i) instanceof WorkerRobot){
+                        imv.setImage(imageRobotConstructor);
+                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
+                                robots.get(i).getCell().getCoordinate().getY());
+                    }
+                }
             }
         }
+    }
+
+    //TODO à remodeler pour le vrai jeu
+    public void game(){
+        //metamorphose.routinePercent();
+        //double percentWater = metamorphose.getRoutinePercentWater();
+        //double percentOre = metamorphose.getRoutinePercentOre();
+        double result = metamorphose.loadResultFromFLL();
+        System.out.println(result);
+        //Game game = MainClass.getGame();
+        metamorphose.chooseMetamorphosisCell(result);
+        refreshGameboardMap();
     }
 
 }
