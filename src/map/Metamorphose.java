@@ -14,6 +14,7 @@ import display.main.MainClass;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Metamorphose {
@@ -34,6 +35,31 @@ public class Metamorphose {
         InputVariable oreextraction = engine.getInputVariable("oreextraction");
         InputVariable drawnedWater = engine.getInputVariable("drawnedWater");
         OutputVariable mMetamorphosis = engine.getOutputVariable("mMetamorphosis");
+    }
+
+    /**
+     * Choose X random cases (X = [21*21]*[percent/100]) to transform them with the MetamorphRandomFromCell method
+     * @param percent
+     * @author Isaë LE MOIGNE
+     */
+    public void ChooseMetamorphosisCell(double percent){
+        Gameboard gameboard = MainClass.getGameboard();
+        int roundedPercent = (int)percent;
+        int nbOfCases = (21*21)*(roundedPercent/100);
+        ArrayList<Coordinate> cellList=new ArrayList<Coordinate>();
+        for(int x = 0; x < nbOfCases; x++){
+            int randX, randY;
+            randX = randomGen(0,21);
+            randY = randomGen(0,21);
+            Coordinate randomCell = new Coordinate(randX, randY);
+            while(cellList.contains(randomCell)){
+                randX = randomGen(0,21);
+                randY = randomGen(0,21);
+                randomCell = new Coordinate(randX, randY);
+            }
+            cellList.add(randomCell);
+            MetamorphRandomFromCell(gameboard.getGameboard()[randX][randY]);
+        }
     }
 
     /**
