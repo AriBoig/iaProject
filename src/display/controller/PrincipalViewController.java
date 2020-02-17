@@ -16,6 +16,7 @@ import map.Gameboard;
 import map.Metamorphose;
 import map.TypeCase;
 import robot.classes.*;
+import robot.enums.Type;
 
 import java.util.List;
 
@@ -183,23 +184,23 @@ public class PrincipalViewController {
                 ImageView imv = new ImageView();
                 if (robots.get(i).getCell().getCoordinate() != gameboard.getGameboard()[gameboard.getSizeX()/2]
                     [gameboard.getSizeY()/2].getCoordinate()){
-                    if (robots.get(i) instanceof CentraliserRobot){
+                    if (robots.get(i).getType().equals(Type.CENTRALISER)){
                         imv.setImage(imageRobotCentraliser);
                         gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
                                 robots.get(i).getCell().getCoordinate().getY());
-                    }else if (robots.get(i) instanceof CollectorRobot){
+                    }else if (robots.get(i).getType().equals(Type.COLLECTER)){
                         imv.setImage(imageRobotCollector);
                         gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
                                 robots.get(i).getCell().getCoordinate().getY());
-                    }else if (robots.get(i) instanceof ExtractorRobot){
+                    }else if (robots.get(i).getType().equals(Type.EXTRACTER)){
                         imv.setImage(imageRobotExtrator);
                         gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
                                 robots.get(i).getCell().getCoordinate().getY());
-                    }else if (robots.get(i) instanceof FarmerRobot){
+                    }else if (robots.get(i).getType().equals(Type.FARMER)){
                         imv.setImage(imageRobotFarmer);
                         gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
                                 robots.get(i).getCell().getCoordinate().getY());
-                    }else if (robots.get(i) instanceof WorkerRobot){
+                    }else if (robots.get(i).getType().equals(Type.CONSTRUCTER)){
                         imv.setImage(imageRobotConstructor);
                         gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
                                 robots.get(i).getCell().getCoordinate().getY());
