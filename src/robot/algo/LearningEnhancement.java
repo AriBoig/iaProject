@@ -35,6 +35,7 @@ public class LearningEnhancement
         }
     }
 
+    /*
     void calculateQ( int trainCycles)
     {
         Random rand = new Random();
@@ -57,6 +58,8 @@ public class LearningEnhancement
             }
         }
     }
+    
+     */
 
     /**
      * This function is use to have a random between two integer.

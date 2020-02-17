@@ -40,7 +40,7 @@ public class Robot
         {
             Direction direction = Direction.getRandomDirection();
             Cell nextCell = neighbour.findCellByDirection(direction);
-
+            /*
             if (nextCell.getType() != TypeCase.IMPASSABLE_AREA && nextCell.getType() != TypeCase.WATER
                     && !nextCell.isOccupe())
             {
@@ -48,6 +48,8 @@ public class Robot
                 cell = nextCell;
                 neighbour = new Neighbour(cell);
             }
+
+             */
         }
         else {
             // TODO faire en fonction du Q-LEARNING
@@ -133,6 +135,10 @@ public class Robot
      * @author Enzo DECHAENE.
      */
     public Cell getCell() { return cell; }
+
+    public void setCell(Cell cell) {
+        this.cell = cell;
+    }
 
     /**
      * @author AC

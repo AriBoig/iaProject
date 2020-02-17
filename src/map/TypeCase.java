@@ -1,19 +1,19 @@
 package map;
 /**
- * Enum des types de cases
- * @author Aristide Boisgontier
+ * Enum of the cell's types
+ * @author Aristide Boisgontier & Isaë Le Moigne
  * @date 06/02/2020
  */
 public enum TypeCase {
-    BASE,               /* Base de la colonie   */
+    BASE,               /* Base of the colony   */
     DESERT,             /* Desert               */
-    FOOD,               /* Nourriture           */
-    DRY_MEDOW,          /* prairie seche        */
-    NORMAL_MEDOW,       /* prairie normal       */
-    OILY_MEDOW,         /* prairie grasse       */
-    IMPASSABLE_AREA,    /* zone infranchissable */
-    ORE,                /* Minerai              */
-    SCREE,              /* Pierail              */
-    TREE,               /* Foret                */
-    WATER               /* Lac                  */
+    FOOD,               /* Food                 */
+    DRY_MEDOW,          /* Dry Medow            */
+    NORMAL_MEDOW,       /* Normal Medow         */
+    OILY_MEDOW,         /* Oily Medow           */
+    IMPASSABLE_AREA,    /* Impassable Area      */
+    ORE,                /* Ore                  */
+    SCREE,              /* Scree                */
+    TREE,               /* Forest               */
+    WATER               /* Lake                 */
 }

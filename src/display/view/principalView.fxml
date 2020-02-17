@@ -12,5 +12,6 @@
       <GridPane fx:id="gridpaneGameBoard" layoutX="35.0" layoutY="32.0" prefHeight="600.0" prefWidth="600.0">
       </GridPane>
       <ImageView fx:id="imageViewLegend" fitHeight="355.0" fitWidth="358.0" layoutX="628.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="776.0" layoutY="551.0" mnemonicParsing="false" onAction="#game" text="Start" />
    </children>
 </AnchorPane>

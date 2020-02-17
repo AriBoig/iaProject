@@ -4,68 +4,137 @@
 package map;
 
 /**
- * Classe qui fait office de carte de la simulation
- * @author Aristide Boisgontier
+ * Class of the simulaion map
+ * @author Aristide Boisgontier & Isaë Le Moigne
  * @date 06/02/2020
  */
 
 public class Gameboard {
 
-    private int tailleX;
-    private int tailleY;
+    private int sizeX;
+    private int sizeY;
     private Cell[][] gameboard;
 
-
-    public void initializeGameBoard(){
-        for (int i = 0; i < 21; i++) {
-            for (int j = 0; j < 21; j++) {
-
-            }
-        }
-    }
-
+    /**
+     * Class constructor
+     * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
+     */
     public Gameboard() {
-        this.tailleX = 21;
-        this.tailleY = 21;
-        gameboard = new Cell[tailleX][tailleY];
-        for (int i = 0; i < tailleX; i++) {
-            for (int j = 0; j < tailleY; j++) {
+        this.sizeX = 21;
+        this.sizeY = 21;
+        gameboard = new Cell[sizeX][sizeY];
+
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++) {
                 Coordinate coordinate = new Coordinate(j, i);
-                gameboard[i][j] = new Cell(map.TypeCase.IMPASSABLE_AREA,0,false, coordinate);
+                gameboard[i][j] = new Cell(map.TypeCase.IMPASSABLE_AREA,0,false, coordinate,0,0,0);
+            }
+        }
+
+    }
+
+    /**
+     * Set the "water" value of the gameboard's cells
+     * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
+     */
+    public void setValueOfWaterCells(){
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++) {
+                if (gameboard[i][j].getType().equals(TypeCase.WATER)){
+                    gameboard[i][j].setWaterNb(200000);
+                }
             }
         }
     }
 
-    public Gameboard(int tailleX, int tailleY, Cell[][] gameboard) {
-        this.tailleX = tailleX;
-        this.tailleY = tailleY;
-        this.gameboard = gameboard;
+    /**
+     * Set the "food" value of the gameboard's cells
+     * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
+     */
+    public void setValueOfFoodCells(){
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++) {
+                if (gameboard[i][j].getType().equals(TypeCase.FOOD)){
+                    gameboard[i][j].setFoodNb(100);
+                }
+            }
+        }
+    }
+    /**
+     * Set the "ore" value of the gameboard's cells
+     * @author Isaë LE MOIGNE.
+     * @author Arstide BOISGONTIER
+     */
+    public void setValueOfOreCells(){
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++) {
+                if (gameboard[i][j].getType().equals(TypeCase.ORE)){
+                    gameboard[i][j].setFoodNb(100);
+                }
+            }
+        }
     }
 
-    public int getTailleX() {
-        return tailleX;
+    /**
+     * Get the X size of the gameboard
+     * @return sizeX
+     * @author Isaë LE MOIGNE.
+     */
+    public int getSizeX() {
+        return sizeX;
     }
 
-    public void setTailleX(int tailleX) {
-        this.tailleX = tailleX;
+    /**
+     * Set the X size of the gameboard
+     * @param sizeX
+     * @author Isaë LE MOIGNE.
+     */
+    public void setSizeX(int sizeX) {
+        this.sizeX = sizeX;
     }
 
-    public int getTailleY() {
-        return tailleY;
+    /**
+     * Get the Y size of the gameboard
+     * @return sizeY
+     * @author Isaë LE MOIGNE.
+     */
+    public int getSizeY() {
+        return sizeY;
     }
 
-    public void setTailleY(int tailleY) {
-        this.tailleY = tailleY;
+    /**
+     * Initialiser la taille Y de la carte de la simulation
+     * @param sizeY
+     * @author Isaë LE MOIGNE.
+     */
+    public void setSizeY(int sizeY) {
+        this.sizeY = sizeY;
     }
 
+    /**
+     * Récupérer la carte
+     * @author Isaë LE MOIGNE.
+     */
     public Cell[][] getGameboard() {
         return gameboard;
     }
 
+    /**
+     * Set the gameboard
+     * @param gameboard
+     * @author Isaë LE MOIGNE.
+     */
     public void setGameboard(Cell[][] gameboard) {
         this.gameboard = gameboard;
     }
 
+    /**
+     * Set the "WATER" cases
+     * @author Aristide BOISGONTIER.
+     */
     public void initializeWaterGameBoard(){
         gameboard[0][0].setType(TypeCase.WATER);
         gameboard[0][1].setType(TypeCase.WATER);
@@ -122,10 +191,18 @@ public class Gameboard {
         gameboard[9][19].setType(TypeCase.WATER);
     }
 
+    /**
+     * Set the "BASE" case
+     * @author Aristide BOISGONTIER.
+     */
     public void initializeBaseGameBoard(){
         gameboard[10][10].setType(TypeCase.BASE);
     }
 
+    /**
+     * Set the "ORE" cases.
+     * @author Aristide BOISGONTIER.
+     */
     public void initializeOreGameBoard(){
         gameboard[19][0].setType(TypeCase.ORE);
         gameboard[5][6].setType(TypeCase.ORE);
@@ -134,6 +211,10 @@ public class Gameboard {
         gameboard[16][19].setType(TypeCase.ORE);
     }
 
+    /**
+     * Set the "FOOD" cases.
+     * @author Aristide BOISGONTIER.
+     */
     public void initializeFoodGameBoard(){
         gameboard[18][1].setType(TypeCase.FOOD);
         gameboard[20][3].setType(TypeCase.FOOD);
@@ -152,6 +233,10 @@ public class Gameboard {
         gameboard[5][20].setType(TypeCase.FOOD);
     }
 
+    /**
+     * Set the "TREE" cases.
+     * @author Aristide BOISGONTIER.
+     */
     public void initializeTreeGameBoard(){
         gameboard[0][10].setType(TypeCase.TREE);
         gameboard[0][11].setType(TypeCase.TREE);
@@ -174,6 +259,10 @@ public class Gameboard {
         gameboard[15][15].setType(TypeCase.TREE);
     }
 
+    /**
+     * Set the "DRY_MEDOW" cases.
+     * @author Aristide BOISGONTIER.
+     */
     public void initializeDryMedow(){
         gameboard[4][0].setType(TypeCase.DRY_MEDOW);
         gameboard[4][1].setType(TypeCase.DRY_MEDOW);
@@ -247,6 +336,10 @@ public class Gameboard {
         gameboard[16][20].setType(TypeCase.DRY_MEDOW);
     }
 
+    /**
+     * Set the "NORMAL_MEDOW" cases.
+     * @author Aristide BOISGONTIER.
+     */
     public void initializeNormalMedow(){
         gameboard[17][2].setType(TypeCase.NORMAL_MEDOW);
         gameboard[17][3].setType(TypeCase.NORMAL_MEDOW);
@@ -299,6 +392,10 @@ public class Gameboard {
         gameboard[4][17].setType(TypeCase.NORMAL_MEDOW);
     }
 
+    /**
+     * Set the "OILY_MEDOW" cases.
+     * @author Aristide BOISGONTIER.
+     */
     public void initializeOilyMedow(){
         gameboard[5][0].setType(TypeCase.OILY_MEDOW);
         gameboard[12][0].setType(TypeCase.OILY_MEDOW);
@@ -439,6 +536,10 @@ public class Gameboard {
         gameboard[15][20].setType(TypeCase.OILY_MEDOW);
     }
 
+    /**
+     * Set the "DESERT" cases.
+     * @author Aristide BOISGONTIER.
+     */
     public void initializeDesertGameBoard(){
         gameboard[6][0].setType(TypeCase.DESERT);
         gameboard[7][0].setType(TypeCase.DESERT);
@@ -458,6 +559,10 @@ public class Gameboard {
         gameboard[7][4].setType(TypeCase.DESERT);
     }
 
+    /**
+     * Set the "SCREE" cases.
+     * @author Aristide BOISGONTIER.
+     */
     public void initializeScreeGameBoard(){
         gameboard[20][0].setType(TypeCase.SCREE);
         gameboard[20][1].setType(TypeCase.SCREE);

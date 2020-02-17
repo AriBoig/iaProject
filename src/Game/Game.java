@@ -1,5 +1,8 @@
-import map.Cell;
-import map.Gameboard;
+package Game;
+
+import display.main.MainClass;
+import javafx.stage.Stage;
+import map.TypeCase;
 import robot.classes.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,44 +21,41 @@ public class Game
 
 
     private int day;
-    private List<Robot> robots;
-    private Gameboard gameboard;
+    public static List<Robot> robots;
 
 
     public Game() {
-        day       = 0;
-        gameboard = new Gameboard();
-        robots    = new ArrayList<Robot>();
-
-        initializeRobots(gameboard.getCenterCell());
+        day    = 0;
+        robots = new ArrayList<Robot>();
     }
 
     /**
      * Fonction qui permet d'initialiser les robots.
      * @author Enzo DECHAENE.
      */
-    public void initializeRobots(Cell cell)
+    /*
+    public void initializeRobots()
     {
         List<Robot> robots = new ArrayList<Robot>();
 
         for (int i = 0; i < NB_CENTRALISER_ROBOT; i++) {
-            robots.add(new CentraliserRobot(cell));
+            robots.add(new CentraliserRobot());
         }
 
         for (int i = 0; i < NB_FARMER_ROBOT; i++) {
-            robots.add(new FarmerRobot(cell));
+            robots.add(new FarmerRobot());
         }
 
         for (int i = 0; i < NB_EXTRACTOR_ROBOT; i++) {
-            robots.add(new ExtractorRobot(cell));
+            robots.add(new ExtractorRobot());
         }
 
         for (int i = 0; i < NB_CONSTRUCTOR_ROBOT; i++) {
-            robots.add(new ConstructorRobot(cell));
+            robots.add(new ConstructorRobot());
         }
 
         for (int i = 0; i < NB_COLLECTOR_ROBOT; i++) {
-            robots.add(new CollectorRobot(cell));
+            robots.add(new CollectorRobot());
         }
 
         if (robots.size() != NB_ROBOT) {
@@ -65,6 +65,8 @@ public class Game
 
         this.robots = robots;
     }
+
+     */
 
 
     /**
@@ -91,39 +93,27 @@ public class Game
         }
     }
 
-    /**
-     * @author Enzo DECHAENE
-     */
-    public void moveRobots()
-    {
-        for (Robot robot:robots) {
-            robot.checkCell();
-            robot.move();
-        }
-    }
-
-    /**
-     * @author
-     */
-    public void play()
-    {
-        while (day < NB_TOTAL_DAY)
-        {
-            // TODO ACTION CHAQUE TOUR
-            moveRobots();
-            //actionMap() ?
-
-            try { wait(2); } catch (InterruptedException e) { e.printStackTrace(); }
-        }
-    }
-
     private static Logger logger = Logger.getLogger("logger");
 
-    public static void main(String[] args) {
-        Game game = new Game();
-
-        game.play();
+    public void setRobots(List<Robot> robots) {
+        this.robots = robots;
     }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    /*
+    public static void main(String[] args) {
+        Game.Game game = new Game.Game();
+        game.initializeRobots();
+    }
+
+     */
 }
 
 

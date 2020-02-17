@@ -6,19 +6,27 @@ package display.controller;
  * @date 06/02/2020
  */
 
+import Game.Game;
 import display.main.MainClass;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import map.Gameboard;
+import map.Metamorphose;
 import map.TypeCase;
+import robot.classes.*;
+
+import java.util.List;
 
 
 public class PrincipalViewController {
 
     private MainClass main;
     private Gameboard gameboard;
+    private List<Robot> robots;
+    private Metamorphose metamorphose;
+
     @FXML
     private GridPane gridpaneGameBoard;
     @FXML
@@ -36,36 +44,83 @@ public class PrincipalViewController {
     private Image imageTree;
     private Image imageWater;
 
+    private Image imageRobotCentraliser;
+    private Image imageRobotCollector;
+    private Image imageRobotConstructor;
+    private Image imageRobotExtrator;
+    private Image imageRobotFarmer;
+
+    private Image imagePipeline;
+
+    /**
+     * This function initialize the map of the gameboard
+     */
     public void initializeGameboardFromMain(){
-        this.gameboard = main.getGameboard();
+        this.gameboard = MainClass.getGameboard();
     }
 
+    /**
+     * This function initialize the robots of the gameboard
+     */
+    public void initializeRobotsFromMain(){
+        this.robots = MainClass.getListRobot();
+    }
+
+    /**
+     * This function is launched at the start of the application
+     */
     public void initialize(){
-        Image img = new Image("src/display/ressources/legende/legende.png");
+        Image img = new Image("file:src/display/ressources/legende/legende.png");
         imageViewLegend.setImage(img);
     }
 
+    public void initializeMetamorph(){
+        metamorphose = new Metamorphose();
+        metamorphose.loadFLL();
+    }
+
+    /**
+     * We get the attribute of the main class to access the statics and other else
+     * @param mainApp
+     */
     public void setMainClass(MainClass mainApp) {
         this.main = mainApp;
     }
 
+    /**
+     * @author Aristide Boisgontier
+     * @author Isae Lemoigne
+     * This function initialize the images intos the variables of the class for a quick launch
+     */
     public void initializeImages(){
-        imageBase = new Image("src/display/ressources/field/base.png");
-        imageDesert = new Image("src/display/ressources/field/desert.png");
-        imageDryMedow = new Image("src/display/ressources/field/dryMedow.png");
-        imageFood = new Image("src/display/ressources/field/food.png");
-        imageImpassableArea = new Image("src/display/ressources/field/impassableArea.png");
-        imageNormalMedow = new Image("src/display/ressources/field/normalMedow.png");
-        imageOilyMedow = new Image("src/display/ressources/field/oilyMedow.png");
-        imageOre = new Image("src/display/ressources/field/ore.png");
-        imageScree = new Image("src/display/ressources/field/scree.png");
-        imageTree = new Image("src/display/ressources/field/tree.png");
-        imageWater = new Image("src/display/ressources/field/water.png");
+        imageBase = new Image("file:src/display/ressources/field/base.png");
+        imageDesert = new Image("file:src/display/ressources/field/desert.png");
+        imageDryMedow = new Image("file:src/display/ressources/field/dryMedow.png");
+        imageFood = new Image("file:src/display/ressources/field/food.png");
+        imageImpassableArea = new Image("file:src/display/ressources/field/impassableArea.png");
+        imageNormalMedow = new Image("file:src/display/ressources/field/normalMedow.png");
+        imageOilyMedow = new Image("file:src/display/ressources/field/oilyMedow.png");
+        imageOre = new Image("file:src/display/ressources/field/ore.png");
+        imageScree = new Image("file:src/display/ressources/field/scree.png");
+        imageTree = new Image("file:src/display/ressources/field/tree.png");
+        imageWater = new Image("file:src/display/ressources/field/water.png");
+
+
+
+        imageRobotCentraliser = new Image("file:src/display/ressources/robots/robotCentraliser.png");
+        imageRobotCollector = new Image("file:src/display/ressources/robots/robotCollector.png");
+        imageRobotConstructor = new Image("file:src/display/ressources/robots/robotPipeline.png");
+        imageRobotExtrator = new Image("file:src/display/ressources/robots/robotExtractor.png");
+        imageRobotFarmer = new Image("file:src/display/ressources/robots/robotFarmer.png");
+        imagePipeline  = new Image("file:src/display/ressources/robots/pipeline.png");
     }
 
+    /**
+     * This function refresh the gameboard and all the cases into it
+     */
     public void refreshGameboardMap(){
-        for (int i = 0; i < gameboard.getTailleX(); i++) {
-            for (int j = 0; j < gameboard.getTailleY(); j++) {
+        for (int i = 0; i < gameboard.getSizeX(); i++) {
+            for (int j = 0; j < gameboard.getSizeY(); j++) {
                 if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.WATER)){
                     ImageView imv = new ImageView();
                     imv.setImage(imageWater);
@@ -115,14 +170,55 @@ public class PrincipalViewController {
         }
     }
 
+    /**
+     * This function display the robots on the map
+     */
     public void refreshGameBoardRobot(){
-        for (int i = 0; i < gameboard.getTailleX(); i++) {
-            for (int j = 0; j < gameboard.getTailleY(); j++) {
-                if (gameboard.getGameboard()[i][j].getCapacite() != 0){
-
+        //TODO à retirer
+        for (int i = 0; i < robots.size(); i++) {
+            robots.get(i).setCell(gameboard.getGameboard()[i][i]);
+        }
+        if (robots.size()!= 0){
+            for (int i = 0; i < robots.size(); i++) {
+                ImageView imv = new ImageView();
+                if (robots.get(i).getCell().getCoordinate() != gameboard.getGameboard()[gameboard.getSizeX()/2]
+                    [gameboard.getSizeY()/2].getCoordinate()){
+                    if (robots.get(i) instanceof CentraliserRobot){
+                        imv.setImage(imageRobotCentraliser);
+                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
+                                robots.get(i).getCell().getCoordinate().getY());
+                    }else if (robots.get(i) instanceof CollectorRobot){
+                        imv.setImage(imageRobotCollector);
+                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
+                                robots.get(i).getCell().getCoordinate().getY());
+                    }else if (robots.get(i) instanceof ExtractorRobot){
+                        imv.setImage(imageRobotExtrator);
+                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
+                                robots.get(i).getCell().getCoordinate().getY());
+                    }else if (robots.get(i) instanceof FarmerRobot){
+                        imv.setImage(imageRobotFarmer);
+                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
+                                robots.get(i).getCell().getCoordinate().getY());
+                    }else if (robots.get(i) instanceof WorkerRobot){
+                        imv.setImage(imageRobotConstructor);
+                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
+                                robots.get(i).getCell().getCoordinate().getY());
+                    }
                 }
             }
         }
+    }
+
+    //TODO à remodeler pour le vrai jeu
+    public void game(){
+        //metamorphose.routinePercent();
+        //double percentWater = metamorphose.getRoutinePercentWater();
+        //double percentOre = metamorphose.getRoutinePercentOre();
+        double result = metamorphose.loadResultFromFLL();
+        System.out.println(result);
+        //Game game = MainClass.getGame();
+        metamorphose.chooseMetamorphosisCell(result);
+        refreshGameboardMap();
     }
 
 }

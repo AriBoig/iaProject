@@ -50,42 +50,42 @@ public class Neighbour
         Coordinate coordinate = new Coordinate(current.getCoordinate().getX(), current.getCoordinate().getY() + 1);
         getNorth().setCoordinate(coordinate);
         getNorth().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
-        getNorth().setCapacite(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacite());
+        getNorth().setCapacity(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacity());
 
         coordinate = new Coordinate(current.getCoordinate().getX() + 1, current.getCoordinate().getY());
         getEast().setCoordinate(coordinate);
         getEast().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
-        getEast().setCapacite(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacite());
+        getEast().setCapacity(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacity());
 
         coordinate = new Coordinate(current.getCoordinate().getX() + 1, current.getCoordinate().getY() + 1);
         getNortheast().setCoordinate(coordinate);
         getNortheast().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
-        getNortheast().setCapacite(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacite());
+        getNortheast().setCapacity(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacity());
 
         coordinate = new Coordinate(current.getCoordinate().getX() - 1, current.getCoordinate().getY() + 1);
         getNorthwest().setCoordinate(coordinate);
         getNorthwest().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
-        getNorthwest().setCapacite(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacite());
+        getNorthwest().setCapacity(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacity());
 
         coordinate = new Coordinate(current.getCoordinate().getX(), current.getCoordinate().getY() - 1);
         getWest().setCoordinate(coordinate);
         getWest().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
-        getWest().setCapacite(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacite());
+        getWest().setCapacity(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacity());
 
         coordinate = new Coordinate(current.getCoordinate().getX() + 1, current.getCoordinate().getY() - 1);
         getSoutheast().setCoordinate(coordinate);
         getSoutheast().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
-        getSoutheast().setCapacite(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacite());
+        getSoutheast().setCapacity(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacity());
 
         coordinate = new Coordinate(current.getCoordinate().getX() - 1, current.getCoordinate().getY() - 1);
         getSouthwest().setCoordinate(coordinate);
         getSouthwest().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
-        getSouthwest().setCapacite(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacite());
+        getSouthwest().setCapacity(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacity());
 
         coordinate = new Coordinate(current.getCoordinate().getX() - 1, current.getCoordinate().getY());
         getSouth().setCoordinate(coordinate);
         getSouth().setType(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getType());
-        getSouth().setCapacite(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacite());
+        getSouth().setCapacity(MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()].getCapacity());
 
     }
 

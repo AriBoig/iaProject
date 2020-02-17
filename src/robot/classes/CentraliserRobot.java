@@ -1,8 +1,8 @@
 package robot.classes;
 
+import Game.Game;
 import map.Cell;
 import map.Coordinate;
-import Game;
 import map.TypeCase;
 import robot.enums.Type;
 
@@ -88,8 +88,10 @@ public class CentraliserRobot extends Robot
 
         //the most important points for the extractors
         toExplore.forEach(cell1 -> {
-            Game.getRobots().forEach(robot -> {
-               robot.getType().equals(Type.EXTRACTER) ? nbOfRobots++ : null;
+            Game.robots.forEach(robot -> {
+                if (robot.getType().equals(Type.EXTRACTER)) {
+                    nbOfRobots++;
+                }
             });
 
             findNeighbours(cell1).forEach(cell2 -> {
@@ -102,8 +104,10 @@ public class CentraliserRobot extends Robot
 
         //the most important points for the constructors
         toExplore.forEach(cell1 -> {
-            Game.getRobots().forEach(robot -> {
-                robot.getType().equals(Type.CONSTRUCTER) ? nbOfRobots++ : null;
+            Game.robots.forEach(robot -> {
+                if (robot.getType().equals(Type.CONSTRUCTER)) {
+                    nbOfRobots++;
+                }
             });
 
             findNeighbours(cell1).forEach(cell2 -> {
@@ -116,8 +120,10 @@ public class CentraliserRobot extends Robot
 
         //the most important points for the collectors
         toExplore.forEach(cell1 -> {
-            Game.getRobots().forEach(robot -> {
-                robot.getType().equals(Type.COLLECTER) ? nbOfRobots++ : null;
+            Game.robots.forEach(robot -> {
+                if (robot.getType().equals(Type.COLLECTER)) {
+                    nbOfRobots++;
+                }
             });
 
             findNeighbours(cell1).forEach(cell2 -> {
@@ -130,8 +136,10 @@ public class CentraliserRobot extends Robot
 
         //the most important points for the farmers
         toExplore.forEach(cell1 -> {
-            Game.getRobots().forEach(robot -> {
-                robot.getType().equals(Type.FARMER) ? nbOfRobots++ : null;
+            Game.robots.forEach(robot -> {
+                if (robot.getType().equals(Type.FARMER)) {
+                    nbOfRobots++;
+                }
             });
 
             findNeighbours(cell1).forEach(cell2 -> {
@@ -174,7 +182,7 @@ public class CentraliserRobot extends Robot
 
         for (int i = 0; i < coordinates.length; i++) {
             Coordinate c = new Coordinate(cell1.getCoordinate().getX() + coordinates[i][0],
-                    cell1.getCoordinate().getY() + coordinates[i][1]))
+                    cell1.getCoordinate().getY() + coordinates[i][1]);
             if (findByCoordinate(c) != null) {
                 result.add(findByCoordinate(c));
             }
