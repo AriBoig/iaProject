@@ -233,7 +233,6 @@ public class CentraliserRobot extends Robot
         });
 
         return place;
-
     }
 
     /**
