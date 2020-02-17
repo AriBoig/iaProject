@@ -2,7 +2,7 @@ package robot.classes;
 
 import map.Cell;
 import map.Coordinate;
-import map.Game;
+import Game;
 import map.TypeCase;
 import robot.enums.Type;
 
