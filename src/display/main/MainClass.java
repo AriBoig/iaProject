@@ -67,7 +67,7 @@ public class MainClass extends Application {
      */
     public void iniGame(){
         game = new Game();
-        //game.initializeRobots();
+        game.initializeRobots(gameboard.getCenterCell());
         listRobot = Game.robots;
     }
 

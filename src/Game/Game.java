@@ -2,6 +2,7 @@ package Game;
 
 import display.main.MainClass;
 import javafx.stage.Stage;
+import map.Cell;
 import map.TypeCase;
 import robot.classes.*;
 import java.util.ArrayList;
@@ -33,29 +34,29 @@ public class Game
      * Fonction qui permet d'initialiser les robots.
      * @author Enzo DECHAENE.
      */
-    /*
-    public void initializeRobots()
+
+    public void initializeRobots(Cell cell)
     {
         List<Robot> robots = new ArrayList<Robot>();
 
         for (int i = 0; i < NB_CENTRALISER_ROBOT; i++) {
-            robots.add(new CentraliserRobot());
+            robots.add(new CentraliserRobot(cell));
         }
 
         for (int i = 0; i < NB_FARMER_ROBOT; i++) {
-            robots.add(new FarmerRobot());
+            robots.add(new FarmerRobot(cell));
         }
 
         for (int i = 0; i < NB_EXTRACTOR_ROBOT; i++) {
-            robots.add(new ExtractorRobot());
+            robots.add(new ExtractorRobot(cell));
         }
 
         for (int i = 0; i < NB_CONSTRUCTOR_ROBOT; i++) {
-            robots.add(new ConstructorRobot());
+            robots.add(new ConstructorRobot(cell));
         }
 
         for (int i = 0; i < NB_COLLECTOR_ROBOT; i++) {
-            robots.add(new CollectorRobot());
+            robots.add(new CollectorRobot(cell));
         }
 
         if (robots.size() != NB_ROBOT) {
@@ -66,7 +67,17 @@ public class Game
         this.robots = robots;
     }
 
+    /**
+     * @author Enzo DECHAENE
      */
+    public void turn()
+    {
+        for (Robot robot: robots) {
+            robot.move();
+        }
+    }
+
+
 
 
     /**
@@ -107,13 +118,12 @@ public class Game
         this.day = day;
     }
 
-    /*
+/*
     public static void main(String[] args) {
-        Game.Game game = new Game.Game();
+        Game game = new Game();
         game.initializeRobots();
     }
-
-     */
+*/
 }
 
 

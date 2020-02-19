@@ -3,6 +3,7 @@ package robot.classes;
 import map.Cell;
 import map.TypeCase;
 import robot.algo.LearningEnhancement;
+import robot.algo.QLearning;
 import robot.enums.Direction;
 import robot.enums.Mode;
 import robot.enums.Type;
@@ -19,7 +20,9 @@ public class Robot
     protected Cell cell; /* Cellule sur laquelle se trouve le robot */
     protected Neighbour neighbour;
     protected LearningEnhancement learningEnhancement;
+    protected QLearning qLearning;
     protected Type type;
+
 
     public Robot(Cell cell)
     {
@@ -40,18 +43,20 @@ public class Robot
         {
             Direction direction = Direction.getRandomDirection();
             Cell nextCell = neighbour.findCellByDirection(direction);
-            /*
+
             if (nextCell.getType() != TypeCase.IMPASSABLE_AREA && nextCell.getType() != TypeCase.WATER
-                    && !nextCell.isOccupe())
+                    && nextCell.getCapacity() == 0)
             {
                 // TODO faire le mouvement du robot sur la case concerne
                 cell = nextCell;
                 neighbour = new Neighbour(cell);
             }
 
-             */
+
         }
         else {
+            qLearning.init();
+            qLearning.calculateQ();
             // TODO faire en fonction du Q-LEARNING
 
         }
