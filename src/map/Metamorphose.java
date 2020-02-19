@@ -11,9 +11,9 @@ import com.fuzzylite.imex.FllImporter;
 import com.fuzzylite.variable.InputVariable;
 import com.fuzzylite.variable.OutputVariable;
 import display.main.MainClass;
+import sun.misc.IOUtils;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
@@ -27,20 +27,76 @@ public class Metamorphose {
     private InputVariable oreextraction;
     private InputVariable drawnedWater;
     private OutputVariable mMetamorphosis;
+    private double dissatisfactionEpsylon;
+    private double dissatisfactionRates;
+
+
+    //TODO modifier le fichier fll
+    /**
+     * Modify the rates of the fuzzy logic and reload the FLL file
+     * @author Arstide Boisgontier
+     */
+    public void routineDissatisfaction(){
+        if (dissatisfactionEpsylon <= dissatisfactionRates){
+            dissatisfactionRates -= 50;
+            loadFLL(1000, dissatisfactionRates,"src/map/metamorphose.fll");
+        }
+    }
+
+    /**
+     * Make sure the FLL file start with the same file
+     * @author Arstide Boisgontier
+     */
+    public void copier(File source, File dest) {
+        try (InputStream sourceFile = new java.io.FileInputStream(source);
+             OutputStream destinationFile = new FileOutputStream(dest)) {
+            byte buffer[] = new byte[512 * 1024];
+            int nbLecture;
+            while ((nbLecture = sourceFile.read(buffer)) != -1){
+                destinationFile.write(buffer, 0, nbLecture);
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Modify the rates of the fuzzy logic and reload the FLL file
+     * @author Arstide Boisgontier
+     */
+    public void modifyFll(){
+        try {
+            FileInputStream fis = new FileInputStream(new File("src/map/metamorphose.fll"));
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            FileOutputStream fos = new FileOutputStream(new File("src/map/metamorphose.fll"));
+            BufferedOutputStream bos = new BufferedOutputStream(fos);
+            int data;
+            while ((data = bis.read()) >= 0)
+                bos.write(data);
+            bis.close();
+            bos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Load the FLL file
      * @author Arstide Boisgontier
      */
-    public void loadFLL() {
+    public void loadFLL(double _dissatisfaction, double _dissatisfactionRates,String pathName) {
         try {
-            engine = new FllImporter().fromFile(new File("src/map/metamorphose.fll"));
+            engine = new FllImporter().fromFile(new File(pathName));
         } catch (IOException e) {
             e.printStackTrace();
         }
         oreextraction = engine.getInputVariable("oreextraction");
         drawnedWater = engine.getInputVariable("drawnedwater");
         mMetamorphosis = engine.getOutputVariable("mMetamorphosis");
+        dissatisfactionEpsylon = _dissatisfaction;
+        dissatisfactionRates = _dissatisfactionRates;
         Logger.getLogger("javafx").setLevel(Level.OFF);
     }
 
@@ -81,6 +137,14 @@ public class Metamorphose {
 
     public void setRoutinePercentOre(double routinePercentOre) {
         this.routinePercentOre = routinePercentOre;
+    }
+
+    public double getDissatisfactionEpsylon() {
+        return dissatisfactionEpsylon;
+    }
+
+    public void setDissatisfactionEpsylon(double dissatisfactionEpsylon) {
+        this.dissatisfactionEpsylon = dissatisfactionEpsylon;
     }
 
     /**

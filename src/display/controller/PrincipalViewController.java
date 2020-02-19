@@ -77,7 +77,7 @@ public class PrincipalViewController {
 
     public void initializeMetamorph(){
         metamorphose = new Metamorphose();
-        metamorphose.loadFLL();
+        metamorphose.loadFLL(1000,500,"src/map/metamorphoseStart.fll");
     }
 
     /**
