@@ -13,7 +13,7 @@ public class ExtractorRobot extends Robot
     public ExtractorRobot(Cell cell)
     {
         super(cell);
-        //action = Mode.NOTHING;
+        action = Mode.NOTHING;
         setType(Type.EXTRACTER);
     }
 
