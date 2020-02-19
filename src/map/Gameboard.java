@@ -11,6 +11,9 @@ package map;
 
 public class Gameboard {
 
+    public static final int ROW    = 21;
+    public static final int COLUMN = 21;
+
     private int sizeX;
     private int sizeY;
     private Cell[][] gameboard;

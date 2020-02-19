@@ -161,4 +161,32 @@ public class Cell {
         this.extraction = extraction;
     }
 
+
+    public boolean isTop()
+    {
+        return getCoordinate().getX() == 0;
+    }
+
+    public boolean isBottom()
+    {
+        return getCoordinate().getX() == Gameboard.COLUMN-1;
+    }
+
+    public boolean isLeft()
+    {
+        return getCoordinate().getY() == 0;
+    }
+
+    public boolean isRight()
+    {
+        return getCoordinate().getY() == Gameboard.ROW-1;
+    }
+
+    @Override
+    public String toString() {
+        return "Cell{" +
+                "type=" + type +
+                ", coordinate=" + coordinate +
+                '}';
+    }
 }

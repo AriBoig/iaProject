@@ -22,6 +22,15 @@ public class Neighbour
     public Cell southwest;
 
     public Neighbour(Cell current) {
+        north     = null;
+        northeast = null;
+        northwest = null;
+        south     = null;
+        southeast = null;
+        southwest = null;
+        east      = null;
+        west      = null;
+
         cellInit(current);
     }
     
@@ -40,36 +49,47 @@ public class Neighbour
     }
 
     /**
-     * @author AC
+     *
+     * @author AC & ED
      * @param current
      */
-    private void cellInit(Cell current) {
+    private void cellInit(Cell current)
+    {
+        int x = current.getCoordinate().getX();
+        int y = current.getCoordinate().getY();
+        Cell[][] cell = MainClass.getGameboard().getGameboard();
 
-        //TODO récupérer le type des cases dans le gameboard
+        if (!current.isTop()) {
+            north = cell[y][x-1];
+            if (!current.isRight())
+                northeast =  cell[y+1][x-1];
+            if (!current.isLeft())
+                northwest =  cell[y-1][x-1];
+        }
 
-        Coordinate coordinate = new Coordinate(current.getCoordinate().getX(), current.getCoordinate().getY() + 1);
-        north = MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()];
+        if (!current.isBottom()) {
+            south = cell[y][x+1];
+            if (!current.isRight())
+                southeast = cell[y+1][x+1];
+            if (!current.isLeft())
+                southwest = cell[y-1][x+1];
+        }
 
-        coordinate = new Coordinate(current.getCoordinate().getX() + 1, current.getCoordinate().getY());
-        east = MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()];
+        if (!current.isRight()) {
+            east = cell[y+1][x];
+            if (!current.isTop())
+                northeast = cell[y+1][x-1];
+            if (!current.isBottom())
+                southeast = cell[y+1][x+1];
+        }
 
-        coordinate = new Coordinate(current.getCoordinate().getX() + 1, current.getCoordinate().getY() + 1);
-        northeast = MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()];
-
-        coordinate = new Coordinate(current.getCoordinate().getX() - 1, current.getCoordinate().getY() + 1);
-        northwest = MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()];
-
-        coordinate = new Coordinate(current.getCoordinate().getX(), current.getCoordinate().getY() - 1);
-        west = MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()];
-
-        coordinate = new Coordinate(current.getCoordinate().getX() + 1, current.getCoordinate().getY() - 1);
-        southeast = MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()];
-
-        coordinate = new Coordinate(current.getCoordinate().getX() - 1, current.getCoordinate().getY() - 1);
-        southwest = MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()];
-
-        coordinate = new Coordinate(current.getCoordinate().getX() - 1, current.getCoordinate().getY());
-        south = MainClass.getGameboard().getGameboard()[coordinate.getY()][coordinate.getX()];
+        if (!current.isLeft()) {
+            west = cell[y-1][x];
+            if (!current.isTop())
+                northwest = cell[y-1][x-1];
+            if (!current.isBottom())
+                southwest = cell[y-1][x+1];
+        }
     }
 
     /**
@@ -233,5 +253,19 @@ public class Neighbour
     public void updateNeighbour(Cell cell)
     {
         // TODO actualiser les cellules avec la cellule passe en parametre
+    }
+
+    @Override
+    public String toString() {
+        return "Neighbour{" +
+                "north=" + north +
+                ", south=" + south +
+                ", east=" + east +
+                ", west=" + west +
+                ", northeast=" + northeast +
+                ", northwest=" + northwest +
+                ", southeast=" + southeast +
+                ", southwest=" + southwest +
+                '}';
     }
 }

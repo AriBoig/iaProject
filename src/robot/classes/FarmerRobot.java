@@ -48,4 +48,6 @@ public class FarmerRobot extends Robot
         // TODO move le robot si sa case ne lui plait pas
         move();
     }
+
+
 }
