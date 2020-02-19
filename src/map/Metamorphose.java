@@ -11,7 +11,6 @@ import com.fuzzylite.imex.FllImporter;
 import com.fuzzylite.variable.InputVariable;
 import com.fuzzylite.variable.OutputVariable;
 import display.main.MainClass;
-import sun.misc.IOUtils;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -43,19 +42,19 @@ public class Metamorphose {
                 dissatisfactionRates -= 50;
                 switch (wickednessStep) {
                     case 1:
-                        loadFLL(1000, dissatisfactionRates, "src/map/metamorphose1.fll");
+                        loadFLL(1000, dissatisfactionRates, "src/map/fllFiles/metamorphose1.fll");
                         break;
                     case 2:
-                        loadFLL(1000, dissatisfactionRates, "src/map/metamorphose2.fll");
+                        loadFLL(1000, dissatisfactionRates, "src/map/fllFiles/metamorphose2.fll");
                         break;
                     case 3:
-                        loadFLL(1000, dissatisfactionRates, "src/map/metamorphose3.fll");
+                        loadFLL(1000, dissatisfactionRates, "src/map/fllFiles/metamorphose3.fll");
                         break;
                     case 4:
-                        loadFLL(1000, dissatisfactionRates, "src/map/metamorphose4.fll");
+                        loadFLL(1000, dissatisfactionRates, "src/map/fllFiles/metamorphose4.fll");
                         break;
                     default:
-                        loadFLL(1000, dissatisfactionRates, "src/map/metamorphoseStart.fll");
+                        loadFLL(1000, dissatisfactionRates, "src/map/fllFiles/metamorphoseStart.fll");
                         break;
                 }
             }
@@ -84,11 +83,7 @@ public class Metamorphose {
      * Set the values of the variables from fll
      * @author Arstide Boisgontier
      */
-    //TODO enlever les vals fixes
     public double loadResultFromFLL(){
-        routinePercentOre = 90;
-        routinePercentWater = 90;
-
         oreextraction.setValue(routinePercentOre);
         drawnedWater.setValue(routinePercentWater);
         engine.process();
@@ -220,10 +215,10 @@ public class Metamorphose {
         int nbOre = 0;
         for (int i = 0; i < gameboard.getSizeX(); i++) {
             for (int j = 0; j < gameboard.getSizeY(); j++) {
-                if (gameboard.getGameboard()[i][j].getFoodNb() == 0){
+                if (gameboard.getGameboard()[i][j].getFoodNb() == 0 && gameboard.getGameboard()[i][j].getType().equals(TypeCase.FOOD)){
                     gameboard.getGameboard()[i][j].setType(TypeCase.DRY_MEDOW);
                 }
-                if (gameboard.getGameboard()[i][j].getWaterNb() == 0){
+                if (gameboard.getGameboard()[i][j].getWaterNb() == 0 && gameboard.getGameboard()[i][j].getType().equals(TypeCase.SCREE)){
                     gameboard.getGameboard()[i][j].setType(TypeCase.SCREE);
                     nbWater++;
                 }
