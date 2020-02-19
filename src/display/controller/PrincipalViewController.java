@@ -6,7 +6,6 @@ package display.controller;
  * @date 06/02/2020
  */
 
-import Game.Game;
 import display.main.MainClass;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -77,7 +76,7 @@ public class PrincipalViewController {
 
     public void initializeMetamorph(){
         metamorphose = new Metamorphose();
-        metamorphose.loadFLL();
+        metamorphose.loadFLL(1000,500, "src/map/fllFiles/metamorphoseStart.fll");
     }
 
     /**
@@ -209,15 +208,27 @@ public class PrincipalViewController {
 
     //TODO à remodeler pour le vrai jeu
     public void game(){
-        //metamorphose.routinePercent();
-        //double percentWater = metamorphose.getRoutinePercentWater();
-        //double percentOre = metamorphose.getRoutinePercentOre();
-        //double result = metamorphose.loadResultFromFLL();
-        //Game game = MainClass.getGame();
-        //metamorphose.chooseMetamorphosisCell(result);
+        double result;
+
+        metamorphose.routinePercent();
+        metamorphose.routineDissatisfaction();
+        result = metamorphose.loadResultFromFLL();
+        metamorphose.chooseMetamorphosisCell(result);
         MainClass.getGame().turn();
         refreshGameboardMap();
         refreshGameBoardRobot();
+
+        /*
+        while(MainClass.getGame().getDay() != 10000){
+            try {
+
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+         */
     }
 
 }
