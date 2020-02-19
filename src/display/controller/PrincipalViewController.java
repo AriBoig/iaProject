@@ -183,24 +183,24 @@ public class PrincipalViewController {
                     [gameboard.getSizeY()/2].getCoordinate()){
                     if (robots.get(i).getType().equals(Type.CENTRALISER)){
                         imv.setImage(imageRobotCentraliser);
-                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
-                                robots.get(i).getCell().getCoordinate().getY());
+                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getY(),
+                                robots.get(i).getCell().getCoordinate().getX());
                     }else if (robots.get(i).getType().equals(Type.COLLECTER)){
                         imv.setImage(imageRobotCollector);
-                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
-                                robots.get(i).getCell().getCoordinate().getY());
+                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getY(),
+                                robots.get(i).getCell().getCoordinate().getX());
                     }else if (robots.get(i).getType().equals(Type.EXTRACTER)){
                         imv.setImage(imageRobotExtrator);
-                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
-                                robots.get(i).getCell().getCoordinate().getY());
+                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getY(),
+                                robots.get(i).getCell().getCoordinate().getX());
                     }else if (robots.get(i).getType().equals(Type.FARMER)){
                         imv.setImage(imageRobotFarmer);
-                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
-                                robots.get(i).getCell().getCoordinate().getY());
+                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getY(),
+                                robots.get(i).getCell().getCoordinate().getX());
                     }else if (robots.get(i).getType().equals(Type.CONSTRUCTER)){
                         imv.setImage(imageRobotConstructor);
-                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getX(),
-                                robots.get(i).getCell().getCoordinate().getY());
+                        gridpaneGameBoard.add(imv,robots.get(i).getCell().getCoordinate().getY(),
+                                robots.get(i).getCell().getCoordinate().getX());
                     }
                 }
             }

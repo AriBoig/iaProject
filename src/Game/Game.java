@@ -72,9 +72,11 @@ public class Game
      */
     public void turn()
     {
-        for (Robot robot: robots) {
+        /*for (Robot robot: robots) {
             robot.move();
-        }
+        }*/
+
+        robots.get(2).move();
     }
 
 

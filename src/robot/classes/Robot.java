@@ -41,18 +41,13 @@ public class Robot
     {
         if (learningEnhancement.getTypeMove() == Mode.EXPLORATION)
         {
+            //System.out.println("Avant le mouvement : "+this);
             Direction direction = Direction.getRandomDirection();
-            Cell nextCell = neighbour.findCellByDirection(direction);
 
-            if (nextCell.getType() != TypeCase.IMPASSABLE_AREA && nextCell.getType() != TypeCase.WATER
-                    && nextCell.getCapacity() == 0)
-            {
-                // TODO faire le mouvement du robot sur la case concerne
-                cell = nextCell;
-                neighbour = new Neighbour(cell);
-            }
+            Cell nextCell = chooseGoodCell(direction);
 
-
+            cell = nextCell;
+            neighbour = new Neighbour(cell);
         }
         else {
             qLearning.init();
@@ -60,6 +55,24 @@ public class Robot
             // TODO faire en fonction du Q-LEARNING
 
         }
+    }
+
+    private Cell chooseGoodCell()
+    {
+        Cell nextCell = null;
+
+        do {
+            nextCell = neighbour.findCellByDirection(Direction.getRandomDirection());
+
+            if (nextCell.getType() == TypeCase.IMPASSABLE_AREA || nextCell.getType() == TypeCase.WATER)
+                continue;
+
+            if (nextCell.getCapacity() == 1)
+                continue;
+
+        } while (nextCell != null);
+
+        return nextCell;
     }
 
     /**
@@ -159,5 +172,16 @@ public class Robot
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Robot {" +
+                " action=" + action +
+                ", cell=" + cell +
+                ", type=" + type +
+                ", neibourgh=" + neighbour +
+                '}';
     }
 }

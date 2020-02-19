@@ -37,4 +37,12 @@ public class Coordinate {
     public Boolean equals(Coordinate coordinate) {
         return coordinate.getX() == this.x && coordinate.getY() == this.y;
     }
+
+    @Override
+    public String toString() {
+        return "Coordinate{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }
