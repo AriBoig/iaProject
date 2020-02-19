@@ -34,7 +34,7 @@ public class MainClass extends Application {
         return game;
     }
 
-    public static Gameboard getGameboard() {
+    public static Gameboard getgb() {
         return gameboard;
     }
 

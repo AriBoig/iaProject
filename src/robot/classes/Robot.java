@@ -10,7 +10,6 @@ import robot.enums.Mode;
 import robot.enums.Type;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 
 public class Robot
@@ -57,9 +56,9 @@ public class Robot
     {
         if (learningEnhancement.getTypeMove() == Mode.EXPLORATION)
         {
-            MainClass.getGameboard().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(0);
+            MainClass.getgb().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(0);
             cell = chooseGoodCell();
-            MainClass.getGameboard().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(1);
+            MainClass.getgb().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(1);
             neighbour = new Neighbour(cell);
         }
         else {
@@ -83,7 +82,7 @@ public class Robot
             if (nextCell.getType() == TypeCase.IMPASSABLE_AREA || nextCell.getType() == TypeCase.WATER)
                 continue;
 
-            int capacity = MainClass.getGameboard().getGameboard()[nextCell.getCoordinate().getY()][nextCell.getCoordinate().getX()].getCapacity();
+            int capacity = MainClass.getgb().getGameboard()[nextCell.getCoordinate().getY()][nextCell.getCoordinate().getX()].getCapacity();
             if (capacity == 1)
                 continue;
 

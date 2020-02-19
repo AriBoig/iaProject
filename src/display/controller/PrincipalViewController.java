@@ -56,7 +56,7 @@ public class PrincipalViewController {
      * This function initialize the map of the gameboard
      */
     public void initializeGameboardFromMain(){
-        this.gameboard = MainClass.getGameboard();
+        this.gameboard = MainClass.getgb();
     }
 
     /**

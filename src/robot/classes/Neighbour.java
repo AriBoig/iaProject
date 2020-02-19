@@ -2,7 +2,6 @@ package robot.classes;
 
 import display.main.MainClass;
 import map.Cell;
-import map.Coordinate;
 import map.TypeCase;
 import robot.enums.Direction;
 
@@ -57,7 +56,7 @@ public class Neighbour
     {
         int x = current.getCoordinate().getX();
         int y = current.getCoordinate().getY();
-        Cell[][] cell = MainClass.getGameboard().getGameboard();
+        Cell[][] cell = MainClass.getgb().getGameboard();
 
         if (!current.isTop()) {
             north = cell[y][x-1];

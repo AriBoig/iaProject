@@ -93,7 +93,7 @@ public class Metamorphose {
      * @author Isaë LE MOIGNE
      */
     public void chooseMetamorphosisCell(double percent){
-        Gameboard gameboard = MainClass.getGameboard();
+        Gameboard gameboard = MainClass.getgb();
         int roundedPercent = (int)percent;
         int nbOfCases = ((gameboard.getSizeX()*gameboard.getSizeY())*(roundedPercent))/100;
         ArrayList<Coordinate> cellList=new ArrayList<Coordinate>();
@@ -147,7 +147,7 @@ public class Metamorphose {
      * @author Aristide BOISGONTIER.
      */
     public void routinePercent(){
-        Gameboard gameboard = MainClass.getGameboard();
+        Gameboard gameboard = MainClass.getgb();
         routinePercentWater = 0;
         routinePercentOre = 0;
         int nbWater = 0;
