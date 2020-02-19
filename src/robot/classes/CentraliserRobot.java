@@ -4,6 +4,7 @@ import Game.Game;
 import map.Cell;
 import map.Coordinate;
 import map.TypeCase;
+import robot.enums.Mode;
 import robot.enums.Type;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class CentraliserRobot extends Robot
     public CentraliserRobot(Cell cell)
     {
         super(cell);
+        //action = Mode.NOTHING;
         setType(Type.CENTRALISER);
     }
 

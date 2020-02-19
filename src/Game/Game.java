@@ -72,11 +72,20 @@ public class Game
      */
     public void turn()
     {
-        /*for (Robot robot: robots) {
-            robot.move();
-        }*/
 
-        robots.get(2).move();
+        for (Robot robot: robots) {
+            robot.move();
+
+        }
+
+        for (Robot robot: robots) {
+            System.out.println(robot);
+
+
+        }
+
+        //robots.get(2).move();
+        day++;
     }
 
 
@@ -120,12 +129,6 @@ public class Game
         this.day = day;
     }
 
-/*
-    public static void main(String[] args) {
-        Game game = new Game();
-        game.initializeRobots();
-    }
-*/
 }
 
 

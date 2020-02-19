@@ -11,6 +11,7 @@ public class ConstructorRobot extends Robot
     public ConstructorRobot(Cell cell)
     {
         super(cell);
+        //action = Mode.NOTHING;
         setType(Type.CONSTRUCTER);
     }
 
