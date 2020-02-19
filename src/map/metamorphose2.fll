@@ -22,11 +22,11 @@ OutputVariable: mMetamorphosis
  defuzzifier: SmallestOfMaximum 100
  default: nan
  lock-previous: false
- term: limited Trapezoid 0 0 1 5
- term: small Trapezoid 1 5 10 15
- term: medium Trapezoid 10 15 50 60
- term: large Trapezoid 50 60 75 85
- term: important Trapezoid 75 85 100 100
+ term: limited Trapezoid 0 0 0 1
+ term: small Trapezoid 0 1 5 10
+ term: medium Trapezoid 5 10 45 55
+ term: large Trapezoid 45 55 70 80
+ term: important Trapezoid 70 80 100 100
 RuleBlock: mamdani
  enabled: true
  conjunction: AlgebraicProduct

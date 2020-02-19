@@ -29,56 +29,36 @@ public class Metamorphose {
     private OutputVariable mMetamorphosis;
     private double dissatisfactionEpsylon;
     private double dissatisfactionRates;
+    private int wickednessStep = 0;
 
 
-    //TODO modifier le fichier fll
     /**
-     * Modify the rates of the fuzzy logic and reload the FLL file
-     * @author Arstide Boisgontier
+     * Modify the rates of the fuzzy logic and load another FLL file consequently
+     * @author Isaë LE MOIGNE
      */
     public void routineDissatisfaction(){
         if (dissatisfactionEpsylon <= dissatisfactionRates){
-            dissatisfactionRates -= 50;
-            loadFLL(1000, dissatisfactionRates,"src/map/metamorphose.fll");
-        }
-    }
-
-    /**
-     * Make sure the FLL file start with the same file
-     * @author Arstide Boisgontier
-     */
-    public void copier(File source, File dest) {
-        try (InputStream sourceFile = new java.io.FileInputStream(source);
-             OutputStream destinationFile = new FileOutputStream(dest)) {
-            byte buffer[] = new byte[512 * 1024];
-            int nbLecture;
-            while ((nbLecture = sourceFile.read(buffer)) != -1){
-                destinationFile.write(buffer, 0, nbLecture);
+            if(wickednessStep < 4) {
+                wickednessStep++;
+                dissatisfactionRates -= 50;
+                switch (wickednessStep) {
+                    case 1:
+                        loadFLL(1000, dissatisfactionRates, "src/map/metamorphose1.fll");
+                        break;
+                    case 2:
+                        loadFLL(1000, dissatisfactionRates, "src/map/metamorphose2.fll");
+                        break;
+                    case 3:
+                        loadFLL(1000, dissatisfactionRates, "src/map/metamorphose3.fll");
+                        break;
+                    case 4:
+                        loadFLL(1000, dissatisfactionRates, "src/map/metamorphose4.fll");
+                        break;
+                    default:
+                        loadFLL(1000, dissatisfactionRates, "src/map/metamorphoseStart.fll");
+                        break;
+                }
             }
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Modify the rates of the fuzzy logic and reload the FLL file
-     * @author Arstide Boisgontier
-     */
-    public void modifyFll(){
-        try {
-            FileInputStream fis = new FileInputStream(new File("src/map/metamorphose.fll"));
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            FileOutputStream fos = new FileOutputStream(new File("src/map/metamorphose.fll"));
-            BufferedOutputStream bos = new BufferedOutputStream(fos);
-            int data;
-            while ((data = bis.read()) >= 0)
-                bos.write(data);
-            bis.close();
-            bos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -120,29 +100,55 @@ public class Metamorphose {
     }
 
     /**
-     * Assesseurs
+     * Get the water routine percent
+     * @return routinePercentWater
      * @author Arstide Boisgontier
      */
     public double getRoutinePercentWater() {
         return routinePercentWater;
     }
 
+    /**
+     * Set the water routine percent
+     * @param routinePercentWater
+     * @author Arstide Boisgontier
+     */
     public void setRoutinePercentWater(double routinePercentWater) {
         this.routinePercentWater = routinePercentWater;
     }
 
+    /**
+     * Get the ore routine percent
+     * @return routinePercentOre
+     * @author Arstide Boisgontier
+     */
     public double getRoutinePercentOre() {
         return routinePercentOre;
     }
 
+    /**
+     * Get the ore routine percent
+     * @param routinePercentOre
+     * @author Arstide Boisgontier
+     */
     public void setRoutinePercentOre(double routinePercentOre) {
         this.routinePercentOre = routinePercentOre;
     }
 
+    /**
+     * Get the epsylon of dissatisfaction
+     * @return dissatisfactionEpsylon
+     * @author Arstide Boisgontier
+     */
     public double getDissatisfactionEpsylon() {
         return dissatisfactionEpsylon;
     }
 
+    /**
+     * Set the epsylon of dissatisfaction
+     * @param dissatisfactionEpsylon
+     * @author Arstide Boisgontier
+     */
     public void setDissatisfactionEpsylon(double dissatisfactionEpsylon) {
         this.dissatisfactionEpsylon = dissatisfactionEpsylon;
     }
