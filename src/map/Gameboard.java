@@ -642,7 +642,7 @@ public class Gameboard {
 
 
     public Cell getCenterCell() {
-        return gameboard[11][11];
+        return gameboard[sizeX/2][sizeY/2];
     }
 }
 

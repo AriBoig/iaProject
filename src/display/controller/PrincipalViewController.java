@@ -176,9 +176,6 @@ public class PrincipalViewController {
      */
     public void refreshGameBoardRobot(){
         //TODO à retirer
-        for (int i = 0; i < robots.size(); i++) {
-            robots.get(i).setCell(gameboard.getGameboard()[i][i]);
-        }
         if (robots.size()!= 0){
             for (int i = 0; i < robots.size(); i++) {
                 ImageView imv = new ImageView();
@@ -215,11 +212,12 @@ public class PrincipalViewController {
         //metamorphose.routinePercent();
         //double percentWater = metamorphose.getRoutinePercentWater();
         //double percentOre = metamorphose.getRoutinePercentOre();
-        double result = metamorphose.loadResultFromFLL();
-        System.out.println(result);
+        //double result = metamorphose.loadResultFromFLL();
         //Game game = MainClass.getGame();
-        metamorphose.chooseMetamorphosisCell(result);
+        //metamorphose.chooseMetamorphosisCell(result);
+        MainClass.getGame().turn();
         refreshGameboardMap();
+        refreshGameBoardRobot();
     }
 
 }
