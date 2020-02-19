@@ -1,5 +1,6 @@
 package robot.classes;
 
+import display.main.MainClass;
 import map.Cell;
 import map.TypeCase;
 import robot.algo.LearningEnhancement;
@@ -39,14 +40,26 @@ public class Robot
      */
     public void move()
     {
+        switch (action) {
+            case NOTHING: break;
+            case EXPLORATION: chooseAlgorithm(); break;
+            case OPERATION: chooseAlgorithm(); break;
+            case WORK: break;
+            case REPAIR: // TODO  appeler astar
+                break;
+            case DELIVERY: // TODO  appeler astar
+                break;
+            default:
+        }
+    }
+
+    private void chooseAlgorithm()
+    {
         if (learningEnhancement.getTypeMove() == Mode.EXPLORATION)
         {
-            //System.out.println("Avant le mouvement : "+this);
-            Direction direction = Direction.getRandomDirection();
-
-            Cell nextCell = chooseGoodCell(direction);
-
-            cell = nextCell;
+            MainClass.getGameboard().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(0);
+            cell = chooseGoodCell();
+            MainClass.getGameboard().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(1);
             neighbour = new Neighbour(cell);
         }
         else {
@@ -64,13 +77,19 @@ public class Robot
         do {
             nextCell = neighbour.findCellByDirection(Direction.getRandomDirection());
 
+            if (nextCell == null)
+                continue;
+
             if (nextCell.getType() == TypeCase.IMPASSABLE_AREA || nextCell.getType() == TypeCase.WATER)
                 continue;
 
-            if (nextCell.getCapacity() == 1)
+            int capacity = MainClass.getGameboard().getGameboard()[nextCell.getCoordinate().getY()][nextCell.getCoordinate().getX()].getCapacity();
+            if (capacity == 1)
                 continue;
 
-        } while (nextCell != null);
+            break;
+
+        } while (true);
 
         return nextCell;
     }
