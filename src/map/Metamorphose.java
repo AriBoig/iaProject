@@ -12,8 +12,7 @@ import com.fuzzylite.variable.InputVariable;
 import com.fuzzylite.variable.OutputVariable;
 import display.main.MainClass;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
@@ -27,20 +26,56 @@ public class Metamorphose {
     private InputVariable oreextraction;
     private InputVariable drawnedWater;
     private OutputVariable mMetamorphosis;
+    private double dissatisfactionEpsylon;
+    private double dissatisfactionRates;
+    private int wickednessStep = 0;
+
+
+    /**
+     * Modify the rates of the fuzzy logic and load another FLL file consequently
+     * @author Isaë LE MOIGNE
+     */
+    public void routineDissatisfaction(){
+        if (dissatisfactionEpsylon <= dissatisfactionRates){
+            if(wickednessStep < 4) {
+                wickednessStep++;
+                dissatisfactionRates -= 50;
+                switch (wickednessStep) {
+                    case 1:
+                        loadFLL(1000, dissatisfactionRates, "src/map/fllFiles/metamorphose1.fll");
+                        break;
+                    case 2:
+                        loadFLL(1000, dissatisfactionRates, "src/map/fllFiles/metamorphose2.fll");
+                        break;
+                    case 3:
+                        loadFLL(1000, dissatisfactionRates, "src/map/fllFiles/metamorphose3.fll");
+                        break;
+                    case 4:
+                        loadFLL(1000, dissatisfactionRates, "src/map/fllFiles/metamorphose4.fll");
+                        break;
+                    default:
+                        loadFLL(1000, dissatisfactionRates, "src/map/fllFiles/metamorphoseStart.fll");
+                        break;
+                }
+            }
+        }
+    }
 
     /**
      * Load the FLL file
      * @author Arstide Boisgontier
      */
-    public void loadFLL() {
+    public void loadFLL(double _dissatisfaction, double _dissatisfactionRates,String pathName) {
         try {
-            engine = new FllImporter().fromFile(new File("src/map/metamorphose.fll"));
+            engine = new FllImporter().fromFile(new File(pathName));
         } catch (IOException e) {
             e.printStackTrace();
         }
         oreextraction = engine.getInputVariable("oreextraction");
         drawnedWater = engine.getInputVariable("drawnedwater");
         mMetamorphosis = engine.getOutputVariable("mMetamorphosis");
+        dissatisfactionEpsylon = _dissatisfaction;
+        dissatisfactionRates = _dissatisfactionRates;
         Logger.getLogger("javafx").setLevel(Level.OFF);
     }
 
@@ -48,11 +83,7 @@ public class Metamorphose {
      * Set the values of the variables from fll
      * @author Arstide Boisgontier
      */
-    //TODO enlever les vals fixes
     public double loadResultFromFLL(){
-        routinePercentOre = 90;
-        routinePercentWater = 90;
-
         oreextraction.setValue(routinePercentOre);
         drawnedWater.setValue(routinePercentWater);
         engine.process();
@@ -64,23 +95,57 @@ public class Metamorphose {
     }
 
     /**
-     * Assesseurs
+     * Get the water routine percent
+     * @return routinePercentWater
      * @author Arstide Boisgontier
      */
     public double getRoutinePercentWater() {
         return routinePercentWater;
     }
 
+    /**
+     * Set the water routine percent
+     * @param routinePercentWater
+     * @author Arstide Boisgontier
+     */
     public void setRoutinePercentWater(double routinePercentWater) {
         this.routinePercentWater = routinePercentWater;
     }
 
+    /**
+     * Get the ore routine percent
+     * @return routinePercentOre
+     * @author Arstide Boisgontier
+     */
     public double getRoutinePercentOre() {
         return routinePercentOre;
     }
 
+    /**
+     * Get the ore routine percent
+     * @param routinePercentOre
+     * @author Arstide Boisgontier
+     */
     public void setRoutinePercentOre(double routinePercentOre) {
         this.routinePercentOre = routinePercentOre;
+    }
+
+    /**
+     * Get the epsylon of dissatisfaction
+     * @return dissatisfactionEpsylon
+     * @author Arstide Boisgontier
+     */
+    public double getDissatisfactionEpsylon() {
+        return dissatisfactionEpsylon;
+    }
+
+    /**
+     * Set the epsylon of dissatisfaction
+     * @param dissatisfactionEpsylon
+     * @author Arstide Boisgontier
+     */
+    public void setDissatisfactionEpsylon(double dissatisfactionEpsylon) {
+        this.dissatisfactionEpsylon = dissatisfactionEpsylon;
     }
 
     /**
@@ -89,7 +154,7 @@ public class Metamorphose {
      * @author Isaë LE MOIGNE
      */
     public void chooseMetamorphosisCell(double percent){
-        Gameboard gameboard = MainClass.getGameboard();
+        Gameboard gameboard = MainClass.getgb();
         int roundedPercent = (int)percent;
         int nbOfCases = ((gameboard.getSizeX()*gameboard.getSizeY())*(roundedPercent))/100;
         ArrayList<Coordinate> cellList=new ArrayList<Coordinate>();
@@ -143,17 +208,17 @@ public class Metamorphose {
      * @author Aristide BOISGONTIER.
      */
     public void routinePercent(){
-        Gameboard gameboard = MainClass.getGameboard();
+        Gameboard gameboard = MainClass.getgb();
         routinePercentWater = 0;
         routinePercentOre = 0;
         int nbWater = 0;
         int nbOre = 0;
         for (int i = 0; i < gameboard.getSizeX(); i++) {
             for (int j = 0; j < gameboard.getSizeY(); j++) {
-                if (gameboard.getGameboard()[i][j].getFoodNb() == 0){
+                if (gameboard.getGameboard()[i][j].getFoodNb() == 0 && gameboard.getGameboard()[i][j].getType().equals(TypeCase.FOOD)){
                     gameboard.getGameboard()[i][j].setType(TypeCase.DRY_MEDOW);
                 }
-                if (gameboard.getGameboard()[i][j].getWaterNb() == 0){
+                if (gameboard.getGameboard()[i][j].getWaterNb() == 0 && gameboard.getGameboard()[i][j].getType().equals(TypeCase.SCREE)){
                     gameboard.getGameboard()[i][j].setType(TypeCase.SCREE);
                     nbWater++;
                 }

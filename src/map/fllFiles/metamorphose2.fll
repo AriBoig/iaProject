@@ -1,0 +1,47 @@
+Engine: Metamorphosis
+InputVariable: oreextraction
+ enabled: true
+ range: 0 100
+ lock-range: false
+ term: small Trapezoid 0 0 10 20
+ term: medium Trapezoid 10 20 40 60
+ term: large Trapezoid 40 60 100 400
+InputVariable: drawnedwater
+ enabled: true
+ range: 0 100
+ lock-range: false
+ term: insignificant Trapezoid 0 0 8 14
+ term: small Trapezoid 8 14 36 44
+ term: medium Trapezoid 36 44 66 72
+ term: large Trapezoid 66 72 100 1000
+OutputVariable: mMetamorphosis
+ enabled: true
+ range: 0 100
+ lock-range: false
+ aggregation: Maximum
+ defuzzifier: SmallestOfMaximum 100
+ default: nan
+ lock-previous: false
+ term: limited Trapezoid 0 0 0 1
+ term: small Trapezoid 0 1 5 10
+ term: medium Trapezoid 5 10 45 55
+ term: large Trapezoid 45 55 70 80
+ term: important Trapezoid 70 80 100 100
+RuleBlock: mamdani
+ enabled: true
+ conjunction: AlgebraicProduct
+ disjunction: none
+ implication: AlgebraicProduct
+ activation: General
+ rule: if oreextraction is small and drawnedwater is insignificant then mMetamorphosis is limited
+ rule: if oreextraction is small and drawnedwater is small then mMetamorphosis is small
+ rule: if oreextraction is small and drawnedwater is medium then mMetamorphosis is small
+ rule: if oreextraction is small and drawnedwater is large then mMetamorphosis is medium
+ rule: if oreextraction is medium and drawnedwater is insignificant then mMetamorphosis is medium
+ rule: if oreextraction is medium and drawnedwater is small then mMetamorphosis is medium
+ rule: if oreextraction is medium and drawnedwater is medium then mMetamorphosis is medium
+ rule: if oreextraction is medium and drawnedwater is large then mMetamorphosis is medium
+ rule: if oreextraction is large and drawnedwater is insignificant then mMetamorphosis is large
+ rule: if oreextraction is large and drawnedwater is small then mMetamorphosis is large
+ rule: if oreextraction is large and drawnedwater is medium then mMetamorphosis is important
+ rule: if oreextraction is large and drawnedwater is large then mMetamorphosis is important

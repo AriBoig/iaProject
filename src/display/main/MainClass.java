@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import map.Gameboard;
+import map.TypeCase;
 import robot.classes.Robot;
 import java.io.IOException;
 import java.util.List;
@@ -33,7 +34,7 @@ public class MainClass extends Application {
         return game;
     }
 
-    public static Gameboard getGameboard() {
+    public static Gameboard getgb() {
         return gameboard;
     }
 
@@ -46,16 +47,17 @@ public class MainClass extends Application {
      */
     public void iniGameboard() {
         gameboard = new Gameboard();
-        gameboard.initializeWaterGameBoard();
-        gameboard.initializeBaseGameBoard();
-        gameboard.initializeOreGameBoard();
-        gameboard.initializeFoodGameBoard();
-        gameboard.initializeTreeGameBoard();
-        gameboard.initializeDryMedow();
-        gameboard.initializeNormalMedow();
-        gameboard.initializeOilyMedow();
-        gameboard.initializeDesertGameBoard();
-        gameboard.initializeScreeGameBoard();
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/water.txt", TypeCase.WATER);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/base.txt", TypeCase.BASE);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/ore.txt", TypeCase.ORE);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/food.txt", TypeCase.FOOD);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/tree.txt", TypeCase.TREE);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/dryMedow.txt", TypeCase.DRY_MEDOW);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/normalMedow.txt", TypeCase.NORMAL_MEDOW);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/oilyMedow.txt", TypeCase.OILY_MEDOW);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/desert.txt", TypeCase.DESERT);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/scree.txt", TypeCase.SCREE);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/impassableArea.txt", TypeCase.IMPASSABLE_AREA);
         gameboard.setValueOfWaterCells();
         gameboard.setValueOfFoodCells();
         gameboard.setValueOfOreCells();
@@ -109,7 +111,7 @@ public class MainClass extends Application {
     }
 
     /**
-     * This function intialize the principal View in which we will see the gameboard
+     * This function initialize the principal View in which we will see the gameboard
      */
     public void initializePrincipalView() {
         FXMLLoader loader = new FXMLLoader();
