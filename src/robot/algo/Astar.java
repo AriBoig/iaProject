@@ -144,9 +144,4 @@ public class Astar {
 
         return result;
     }
-
-    private AStarGraph initGraph(Cell cell) {
-        if ()
-    }
-
 }
