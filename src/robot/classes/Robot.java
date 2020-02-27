@@ -64,11 +64,11 @@ public class Robot
         nextCell = neighbour.findCellByDirection(dir);
 
         if (nextCell != null && nextCell.getType() != TypeCase.IMPASSABLE_AREA && nextCell.getType() != TypeCase.WATER
-                && MainClass.getGameboard().getGameboard()[nextCell.getCoordinate().getY()][nextCell.getCoordinate().getX()].getCapacity() != 1)
+                && MainClass.getgb().getGameboard()[nextCell.getCoordinate().getY()][nextCell.getCoordinate().getX()].getCapacity() != 1)
         {
-            MainClass.getGameboard().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(0);
+            MainClass.getgb().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(0);
             cell = nextCell;
-            MainClass.getGameboard().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(1);
+            MainClass.getgb().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(1);
 
             neighbour = new Neighbour(cell);
         }
