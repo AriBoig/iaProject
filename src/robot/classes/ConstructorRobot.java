@@ -29,9 +29,6 @@ public class ConstructorRobot extends Robot
                 // TODO checker les cases voisines pour savoir sil y a de l'eau
             }
         }
-
-        // TODO move le robot si sa case ne lui plait pas
-        move();
     }
 }
 

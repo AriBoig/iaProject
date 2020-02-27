@@ -21,7 +21,7 @@ public class QLearning
     private double[][] Q;   // Q learning
 
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         QLearning ql = new QLearning();
 
         ql.init();
@@ -119,10 +119,11 @@ public class QLearning
                 }
             }
         }
+
         initializeQ();
         printR(R);
-
     }
+
     //Set Q values to R values
     void initializeQ()
     {
@@ -134,7 +135,8 @@ public class QLearning
     }
 
     // Used for debug
-    void printR(int[][] matrix) {
+    void printR(int[][] matrix)
+    {
         System.out.printf("%25s", "States: ");
         for (int i = 0; i <= 8; i++) {
             System.out.printf("%4s", i);
@@ -150,7 +152,8 @@ public class QLearning
         }
     }
 
-    public void calculateQ() {
+    public void calculateQ()
+    {
         Random rand = new Random();
 
         for (int i = 0; i < 1000; i++) { // Train cycles
@@ -177,14 +180,16 @@ public class QLearning
         }
     }
 
-    boolean isFinalState(int state) {
+    boolean isFinalState(int state)
+    {
         int i = state / mazeWidth;
         int j = state - i * mazeWidth;
 
         return maze[i][j] == 'F';
     }
 
-    int[] possibleActionsFromState(int state) {
+    int[] possibleActionsFromState(int state)
+    {
         ArrayList<Integer> result = new ArrayList<>();
         for (int i = 0; i < statesCount; i++) {
             if (R[state][i] != -1) {
@@ -195,7 +200,8 @@ public class QLearning
         return result.stream().mapToInt(i -> i).toArray();
     }
 
-    double maxQ(int nextState) {
+    double maxQ(int nextState)
+    {
         int[] actionsFromState = possibleActionsFromState(nextState);
         //the learning rate and eagerness will keep the W value above the lowest reward
         double maxValue = -10;

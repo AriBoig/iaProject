@@ -220,4 +220,9 @@ public class PrincipalViewController {
         refreshGameBoardRobot();
     }
 
+    public PrincipalViewController getTOTO()
+    {
+        return this;
+    }
+
 }

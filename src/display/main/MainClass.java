@@ -44,7 +44,7 @@ public class MainClass extends Application {
     /**
      * This function is launching and intializing the gameboard
      */
-    public void iniGameboard(){
+    public void iniGameboard() {
         gameboard = new Gameboard();
         gameboard.initializeWaterGameBoard();
         gameboard.initializeBaseGameBoard();
@@ -65,7 +65,7 @@ public class MainClass extends Application {
     /**
      * This function is intializing the base game
      */
-    public void iniGame(){
+    public void iniGame() {
         game = new Game();
         game.initializeRobots(gameboard.getCenterCell());
         listRobot = Game.robots;
@@ -74,6 +74,7 @@ public class MainClass extends Application {
 
     /**
      * This function launche the GUI
+     *
      * @param primaryStage the initial primary stage of the application
      * @throws Exception
      */
@@ -92,7 +93,7 @@ public class MainClass extends Application {
     /**
      * This function initialize the principal container in which we will see the objects
      */
-    public void initialiazePrincipalContainer(){
+    public void initialiazePrincipalContainer() {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainClass.class.getResource("../container/PrincipalContainer.fxml"));
         try {
@@ -110,7 +111,7 @@ public class MainClass extends Application {
     /**
      * This function intialize the principal View in which we will see the gameboard
      */
-    public void initializePrincipalView(){
+    public void initializePrincipalView() {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainClass.class.getResource("../view/PrincipalView.fxml"));
         try {

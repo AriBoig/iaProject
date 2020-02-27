@@ -31,8 +31,5 @@ public class CollectorRobot extends Robot
                 // TODO envoyer information au centraliser
             }
         }
-
-        // TODO move le robot si sa case ne lui plait pas
-        move();
     }
 }

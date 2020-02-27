@@ -1,8 +1,8 @@
 package robot.algo;
 
 /**
- * Class for the metamorphosis of the cells
- * @author Aristide Boisgontier & Isaë Le Moigne
+ * Class for the metamorphosis of the robots
+ * @author Enzo DECHAENE
  * @date 11/02/2020
  */
 
@@ -23,53 +23,57 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Metamorphose {
+public class Metamorphose
+{
 
     private double routinePercentWater;
     private double routinePercentOre;
     private Engine engine;
-    private InputVariable oreextraction;
+    private InputVariable mMetamorphosis;
     private InputVariable drawnedWater;
-    private OutputVariable mMetamorphosis;
+    private OutputVariable healthRobot;
 
     /**
      * Load the FLL file
-     * @author Arstide Boisgontier
+     * @author Enzo DECHAENE
      */
-    public void loadFLL() {
+    public void loadFLL()
+    {
         try {
-            engine = new FllImporter().fromFile(new File("src/map/metamorphose.fll"));
+            engine = new FllImporter().fromFile(new File("src/robot/algo/metamorphose.fll"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        oreextraction = engine.getInputVariable("oreextraction");
+
+        mMetamorphosis = engine.getInputVariable("mMetamorphosis");
         drawnedWater = engine.getInputVariable("drawnedwater");
-        mMetamorphosis = engine.getOutputVariable("mMetamorphosis");
+        healthRobot = engine.getOutputVariable("healthRobot");
         Logger.getLogger("javafx").setLevel(Level.OFF);
     }
 
     /**
      * Set the values of the variables from fll
-     * @author Arstide Boisgontier
+     * @author Enzo DECHAENE
      */
     //TODO enlever les vals fixes
-    public double loadResultFromFLL(){
+    public double loadResultFromFLL()
+    {
         routinePercentOre = 90;
         routinePercentWater = 90;
 
-        oreextraction.setValue(routinePercentOre);
+        mMetamorphosis.setValue(routinePercentOre);
         drawnedWater.setValue(routinePercentWater);
         engine.process();
 
         routinePercentWater = 0;
         routinePercentOre = 0;
 
-        return mMetamorphosis.getValue();
+        return healthRobot.getValue();
     }
 
     /**
      * Assesseurs
-     * @author Arstide Boisgontier
+     * @author Enzo DECHAENE
      */
     public double getRoutinePercentWater() {
         return routinePercentWater;
@@ -92,7 +96,8 @@ public class Metamorphose {
      * @param percent
      * @author Isaë LE MOIGNE
      */
-    public void chooseMetamorphosisCell(double percent){
+    public void chooseMetamorphosisCell(double percent)
+    {
         Gameboard gameboard = MainClass.getGameboard();
         int roundedPercent = (int)percent;
         int nbOfCases = ((gameboard.getSizeX()*gameboard.getSizeY())*(roundedPercent))/100;
@@ -119,7 +124,8 @@ public class Metamorphose {
      * @author Isaë LE MOIGNE.
      * @author Arstide BOISGONTIER
      */
-    public Cell metamorphRandomFromCell(Cell cell){
+    public Cell metamorphRandomFromCell(Cell cell)
+    {
         if (cell.getType().equals(TypeCase.TREE)){
             fromTree(cell);
         }else if (cell.getType().equals(TypeCase.DRY_MEDOW)){
@@ -146,7 +152,8 @@ public class Metamorphose {
      * Get the percentages of "water" and "ore" to use it with FuzzyLite
      * @author Aristide BOISGONTIER.
      */
-    public void routinePercent(){
+    public void routinePercent()
+    {
         Gameboard gameboard = MainClass.getGameboard();
         routinePercentWater = 0;
         routinePercentOre = 0;
@@ -196,7 +203,8 @@ public class Metamorphose {
      * @author Isaë LE MOIGNE.
      * @author Arstide BOISGONTIER
      */
-    public void fromTree(Cell cell){
+    public void fromTree(Cell cell)
+    {
         int rand;
         rand = randomGen(0,10001);
         if (rand >= 0 && rand <= 2000){
@@ -222,7 +230,8 @@ public class Metamorphose {
      * @author Isaë LE MOIGNE.
      * @author Arstide BOISGONTIER
      */
-    public void fromDryMedow(Cell cell){
+    public void fromDryMedow(Cell cell)
+    {
         int rand;
         rand = randomGen(0,10001);
         if (rand >= 0 && rand <= 8000){
@@ -243,7 +252,8 @@ public class Metamorphose {
      * @author Isaë LE MOIGNE.
      * @author Arstide BOISGONTIER
      */
-    public void fromNormalMedow(Cell cell){
+    public void fromNormalMedow(Cell cell)
+    {
         int rand;
         rand = randomGen(0,10001);
         if (rand >= 0 && rand <= 1000){

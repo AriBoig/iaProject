@@ -1,5 +1,6 @@
 package robot.classes;
 
+import Game.Game;
 import map.Cell;
 import map.TypeCase;
 import robot.enums.Mode;
@@ -18,7 +19,7 @@ public class FarmerRobot extends Robot
     public FarmerRobot(Cell cell)
     {
         super(cell);
-        action = Mode.NOTHING; /* Il doit attendre qu'il y ai de l'eau afin de farmer */
+        //action = Mode.NOTHING; /* Il doit attendre qu'il y ai de l'eau afin de farmer */
         setType(Type.FARMER);
     }
 
@@ -29,8 +30,8 @@ public class FarmerRobot extends Robot
     public void checkCell()
     {
         if (this.action == Mode.EXPLORATION || this.action == Mode.OPERATION) {
-            if (getCell().getType() == TypeCase.DRY_MEDOW || getCell().getType() == TypeCase.NORMAL_MEDOW ||
-                    getCell().getType() == TypeCase.OILY_MEDOW)
+            if ((getCell().getType() == TypeCase.DRY_MEDOW || getCell().getType() == TypeCase.NORMAL_MEDOW ||
+                    getCell().getType() == TypeCase.OILY_MEDOW) && Game.getCentraliser().getWater() > 0)
             {
                 this.action = Mode.WORK; /* Le robot se met au travail */
 
@@ -44,9 +45,6 @@ public class FarmerRobot extends Robot
                 // TODO envoyer information au centraliser
             }
         }
-
-        // TODO move le robot si sa case ne lui plait pas
-        move();
     }
 
 

@@ -13,7 +13,7 @@ public class ExtractorRobot extends Robot
     public ExtractorRobot(Cell cell)
     {
         super(cell);
-        action = Mode.NOTHING;
+        //action = Mode.NOTHING;
         setType(Type.EXTRACTER);
     }
 
@@ -30,8 +30,5 @@ public class ExtractorRobot extends Robot
                 // TODO envoyer information au centraliser
             }
         }
-
-        // TODO move le robot si sa case ne lui plait pas
-        move();
     }
 }
