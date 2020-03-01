@@ -61,7 +61,8 @@ public class Robot
     {
         Cell nextCell = null;
 
-        nextCell = neighbour.findCellByDirection(dir);
+        if (action != Mode.NOTHING) {
+            nextCell = neighbour.findCellByDirection(dir);
 
         if (nextCell != null && nextCell.getType() != TypeCase.IMPASSABLE_AREA && nextCell.getType() != TypeCase.WATER
                 && MainClass.getgb().getGameboard()[nextCell.getCoordinate().getY()][nextCell.getCoordinate().getX()].getCapacity() != 1)
@@ -70,7 +71,30 @@ public class Robot
             cell = nextCell;
             MainClass.getgb().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(1);
 
-            neighbour = new Neighbour(cell);
+                neighbour = new Neighbour(cell);
+            }
+            else {
+                switch (dir) {
+                    case NORTH: dir = Direction.NORTHEAST; break;
+                    case SOUTH: dir = Direction.SOUTHWEST; break;
+                    case EAST: dir = Direction.NORTH; break;
+                    case WEST: dir = Direction.SOUTH; break;
+                    case NORTHEAST: dir = Direction.NORTH; break;
+                    case NORTHWEST: dir = Direction.WEST; break;
+                    case SOUTHEAST: dir = Direction.SOUTHWEST; break;
+                    case SOUTHWEST: dir = Direction.WEST; break;
+                }
+                nextCell = neighbour.findCellByDirection(dir);
+
+                if (nextCell != null && nextCell.getType() != TypeCase.IMPASSABLE_AREA && nextCell.getType() != TypeCase.WATER
+                        && MainClass.getgb().getGameboard()[nextCell.getCoordinate().getY()][nextCell.getCoordinate().getX()].getCapacity() != 1) {
+                    MainClass.getgb().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(0);
+                    cell = nextCell;
+                    MainClass.getgb().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(1);
+
+                    neighbour = new Neighbour(cell);
+                }
+            }
         }
     }
 
