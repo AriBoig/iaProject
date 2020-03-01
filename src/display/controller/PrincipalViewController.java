@@ -244,4 +244,9 @@ public class PrincipalViewController {
         t.start();
     }
 
+    public PrincipalViewController getTOTO()
+    {
+        return this;
+    }
+
 }

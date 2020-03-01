@@ -41,10 +41,11 @@ public class Neighbour
      */
     public boolean findWater()
     {
-        return (north.getType() == TypeCase.WATER || south.getType() == TypeCase.WATER ||
-                east.getType() == TypeCase.WATER || west.getType() == TypeCase.WATER ||
-                northeast.getType() == TypeCase.WATER || northwest.getType() == TypeCase.WATER ||
-                southeast.getType() == TypeCase.WATER || southwest.getType() == TypeCase.WATER);
+        return (north != null && north.getType() == TypeCase.WATER) || (south != null && south.getType() == TypeCase.WATER)
+                || (east != null && east.getType() == TypeCase.WATER) || (west != null && west.getType() == TypeCase.WATER)
+                || (northeast != null && northeast.getType() == TypeCase.WATER) || (northwest != null &&
+                northwest.getType() == TypeCase.WATER) || (southeast != null && southeast.getType() == TypeCase.WATER)
+                || (southwest != null && southwest.getType() == TypeCase.WATER);
     }
 
     /**

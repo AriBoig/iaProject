@@ -39,19 +39,44 @@ public class Robot
      */
     public void move()
     {
+        checkCell();
+
         switch (action) {
-            case NOTHING: break;
-            case EXPLORATION: chooseAlgorithm(); break;
-            case OPERATION: chooseAlgorithm(); break;
+            case NOTHING:
             case WORK: break;
-            case REPAIR: // TODO  appeler astar
-                break;
-            case DELIVERY: // TODO  appeler astar
-                break;
+            case EXPLORATION:
+            case OPERATION: chooseAlgorithm(); break;
+            case REPAIR:
+            case DELIVERY: goBase(); break;
             default:
         }
     }
 
+    /**
+     *
+     * @param dir
+     * @author Enzo DECHAENE
+     */
+    public void moveBeginGame(Direction dir)
+    {
+        Cell nextCell = null;
+
+        nextCell = neighbour.findCellByDirection(dir);
+
+        if (nextCell != null && nextCell.getType() != TypeCase.IMPASSABLE_AREA && nextCell.getType() != TypeCase.WATER
+                && MainClass.getgb().getGameboard()[nextCell.getCoordinate().getY()][nextCell.getCoordinate().getX()].getCapacity() != 1)
+        {
+            MainClass.getgb().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(0);
+            cell = nextCell;
+            MainClass.getgb().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(1);
+
+            neighbour = new Neighbour(cell);
+        }
+    }
+
+    /**
+     * @author Enzo DECHAENE
+     */
     private void chooseAlgorithm()
     {
         if (learningEnhancement.getTypeMove() == Mode.EXPLORATION)
@@ -69,6 +94,11 @@ public class Robot
         }
     }
 
+    /**
+     *
+     * @return
+     * @author Enzo DECHAENE
+     */
     private Cell chooseGoodCell()
     {
         Cell nextCell = null;
@@ -91,6 +121,11 @@ public class Robot
         } while (true);
 
         return nextCell;
+    }
+
+    private void goBase()
+    {
+
     }
 
     /**
@@ -166,31 +201,13 @@ public class Robot
 
     }
 
-    /**
-     * @return the Cell where is the robot.
-     * @author Enzo DECHAENE.
-     */
+
     public Cell getCell() { return cell; }
+    public Neighbour getNeighbour() { return neighbour; }
+    public Type getType() { return type; }
 
-    public void setCell(Cell cell) {
-        this.cell = cell;
-    }
-
-    /**
-     * @author AC
-     * @return
-     */
-    public Neighbour getNeighbour() {
-        return neighbour;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
+    public void setType(Type type) { this.type = type; }
+    public void setCell(Cell cell) { this.cell = cell; }
 
 
     @Override

@@ -37,6 +37,11 @@ public class CentraliserRobot extends Robot
     public CentraliserRobot(Cell cell)
     {
         super(cell);
+
+        mineral = 0;
+        food = 0;
+        water = 0;
+        consumeWater = 0;
         //action = Mode.NOTHING;
         setType(Type.CENTRALISER);
     }

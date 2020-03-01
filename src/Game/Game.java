@@ -1,10 +1,9 @@
 package Game;
 
-import display.main.MainClass;
-import javafx.stage.Stage;
 import map.Cell;
-import map.TypeCase;
 import robot.classes.*;
+import robot.enums.Direction;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,10 +19,10 @@ public class Game
     private static final int NB_COLLECTOR_ROBOT     = 3;
     private static final int NB_TOTAL_DAY           = 2922;
 
-
     private int day;
     public static List<Robot> robots;
 
+    private static Logger logger = Logger.getLogger("logger");
 
     public Game() {
         day    = 0;
@@ -34,7 +33,6 @@ public class Game
      * Fonction qui permet d'initialiser les robots.
      * @author Enzo DECHAENE.
      */
-
     public void initializeRobots(Cell cell)
     {
         List<Robot> robots = new ArrayList<Robot>();
@@ -64,7 +62,25 @@ public class Game
             System.exit(1);
         }
 
-        this.robots = robots;
+        Game.robots = robots;
+    }
+
+    public void moveBeginGame()
+    {
+        robots.get(1).moveBeginGame(Direction.NORTH);
+        robots.get(2).moveBeginGame(Direction.SOUTH);
+        robots.get(3).moveBeginGame(Direction.EAST);
+        robots.get(4).moveBeginGame(Direction.WEST);
+        robots.get(5).moveBeginGame(Direction.NORTHEAST);
+        robots.get(6).moveBeginGame(Direction.NORTHWEST);
+        robots.get(7).moveBeginGame(Direction.SOUTHEAST);
+        if (day >= 1) {
+            robots.get(8).moveBeginGame(Direction.SOUTH);
+            robots.get(9).moveBeginGame(Direction.NORTH);
+            robots.get(10).moveBeginGame(Direction.EAST);
+            robots.get(11).moveBeginGame(Direction.WEST);
+        }
+
     }
 
     /**
@@ -72,61 +88,25 @@ public class Game
      */
     public void turn()
     {
+        if (day <= 5) {
+            moveBeginGame();
+        }
+        else if (day < NB_TOTAL_DAY) {
+            for (Robot robot : robots) {
+                robot.move();
+            }
 
-        for (Robot robot: robots) {
-            robot.move();
-
+            for (Robot robot : robots) {
+                System.out.println(robot);
+            }
         }
 
-        for (Robot robot: robots) {
-            System.out.println(robot);
-
-
-        }
-
-        //robots.get(2).move();
         day++;
     }
 
-
-
-
-    /**
-     * La fonction qui permet de mettre a jour la sante des robots en fonction de la metamorphose du terrain.
-     * @author Enzo DECHAENE.
-     */
-    public void metamorphose()
+    public static CentraliserRobot getCentraliser()
     {
-        for (Robot robot:robots) {
-
-            /*
-            if ("métamorphose limitée" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) robots.remove(robot);
-            if ("métamorphose limitée" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA);
-            if ("métamorphose petite" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) robots.remove(robot);
-            if ("métamorphose petite" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA);
-            if ("métamorphose moyenne" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) robots.remove(robot);
-            if ("métamorphose moyenne" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA) robot.health -= 10;
-            if ("métamorphose grande" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) robots.remove(robot);
-            if ("métamorphose grande" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA) robot.health -= 10;
-            if ("métamorphose importante" && robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) robots.remove(robot);
-            if ("métamorphose importante" && robot.getCell().getType() != TypeCase.IMPASSABLE_AREA) robots.remove(robot);
-
-             */
-        }
-    }
-
-    private static Logger logger = Logger.getLogger("logger");
-
-    public void setRobots(List<Robot> robots) {
-        this.robots = robots;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
+        return (CentraliserRobot) Game.robots.get(0);
     }
 
 }
