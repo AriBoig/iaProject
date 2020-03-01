@@ -138,7 +138,7 @@ public class Gameboard {
 
 
     /**
-     * Set the fields by reading files for all positions
+     * Set the fields by reading files for ALL positions
      * @author Aristide BOISGONTIER.
      */
     public void initializeFieldGameboard(String filePath, TypeCase typeCase){

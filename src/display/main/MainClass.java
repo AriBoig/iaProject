@@ -126,6 +126,7 @@ public class MainClass extends Application {
             controller.initializeRobotsFromMain();
             controller.refreshGameboardMap();
             controller.refreshGameBoardRobot();
+            controller.initializeRunnable();
         } catch (IOException e) {
             e.printStackTrace();
         }
