@@ -109,6 +109,9 @@ public class Game
         return (CentraliserRobot) Game.robots.get(0);
     }
 
+    public int getDay() {
+        return day;
+    }
 }
 
 
