@@ -69,15 +69,15 @@ public class Game
     {
         robots.get(1).moveBeginGame(Direction.NORTH);
         robots.get(2).moveBeginGame(Direction.SOUTH);
-        robots.get(3).moveBeginGame(Direction.EAST);
-        robots.get(4).moveBeginGame(Direction.WEST);
-        robots.get(5).moveBeginGame(Direction.NORTHEAST);
+        robots.get(8).moveBeginGame(Direction.EAST);
+        robots.get(9).moveBeginGame(Direction.WEST);
+        robots.get(10).moveBeginGame(Direction.NORTHEAST);
         robots.get(6).moveBeginGame(Direction.NORTHWEST);
         robots.get(7).moveBeginGame(Direction.SOUTHEAST);
-        if (day >= 1) {
-            robots.get(8).moveBeginGame(Direction.SOUTH);
-            robots.get(9).moveBeginGame(Direction.NORTH);
-            robots.get(10).moveBeginGame(Direction.EAST);
+        if (day >= 2) {
+            robots.get(3).moveBeginGame(Direction.SOUTH);
+            robots.get(4).moveBeginGame(Direction.NORTH);
+            robots.get(5).moveBeginGame(Direction.EAST);
             robots.get(11).moveBeginGame(Direction.WEST);
         }
 
@@ -88,17 +88,17 @@ public class Game
      */
     public void turn()
     {
-        if (day <= 5) {
+        if (day <= 8) {
             moveBeginGame();
         }
         else if (day < NB_TOTAL_DAY) {
             for (Robot robot : robots) {
                 robot.move();
             }
+        }
 
-            for (Robot robot : robots) {
-                System.out.println(robot);
-            }
+        for (Robot robot : robots) {
+            System.out.println(robot);
         }
 
         day++;
