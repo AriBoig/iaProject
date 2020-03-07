@@ -222,6 +222,9 @@ public class Metamorphose {
                     gameboard.getGameboard()[i][j].setType(TypeCase.SCREE);
                     nbWater++;
                 }
+                if (gameboard.getGameboard()[i][j].getOreNb() <= 0 && gameboard.getGameboard()[i][j].getType().equals(TypeCase.ORE)){
+                    gameboard.getGameboard()[i][j].setType(TypeCase.SCREE);
+                }
                 if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.WATER)){
                     nbWater++;
                     if(gameboard.getGameboard()[i][j].isExtraction()) {
