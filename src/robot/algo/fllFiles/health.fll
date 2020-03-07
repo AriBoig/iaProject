@@ -1,11 +1,4 @@
-Engine: Metamorphosis
-InputVariable: healthRobot
- enabled: true
- range: 0 100
- lock-range: false
- term: destroyed Trapezoid 0 0 5 15
- term: hurt Trapezoid 5 15 50 60
- term: healthy Trapezoid 50 60 100 400
+Engine: Health
 InputVariable: mMetamorphosis
  enabled: true
  range: 0 100
