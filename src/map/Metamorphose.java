@@ -218,7 +218,7 @@ public class Metamorphose {
                 if (gameboard.getGameboard()[i][j].getFoodNb() == 0 && gameboard.getGameboard()[i][j].getType().equals(TypeCase.FOOD)){
                     gameboard.getGameboard()[i][j].setType(TypeCase.DRY_MEADOW);
                 }
-                if (gameboard.getGameboard()[i][j].getWaterNb() == 0 && gameboard.getGameboard()[i][j].getType().equals(TypeCase.SCREE)){
+                if (gameboard.getGameboard()[i][j].getWaterNb() <= 0 && gameboard.getGameboard()[i][j].getType().equals(TypeCase.SCREE)){
                     gameboard.getGameboard()[i][j].setType(TypeCase.SCREE);
                     nbWater++;
                 }

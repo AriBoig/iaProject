@@ -77,7 +77,7 @@ public class Gameboard {
         for (int i = 0; i < sizeX; i++) {
             for (int j = 0; j < sizeY; j++) {
                 if (gameboard[i][j].getType().equals(TypeCase.ORE)){
-                    gameboard[i][j].setFoodNb(100);
+                    gameboard[i][j].setOreNb(100);
                 }
             }
         }
