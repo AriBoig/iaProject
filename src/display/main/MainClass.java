@@ -106,7 +106,6 @@ public class MainClass extends Application {
      * This function initialize the principal container in which we will see the objects
      */
     public void initialiazePrincipalContainer() {
-        System.out.println("test");
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainClass.class.getResource("../container/PrincipalContainer.fxml"));
         try {
