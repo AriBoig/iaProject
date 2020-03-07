@@ -10,11 +10,14 @@ import Game.Game;
 import display.container.PrincipalContainerController;
 import display.controller.PrincipalViewController;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import map.Gameboard;
 import map.TypeCase;
 import robot.classes.Robot;
@@ -85,6 +88,13 @@ public class MainClass extends Application {
         principalStage = primaryStage;
         principalStage.setTitle("IA");
         principalStage.setResizable(false);
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
         iniGameboard();
         iniGame();
         initialiazePrincipalContainer();
