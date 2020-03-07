@@ -183,11 +183,11 @@ public class Metamorphose {
     public Cell metamorphRandomFromCell(Cell cell){
         if (cell.getType().equals(TypeCase.TREE)){
             fromTree(cell);
-        }else if (cell.getType().equals(TypeCase.DRY_MEDOW)){
+        }else if (cell.getType().equals(TypeCase.DRY_MEADOW)){
             fromDryMedow(cell);
-        }else if (cell.getType().equals(TypeCase.NORMAL_MEDOW)){
+        }else if (cell.getType().equals(TypeCase.NORMAL_MEADOW)){
             fromNormalMedow(cell);
-        }else if (cell.getType().equals(TypeCase.OILY_MEDOW)){
+        }else if (cell.getType().equals(TypeCase.OILY_MEADOW)){
             fromOilyMedow(cell);
         }else if (cell.getType().equals(TypeCase.DESERT)){
             fromDesert(cell);
@@ -216,9 +216,9 @@ public class Metamorphose {
         for (int i = 0; i < gameboard.getSizeX(); i++) {
             for (int j = 0; j < gameboard.getSizeY(); j++) {
                 if (gameboard.getGameboard()[i][j].getFoodNb() == 0 && gameboard.getGameboard()[i][j].getType().equals(TypeCase.FOOD)){
-                    gameboard.getGameboard()[i][j].setType(TypeCase.DRY_MEDOW);
+                    gameboard.getGameboard()[i][j].setType(TypeCase.DRY_MEADOW);
                 }
-                if (gameboard.getGameboard()[i][j].getWaterNb() == 0 && gameboard.getGameboard()[i][j].getType().equals(TypeCase.SCREE)){
+                if (gameboard.getGameboard()[i][j].getWaterNb() <= 0 && gameboard.getGameboard()[i][j].getType().equals(TypeCase.SCREE)){
                     gameboard.getGameboard()[i][j].setType(TypeCase.SCREE);
                     nbWater++;
                 }
@@ -264,13 +264,13 @@ public class Metamorphose {
         int rand;
         rand = randomGen(0,10001);
         if (rand >= 0 && rand <= 2000){
-            cell.setType(TypeCase.DRY_MEDOW);
+            cell.setType(TypeCase.DRY_MEADOW);
         }
         if (rand > 2000 && rand <= 5000){
-            cell.setType(TypeCase.NORMAL_MEDOW);
+            cell.setType(TypeCase.NORMAL_MEADOW);
         }
         if (rand > 5000 && rand <= 9000){
-            cell.setType(TypeCase.OILY_MEDOW);
+            cell.setType(TypeCase.OILY_MEADOW);
         }
         if (rand > 9000 && rand <= 9900){
             cell.setType(TypeCase.DESERT);
@@ -281,7 +281,7 @@ public class Metamorphose {
     }
 
     /**
-     * Metamorphosis of a "DRY_MEDOW" cell
+     * Metamorphosis of a "DRY_MEADOW" cell
      * @param cell
      * @author Isaë LE MOIGNE.
      * @author Arstide BOISGONTIER
@@ -302,7 +302,7 @@ public class Metamorphose {
     }
 
     /**
-     * Metamorphosis of a "NORMAL_MEDOW" cell
+     * Metamorphosis of a "NORMAL_MEADOW" cell
      * @param cell
      * @author Isaë LE MOIGNE.
      * @author Arstide BOISGONTIER
@@ -314,7 +314,7 @@ public class Metamorphose {
             cell.setType(TypeCase.DESERT);
         }
         if (rand > 1000 && rand <= 7000){
-            cell.setType(TypeCase.DRY_MEDOW);
+            cell.setType(TypeCase.DRY_MEADOW);
         }
         if (rand > 7000 && rand <= 10000){
             cell.setType(TypeCase.FOOD);
@@ -323,7 +323,7 @@ public class Metamorphose {
     }
 
     /**
-     * Metamorphosis of a "OILY_MEDOW" cell
+     * Metamorphosis of a "OILY_MEADOW" cell
      * @param cell
      * @author Isaë LE MOIGNE.
      * @author Arstide BOISGONTIER
@@ -335,10 +335,10 @@ public class Metamorphose {
             cell.setType(TypeCase.DESERT);
         }
         if (rand > 500 && rand <= 4500){
-            cell.setType(TypeCase.NORMAL_MEDOW);
+            cell.setType(TypeCase.NORMAL_MEADOW);
         }
         if (rand > 4500 && rand <= 7500){
-            cell.setType(TypeCase.DRY_MEDOW);
+            cell.setType(TypeCase.DRY_MEADOW);
         }
         if (rand > 7500 && rand <= 10000){
             cell.setType(TypeCase.FOOD);
@@ -356,7 +356,7 @@ public class Metamorphose {
         int rand;
         rand = randomGen(0,10001);
         if (rand >= 0 && rand <= 6500){
-            cell.setType(TypeCase.DRY_MEDOW);
+            cell.setType(TypeCase.DRY_MEADOW);
         }
         if (rand > 6500 && rand <= 6510){
             cell.setType(TypeCase.IMPASSABLE_AREA);
@@ -373,15 +373,15 @@ public class Metamorphose {
         int rand;
         rand = randomGen(0,10001);
         if (rand >= 0 && rand <= 5000){
-            cell.setType(TypeCase.OILY_MEDOW);
+            cell.setType(TypeCase.OILY_MEADOW);
             cell.setFoodNb(0);
         }
         if (rand > 5000 && rand <= 8000){
-            cell.setType(TypeCase.NORMAL_MEDOW);
+            cell.setType(TypeCase.NORMAL_MEADOW);
             cell.setFoodNb(0);
         }
         if (rand > 8000 && rand <= 9000){
-            cell.setType(TypeCase.DRY_MEDOW);
+            cell.setType(TypeCase.DRY_MEADOW);
             cell.setFoodNb(0);
         }
         if (rand > 9000 && rand <= 10000){

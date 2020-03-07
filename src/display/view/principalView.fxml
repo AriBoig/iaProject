@@ -11,7 +11,11 @@
    <children>
       <GridPane fx:id="gridpaneGameBoard" layoutX="35.0" layoutY="32.0" prefHeight="600.0" prefWidth="600.0">
       </GridPane>
-      <ImageView fx:id="imageViewLegend" fitHeight="355.0" fitWidth="358.0" layoutX="628.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="gameButton" layoutX="776.0" layoutY="551.0" mnemonicParsing="false" onAction="#game" text="Start" />
+      <ImageView fx:id="imageViewLegend" fitHeight="355.0" fitWidth="358.0" layoutX="628.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="gameButton" layoutX="703.0" layoutY="543.0" mnemonicParsing="false" onAction="#game" text="Start" />
+      <Label fx:id="tourLabel" layoutX="628.0" layoutY="476.0" text="Turn :" />
+      <Label fx:id="waterBaseLabel" layoutX="765.0" layoutY="476.0" text="Water base :" />
+      <Label fx:id="oreBaseLabel" layoutX="765.0" layoutY="516.0" text="Ore base :" />
+      <Label fx:id="foodBaseLabel" layoutX="628.0" layoutY="516.0" text="Food Base :" />
    </children>
 </AnchorPane>

@@ -1,6 +1,5 @@
 package robot.classes;
 
-import Game.Game;
 import map.Cell;
 import map.Coordinate;
 import map.TypeCase;
@@ -10,7 +9,7 @@ import robot.enums.Type;
 import java.util.ArrayList;
 
 /**
- * @author Enzo Dechaene
+ * @author ED
  * @author Adrien Costes
  */
 
@@ -25,9 +24,9 @@ public class CentraliserRobot extends Robot
 
     public static final Object[][] poiExtractor = {{TypeCase.ORE, 5}, {TypeCase.SCREE, 2}};
     public static final Object[][] poiConstructor = {{TypeCase.WATER, 5}};
-    public static final Object[][] poiCollector = {{TypeCase.FOOD, 5}, {TypeCase.NORMAL_MEDOW, 4},
-            {TypeCase.OILY_MEDOW, 3}, {TypeCase.DRY_MEDOW, 1}};
-    public static final Object[][] poiFarmer = {{TypeCase.OILY_MEDOW, 5}, {TypeCase.NORMAL_MEDOW, 4}, {TypeCase.DRY_MEDOW, 2}};
+    public static final Object[][] poiCollector = {{TypeCase.FOOD, 5}, {TypeCase.NORMAL_MEADOW, 4},
+            {TypeCase.OILY_MEADOW, 3}, {TypeCase.DRY_MEADOW, 1}};
+    public static final Object[][] poiFarmer = {{TypeCase.OILY_MEADOW, 5}, {TypeCase.NORMAL_MEADOW, 4}, {TypeCase.DRY_MEADOW, 2}};
 
     public static final int[][] coordinates = {{0, 1}, {1, 1}, {1, 0}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {-1, 1}};
 
@@ -42,7 +41,7 @@ public class CentraliserRobot extends Robot
         food = 0;
         water = 0;
         consumeWater = 0;
-        //action = Mode.NOTHING;
+        action = Mode.NOTHING;
         setType(Type.CENTRALISER);
     }
 
@@ -157,4 +156,11 @@ public class CentraliserRobot extends Robot
         return consumeWater;
     }
 
+    /**
+     * @author ED
+     * @param consumeWater
+     */
+    public void setConsumeWater(double consumeWater) {
+        this.consumeWater = consumeWater;
+    }
 }

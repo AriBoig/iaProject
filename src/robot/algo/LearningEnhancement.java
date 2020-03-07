@@ -11,7 +11,7 @@ public class LearningEnhancement
     private double epsilon;
 
     /**
-     * @author Enzo DECHAENE.
+     * @author ED.
      */
     public LearningEnhancement()
     {
@@ -21,7 +21,7 @@ public class LearningEnhancement
     /**
      *
      * @return
-     * @author Enzo DECHAENE.
+     * @author ED.
      */
     public Mode getTypeMove()
     {
@@ -38,7 +38,7 @@ public class LearningEnhancement
     /**
      * This function is use to have a random between two integer.
      * @return
-     * @author Enzo DECHAENE.
+     * @author ED.
      */
     public static double random()
     {

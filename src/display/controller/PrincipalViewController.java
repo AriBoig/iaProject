@@ -10,14 +10,18 @@ import display.main.MainClass;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import map.Coordinate;
 import map.Gameboard;
 import map.Metamorphose;
 import map.TypeCase;
+import robot.algo.ChangementHealth;
 import robot.classes.*;
 import robot.enums.Type;
+import sun.applet.Main;
 
 import java.util.List;
 
@@ -27,6 +31,7 @@ public class PrincipalViewController {
     private MainClass main;
     private Gameboard gameboard;
     private List<Robot> robots;
+    private ChangementHealth changementHealth;
     private Metamorphose metamorphose;
 
     @FXML
@@ -35,6 +40,14 @@ public class PrincipalViewController {
     private ImageView imageViewLegend;
     @FXML
     private Button gameButton;
+    @FXML
+    private Label tourLabel;
+    @FXML
+    private Label waterBaseLabel;
+    @FXML
+    private Label oreBaseLabel;
+    @FXML
+    private Label foodBaseLabel;
 
     private Image imageBase;
     private Image imageDesert;
@@ -82,6 +95,14 @@ public class PrincipalViewController {
     public void initializeMetamorph(){
         metamorphose = new Metamorphose();
         metamorphose.loadFLL(1000,500, "src/map/fllFiles/metamorphoseStart.fll");
+    }
+
+    /**
+     * @author ED
+     */
+    public void initializeChangementHealth(){
+        changementHealth = new ChangementHealth();
+        changementHealth.loadFLL();
     }
 
     /**
@@ -138,15 +159,15 @@ public class PrincipalViewController {
                     ImageView imv = new ImageView();
                     imv.setImage(imageDesert);
                     gridpaneGameBoard.add(imv, i, j);
-                }else if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.DRY_MEDOW)){
+                }else if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.DRY_MEADOW)){
                     ImageView imv = new ImageView();
                     imv.setImage(imageDryMedow);
                     gridpaneGameBoard.add(imv, i, j);
-                }else if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.NORMAL_MEDOW)){
+                }else if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.NORMAL_MEADOW)){
                     ImageView imv = new ImageView();
                     imv.setImage(imageNormalMedow);
                     gridpaneGameBoard.add(imv, i, j);
-                }else if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.OILY_MEDOW)){
+                }else if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.OILY_MEADOW)){
                     ImageView imv = new ImageView();
                     imv.setImage(imageOilyMedow);
                     gridpaneGameBoard.add(imv, i, j);
@@ -212,12 +233,20 @@ public class PrincipalViewController {
     }
 
 
+    public void refreshGameboardLabels(){
+        tourLabel.setText("Turn : " + MainClass.getGame().getDay());
+        waterBaseLabel.setText("Water Base : " + MainClass.getGame().getCentraliser().getWater());
+        oreBaseLabel.setText("Ore Base : " + MainClass.getGame().getCentraliser().getMineral());
+        foodBaseLabel.setText("Food Base : " + MainClass.getGame().getCentraliser().getFood());
+    }
+
     public void initializeRunnable(){
         updater = new Runnable() {
             @Override
             public void run() {
                 refreshGameboardMap();
                 refreshGameBoardRobot();
+                refreshGameboardLabels();
             }
         };
     }
@@ -229,10 +258,16 @@ public class PrincipalViewController {
             Platform.setImplicitExit(false);
             while(MainClass.getGame().getDay() != 10000){
                 try {
+                    /* Metamorphose cell */
                     metamorphose.routinePercent();
                     metamorphose.routineDissatisfaction();
                     result = metamorphose.loadResultFromFLL();
                     metamorphose.chooseMetamorphosisCell(result);
+                    /* Changement health robot */
+                    // TODO
+                    //changementHealth.changeHealthRobots(result);
+
+                    /* Mouvement robots */
                     MainClass.getGame().turn();
                     Platform.runLater(updater);
                     Thread.sleep(1000);

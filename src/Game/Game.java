@@ -1,6 +1,7 @@
 package Game;
 
 import map.Cell;
+import map.TypeCase;
 import robot.classes.*;
 import robot.enums.Direction;
 
@@ -31,7 +32,7 @@ public class Game
 
     /**
      * Fonction qui permet d'initialiser les robots.
-     * @author Enzo DECHAENE.
+     * @author ED.
      */
     public void initializeRobots(Cell cell)
     {
@@ -65,50 +66,81 @@ public class Game
         Game.robots = robots;
     }
 
+    // TODO
+    /*public void changeHealthRobot(double percentMetamorphose)
+    {
+        for (Robot robot : robots) {
+            if (robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) {
+
+            }
+            else {
+
+            }
+        }
+    }*/
+
     public void moveBeginGame()
     {
         robots.get(1).moveBeginGame(Direction.NORTH);
         robots.get(2).moveBeginGame(Direction.SOUTH);
-        robots.get(3).moveBeginGame(Direction.EAST);
-        robots.get(4).moveBeginGame(Direction.WEST);
-        robots.get(5).moveBeginGame(Direction.NORTHEAST);
+        robots.get(8).moveBeginGame(Direction.EAST);
+        robots.get(9).moveBeginGame(Direction.WEST);
+        robots.get(10).moveBeginGame(Direction.NORTHEAST);
         robots.get(6).moveBeginGame(Direction.NORTHWEST);
         robots.get(7).moveBeginGame(Direction.SOUTHEAST);
-        if (day >= 1) {
-            robots.get(8).moveBeginGame(Direction.SOUTH);
-            robots.get(9).moveBeginGame(Direction.NORTH);
-            robots.get(10).moveBeginGame(Direction.EAST);
+        if (day >= 2) {
+            robots.get(3).moveBeginGame(Direction.SOUTH);
+            robots.get(4).moveBeginGame(Direction.NORTH);
+            robots.get(5).moveBeginGame(Direction.EAST);
             robots.get(11).moveBeginGame(Direction.WEST);
         }
 
     }
 
     /**
-     * @author Enzo DECHAENE
+     * @author ED
      */
     public void turn()
     {
-        if (day <= 5) {
+        /*if (day <= 8) {
             moveBeginGame();
         }
         else if (day < NB_TOTAL_DAY) {
             for (Robot robot : robots) {
                 robot.move();
             }
-
-            for (Robot robot : robots) {
-                System.out.println(robot);
-            }
         }
+
+        for (Robot robot : robots) {
+            System.out.println(robot);
+        }
+
+        day++;*/
+
+        if (day == 0) {
+            robots.get(3).moveBeginGame(Direction.SOUTH);
+            robots.get(3).moveBeginGame(Direction.SOUTH);
+            robots.get(3).moveBeginGame(Direction.SOUTH);
+            robots.get(3).moveBeginGame(Direction.SOUTH);
+            robots.get(3).moveBeginGame(Direction.EAST);
+        }
+        else {
+            robots.get(3).move();
+        }
+
+        System.out.println(robots.get(3).toString());
 
         day++;
     }
 
-    public static CentraliserRobot getCentraliser()
+    public CentraliserRobot getCentraliser()
     {
         return (CentraliserRobot) Game.robots.get(0);
     }
 
+    public int getDay() {
+        return day;
+    }
 }
 
 

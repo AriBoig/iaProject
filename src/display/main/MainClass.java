@@ -10,11 +10,14 @@ import Game.Game;
 import display.container.PrincipalContainerController;
 import display.controller.PrincipalViewController;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import map.Gameboard;
 import map.TypeCase;
 import robot.classes.Robot;
@@ -52,9 +55,9 @@ public class MainClass extends Application {
         gameboard.initializeFieldGameboard("src/display/ressources/fileFields/ore.txt", TypeCase.ORE);
         gameboard.initializeFieldGameboard("src/display/ressources/fileFields/food.txt", TypeCase.FOOD);
         gameboard.initializeFieldGameboard("src/display/ressources/fileFields/tree.txt", TypeCase.TREE);
-        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/dryMedow.txt", TypeCase.DRY_MEDOW);
-        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/normalMedow.txt", TypeCase.NORMAL_MEDOW);
-        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/oilyMedow.txt", TypeCase.OILY_MEDOW);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/dryMedow.txt", TypeCase.DRY_MEADOW);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/normalMedow.txt", TypeCase.NORMAL_MEADOW);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/oilyMedow.txt", TypeCase.OILY_MEADOW);
         gameboard.initializeFieldGameboard("src/display/ressources/fileFields/desert.txt", TypeCase.DESERT);
         gameboard.initializeFieldGameboard("src/display/ressources/fileFields/scree.txt", TypeCase.SCREE);
         gameboard.initializeFieldGameboard("src/display/ressources/fileFields/impassableArea.txt", TypeCase.IMPASSABLE_AREA);
@@ -85,6 +88,13 @@ public class MainClass extends Application {
         principalStage = primaryStage;
         principalStage.setTitle("IA");
         principalStage.setResizable(false);
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
         iniGameboard();
         iniGame();
         initialiazePrincipalContainer();
@@ -96,7 +106,6 @@ public class MainClass extends Application {
      * This function initialize the principal container in which we will see the objects
      */
     public void initialiazePrincipalContainer() {
-        System.out.println("test");
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainClass.class.getResource("../container/PrincipalContainer.fxml"));
         try {
