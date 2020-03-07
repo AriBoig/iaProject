@@ -3,7 +3,7 @@ package robot.enums;
 import java.util.Random;
 
 /**
- * @author Enzo DECHAENE
+ * @author ED
  */
 public enum Direction {
     NORTH,
@@ -18,7 +18,7 @@ public enum Direction {
     /**
      *
      * @return
-     * @author Enzo DECHAENE
+     * @author ED
      */
     public static Direction getRandomDirection() {
         Random random = new Random();

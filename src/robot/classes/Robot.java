@@ -15,9 +15,9 @@ import java.util.ArrayList;
 public class Robot
 {
     protected double energy; /* Ajoute mais pas necessaire dans le sujet */
-    public int health;
+    public int health;       /* Attribut pour gerer la sante du robot    */
     public Mode action;
-    protected Cell cell; /* Cellule sur laquelle se trouve le robot */
+    protected Cell cell;     /* Cellule sur laquelle se trouve le robot  */
     protected Neighbour neighbour;
     protected LearningEnhancement learningEnhancement;
     protected QLearning qLearning;
@@ -35,7 +35,7 @@ public class Robot
 
     /**
      * Fonction qui permet de deplacer le robot sur une Cell adjacente.
-     * @author Enzo DECHAENE.
+     * @author ED.
      */
     public void move()
     {
@@ -55,27 +55,54 @@ public class Robot
     /**
      *
      * @param dir
-     * @author Enzo DECHAENE
+     * @author ED
      */
     public void moveBeginGame(Direction dir)
     {
         Cell nextCell = null;
 
-        nextCell = neighbour.findCellByDirection(dir);
-
-        if (nextCell != null && nextCell.getType() != TypeCase.IMPASSABLE_AREA && nextCell.getType() != TypeCase.WATER
-                && MainClass.getgb().getGameboard()[nextCell.getCoordinate().getY()][nextCell.getCoordinate().getX()].getCapacity() != 1)
+        checkCell();
+        if (action == Mode.EXPLORATION || action == Mode.OPERATION)
         {
-            MainClass.getgb().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(0);
-            cell = nextCell;
-            MainClass.getgb().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(1);
+            nextCell = neighbour.findCellByDirection(dir);
 
-            neighbour = new Neighbour(cell);
+            if (nextCell != null && nextCell.getType() != TypeCase.IMPASSABLE_AREA && nextCell.getType() != TypeCase.WATER
+                    && !getCapacityCell(nextCell))
+            {
+                setCapacityCell(cell, false);
+                cell = nextCell;
+                setCapacityCell(cell, true);
+
+                neighbour = new Neighbour(cell);
+            }
+            else {
+                switch (dir) {
+                    case NORTH: dir = Direction.NORTHEAST; break;
+                    case SOUTH: dir = Direction.SOUTHWEST; break;
+                    case EAST: dir = Direction.NORTH; break;
+                    case WEST: dir = Direction.SOUTH; break;
+                    case NORTHEAST: dir = Direction.NORTH; break;
+                    case NORTHWEST: dir = Direction.WEST; break;
+                    case SOUTHEAST: dir = Direction.SOUTHWEST; break;
+                    case SOUTHWEST: dir = Direction.WEST; break;
+                }
+                nextCell = neighbour.findCellByDirection(dir);
+
+                if (nextCell != null && nextCell.getType() != TypeCase.IMPASSABLE_AREA && nextCell.getType() != TypeCase.WATER
+                        && !getCapacityCell(nextCell))
+                {
+                    setCapacityCell(cell, false);
+                    cell = nextCell;
+                    setCapacityCell(cell, true);
+
+                    neighbour = new Neighbour(cell);
+                }
+            }
         }
     }
 
     /**
-     * @author Enzo DECHAENE
+     * @author ED
      */
     private void chooseAlgorithm()
     {
@@ -97,7 +124,7 @@ public class Robot
     /**
      *
      * @return
-     * @author Enzo DECHAENE
+     * @author ED
      */
     private Cell chooseGoodCell()
     {
@@ -202,9 +229,20 @@ public class Robot
     }
 
 
-    public Cell getCell() { return cell; }
-    public Neighbour getNeighbour() { return neighbour; }
+    public Cell getCell() { return MainClass.getgb().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()]; }
+
+    public Neighbour getNeighbour() { neighbour.updateNeighbour(cell); return neighbour; }
+
     public Type getType() { return type; }
+
+    public boolean getCapacityCell(Cell cell) { return (MainClass.getgb().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].getCapacity() == 1); }
+
+    public void setCapacityCell(Cell cell, boolean capacity) {
+        if (capacity)
+            MainClass.getgb().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(1);
+        else
+            MainClass.getgb().getGameboard()[cell.getCoordinate().getY()][cell.getCoordinate().getX()].setCapacity(0);
+    }
 
     public void setType(Type type) { this.type = type; }
     public void setCell(Cell cell) { this.cell = cell; }

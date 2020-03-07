@@ -1,7 +1,7 @@
 package robot.enums;
 
 /**
- * @author Enzo DECHAENE
+ * @author ED
  */
 public enum Mode {
     NOTHING,        /* Il s'agit du mode ou le robot est amene a rien faire   */

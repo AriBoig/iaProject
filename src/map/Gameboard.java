@@ -39,6 +39,11 @@ public class Gameboard {
 
     }
 
+    public void changeCaseToFood(Coordinate c){
+        gameboard[c.getY()][c.getX()].setType(TypeCase.FOOD);
+        gameboard[c.getY()][c.getX()].setFoodNb(100);
+    }
+
     /**
      * Set the "water" value of the gameboard's cells
      * @author Isaë LE MOIGNE.
@@ -77,7 +82,7 @@ public class Gameboard {
         for (int i = 0; i < sizeX; i++) {
             for (int j = 0; j < sizeY; j++) {
                 if (gameboard[i][j].getType().equals(TypeCase.ORE)){
-                    gameboard[i][j].setFoodNb(100);
+                    gameboard[i][j].setOreNb(100);
                 }
             }
         }

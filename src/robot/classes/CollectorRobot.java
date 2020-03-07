@@ -10,16 +10,22 @@ public class CollectorRobot extends Robot
 
     private static final int PERCENT_OF_COLLECTING = 10;
 
+    private int turn;
+    private int quantityOfOFood;
+
 
     public CollectorRobot(Cell cell)
     {
         super(cell);
+        action = Mode.NOTHING;
         setType(Type.COLLECTER);
+
+        turn = 0;
+        quantityOfOFood = 0;
     }
 
     /**
-     * @author AC
-     * @author Enzo DECHAENE
+     * @author ED
      */
     @Override
     public void checkCell()
@@ -31,5 +37,23 @@ public class CollectorRobot extends Robot
                 // TODO envoyer information au centraliser
             }
         }
+        else if (action == Mode.WORK) {
+            if (getCell().getType() == TypeCase.FOOD) {
+                getCell().setFoodNb(getCell().getFoodNb() - PERCENT_OF_COLLECTING);
+                quantityOfOFood += PERCENT_OF_COLLECTING;
+            }
+            else {
+                action = Mode.DELIVERY; /* Le robot livre les minerai a la base */
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\n" +
+                "CollectorRobot{" +
+                "turn=" + turn +
+                ", quantityOfOFood=" + quantityOfOFood +
+                '}';
     }
 }
