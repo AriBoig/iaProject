@@ -10,15 +10,18 @@ import display.main.MainClass;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import map.Coordinate;
 import map.Gameboard;
 import map.Metamorphose;
 import map.TypeCase;
 import robot.algo.ChangementHealth;
 import robot.classes.*;
 import robot.enums.Type;
+import sun.applet.Main;
 
 import java.util.List;
 
@@ -37,6 +40,14 @@ public class PrincipalViewController {
     private ImageView imageViewLegend;
     @FXML
     private Button gameButton;
+    @FXML
+    private Label tourLabel;
+    @FXML
+    private Label waterBaseLabel;
+    @FXML
+    private Label oreBaseLabel;
+    @FXML
+    private Label foodBaseLabel;
 
     private Image imageBase;
     private Image imageDesert;
@@ -222,12 +233,20 @@ public class PrincipalViewController {
     }
 
 
+    public void refreshGameboardLabels(){
+        tourLabel.setText("Turn : " + MainClass.getGame().getDay());
+        waterBaseLabel.setText("Water Base : " + MainClass.getGame().getCentraliser().getWater());
+        oreBaseLabel.setText("Ore Base : " + MainClass.getGame().getCentraliser().getMineral());
+        foodBaseLabel.setText("Food Base : " + MainClass.getGame().getCentraliser().getFood());
+    }
+
     public void initializeRunnable(){
         updater = new Runnable() {
             @Override
             public void run() {
                 refreshGameboardMap();
                 refreshGameBoardRobot();
+                refreshGameboardLabels();
             }
         };
     }
@@ -244,7 +263,6 @@ public class PrincipalViewController {
                     metamorphose.routineDissatisfaction();
                     result = metamorphose.loadResultFromFLL();
                     metamorphose.chooseMetamorphosisCell(result);
-
                     /* Changement health robot */
                     // TODO
                     //changementHealth.changeHealthRobots(result);

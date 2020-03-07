@@ -39,6 +39,11 @@ public class Gameboard {
 
     }
 
+    public void changeCaseToFood(Coordinate c){
+        gameboard[c.getY()][c.getX()].setType(TypeCase.FOOD);
+        gameboard[c.getY()][c.getX()].setFoodNb(100);
+    }
+
     /**
      * Set the "water" value of the gameboard's cells
      * @author Isaë LE MOIGNE.
