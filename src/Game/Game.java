@@ -1,6 +1,7 @@
 package Game;
 
 import map.Cell;
+import map.TypeCase;
 import robot.classes.*;
 import robot.enums.Direction;
 
@@ -31,7 +32,7 @@ public class Game
 
     /**
      * Fonction qui permet d'initialiser les robots.
-     * @author Enzo DECHAENE.
+     * @author ED.
      */
     public void initializeRobots(Cell cell)
     {
@@ -65,6 +66,19 @@ public class Game
         Game.robots = robots;
     }
 
+    // TODO
+    /*public void changeHealthRobot(double percentMetamorphose)
+    {
+        for (Robot robot : robots) {
+            if (robot.getCell().getType() == TypeCase.IMPASSABLE_AREA) {
+
+            }
+            else {
+
+            }
+        }
+    }*/
+
     public void moveBeginGame()
     {
         robots.get(1).moveBeginGame(Direction.NORTH);
@@ -84,11 +98,11 @@ public class Game
     }
 
     /**
-     * @author Enzo DECHAENE
+     * @author ED
      */
     public void turn()
     {
-        if (day <= 8) {
+        /*if (day <= 8) {
             moveBeginGame();
         }
         else if (day < NB_TOTAL_DAY) {
@@ -101,10 +115,25 @@ public class Game
             System.out.println(robot);
         }
 
+        day++;*/
+
+        if (day == 0) {
+            robots.get(3).moveBeginGame(Direction.SOUTH);
+            robots.get(3).moveBeginGame(Direction.SOUTH);
+            robots.get(3).moveBeginGame(Direction.SOUTH);
+            robots.get(3).moveBeginGame(Direction.SOUTH);
+            robots.get(3).moveBeginGame(Direction.EAST);
+        }
+        else {
+            robots.get(3).move();
+        }
+
+        System.out.println(robots.get(3).toString());
+
         day++;
     }
 
-    public static CentraliserRobot getCentraliser()
+    public CentraliserRobot getCentraliser()
     {
         return (CentraliserRobot) Game.robots.get(0);
     }

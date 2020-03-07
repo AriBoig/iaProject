@@ -16,6 +16,7 @@ import javafx.scene.layout.GridPane;
 import map.Gameboard;
 import map.Metamorphose;
 import map.TypeCase;
+import robot.algo.ChangementHealth;
 import robot.classes.*;
 import robot.enums.Type;
 
@@ -27,6 +28,7 @@ public class PrincipalViewController {
     private MainClass main;
     private Gameboard gameboard;
     private List<Robot> robots;
+    private ChangementHealth changementHealth;
     private Metamorphose metamorphose;
 
     @FXML
@@ -85,6 +87,14 @@ public class PrincipalViewController {
     }
 
     /**
+     * @author ED
+     */
+    public void initializeChangementHealth(){
+        changementHealth = new ChangementHealth();
+        changementHealth.loadFLL();
+    }
+
+    /**
      * We get the attribute of the main class to access the statics and other else
      * @param mainApp
      */
@@ -138,15 +148,15 @@ public class PrincipalViewController {
                     ImageView imv = new ImageView();
                     imv.setImage(imageDesert);
                     gridpaneGameBoard.add(imv, i, j);
-                }else if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.DRY_MEDOW)){
+                }else if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.DRY_MEADOW)){
                     ImageView imv = new ImageView();
                     imv.setImage(imageDryMedow);
                     gridpaneGameBoard.add(imv, i, j);
-                }else if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.NORMAL_MEDOW)){
+                }else if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.NORMAL_MEADOW)){
                     ImageView imv = new ImageView();
                     imv.setImage(imageNormalMedow);
                     gridpaneGameBoard.add(imv, i, j);
-                }else if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.OILY_MEDOW)){
+                }else if (gameboard.getGameboard()[i][j].getType().equals(TypeCase.OILY_MEADOW)){
                     ImageView imv = new ImageView();
                     imv.setImage(imageOilyMedow);
                     gridpaneGameBoard.add(imv, i, j);
@@ -229,10 +239,17 @@ public class PrincipalViewController {
             Platform.setImplicitExit(false);
             while(MainClass.getGame().getDay() != 10000){
                 try {
+                    /* Metamorphose cell */
                     metamorphose.routinePercent();
                     metamorphose.routineDissatisfaction();
                     result = metamorphose.loadResultFromFLL();
                     metamorphose.chooseMetamorphosisCell(result);
+
+                    /* Changement health robot */
+                    // TODO
+                    //changementHealth.changeHealthRobots(result);
+
+                    /* Mouvement robots */
                     MainClass.getGame().turn();
                     Platform.runLater(updater);
                     Thread.sleep(1000);

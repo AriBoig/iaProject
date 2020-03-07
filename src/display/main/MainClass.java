@@ -52,9 +52,9 @@ public class MainClass extends Application {
         gameboard.initializeFieldGameboard("src/display/ressources/fileFields/ore.txt", TypeCase.ORE);
         gameboard.initializeFieldGameboard("src/display/ressources/fileFields/food.txt", TypeCase.FOOD);
         gameboard.initializeFieldGameboard("src/display/ressources/fileFields/tree.txt", TypeCase.TREE);
-        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/dryMedow.txt", TypeCase.DRY_MEDOW);
-        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/normalMedow.txt", TypeCase.NORMAL_MEDOW);
-        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/oilyMedow.txt", TypeCase.OILY_MEDOW);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/dryMedow.txt", TypeCase.DRY_MEADOW);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/normalMedow.txt", TypeCase.NORMAL_MEADOW);
+        gameboard.initializeFieldGameboard("src/display/ressources/fileFields/oilyMedow.txt", TypeCase.OILY_MEADOW);
         gameboard.initializeFieldGameboard("src/display/ressources/fileFields/desert.txt", TypeCase.DESERT);
         gameboard.initializeFieldGameboard("src/display/ressources/fileFields/scree.txt", TypeCase.SCREE);
         gameboard.initializeFieldGameboard("src/display/ressources/fileFields/impassableArea.txt", TypeCase.IMPASSABLE_AREA);

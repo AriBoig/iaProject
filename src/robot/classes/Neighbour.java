@@ -37,7 +37,7 @@ public class Neighbour
     /**
      *
      * @return
-     * @author Enzo DECHAENE
+     * @author ED
      */
     public boolean findWater()
     {
@@ -224,7 +224,7 @@ public class Neighbour
      *
      * @param direction
      * @return
-     * @author Enzo DECHAENE
+     * @author ED
      */
     public Cell findCellByDirection(Direction direction)
     {
@@ -248,7 +248,7 @@ public class Neighbour
     /**
      *
      * @param cell
-     * @author Enzo DECHAENE
+     * @author ED
      */
     public void updateNeighbour(Cell cell)
     {

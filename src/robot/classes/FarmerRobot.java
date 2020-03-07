@@ -1,6 +1,7 @@
 package robot.classes;
 
 import Game.Game;
+import display.main.MainClass;
 import map.Cell;
 import map.TypeCase;
 import robot.enums.Mode;
@@ -15,37 +16,69 @@ public class FarmerRobot extends Robot
     private static final int NB_WATER_NORMAL_MEADOW = 200;
     private static final int NB_WATER_DRY_MEADOW    = 400;
 
+    private int turn;
+
 
     public FarmerRobot(Cell cell)
     {
         super(cell);
-        //action = Mode.NOTHING; /* Il doit attendre qu'il y ai de l'eau afin de farmer */
+        action = Mode.NOTHING; /* Il doit attendre qu'il y ai de l'eau afin de farmer */
         setType(Type.FARMER);
+
+        turn = 0;
     }
 
     /**
-     * @author Enzo DECHAENE
+     * @author ED
      */
     @Override
     public void checkCell()
     {
         if (this.action == Mode.EXPLORATION || this.action == Mode.OPERATION) {
-            if ((getCell().getType() == TypeCase.DRY_MEDOW || getCell().getType() == TypeCase.NORMAL_MEDOW ||
-                    getCell().getType() == TypeCase.OILY_MEDOW) && Game.getCentraliser().getWater() > 0)
+            if ((getCell().getType() == TypeCase.DRY_MEADOW || getCell().getType() == TypeCase.NORMAL_MEADOW ||
+                    getCell().getType() == TypeCase.OILY_MEADOW) && MainClass.getGame().getCentraliser().getWater() > 0)
             {
                 this.action = Mode.WORK; /* Le robot se met au travail */
 
                 switch (getCell().getType()) {
-                    case DRY_MEDOW: break;
-                    case NORMAL_MEDOW: break;
-                    case OILY_MEDOW: break;
-                    default:
+                    case OILY_MEADOW:
+                        MainClass.getGame().getCentraliser().setConsumeWater(MainClass.getGame().getCentraliser().getConsumeWater() + NB_WATER_FAT_MEADOW);
+                        break;
+                    case NORMAL_MEADOW:
+                        MainClass.getGame().getCentraliser().setConsumeWater(MainClass.getGame().getCentraliser().getConsumeWater() + NB_WATER_NORMAL_MEADOW);
+                        break;
+                    case DRY_MEADOW:
+                        MainClass.getGame().getCentraliser().setConsumeWater(MainClass.getGame().getCentraliser().getConsumeWater() + NB_WATER_DRY_MEADOW);
+                        break;
                 }
 
                 // TODO envoyer information au centraliser
             }
         }
+        else if (action == Mode.WORK) {
+
+            // TODO enlever leau de la base
+            if (getCell().getType() == TypeCase.OILY_MEADOW && turn < NB_DAY_FAT_MEADOW) {
+                turn++;
+            }
+            else if (getCell().getType() == TypeCase.NORMAL_MEADOW && turn < NB_DAY_NORMAL_MEADOW) {
+                turn++;
+            }
+            else if (getCell().getType() == TypeCase.DRY_MEADOW && turn < NB_DAY_DRY_MEADOW) {
+                turn++;
+            }
+            else {
+                action = Mode.EXPLORATION;
+            }
+
+        }
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString() + "\n" +
+                "FarmerRobot{" +
+                "turn=" + turn +
+                '}';
+    }
 }

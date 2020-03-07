@@ -8,9 +8,9 @@ public enum TypeCase {
     BASE,               /* Base of the colony   */
     DESERT,             /* Desert               */
     FOOD,               /* Food                 */
-    DRY_MEDOW,          /* Dry Medow            */
-    NORMAL_MEDOW,       /* Normal Medow         */
-    OILY_MEDOW,         /* Oily Medow           */
+    DRY_MEADOW,          /* Dry Meadow          */
+    NORMAL_MEADOW,       /* Normal Meadow       */
+    OILY_MEADOW,         /* Oily Meadow         */
     IMPASSABLE_AREA,    /* Impassable Area      */
     ORE,                /* Ore                  */
     SCREE,              /* Scree                */
